@@ -14,29 +14,14 @@
 //= require lib/handlebars.js
 //= require lib/underscore.js
 //= require lib/backbone.js
-//= require lib/radio.js
-// require lib/marionette.js
 //
 //= require_tree ./app/templates
 //
+//= require app/config.js
 //= require app/mrelloApp.js
-//= require app/models/checklist.js
-//= require app/collections/checklists.js
-//= require app/models/comment.js
-//= require app/collections/comments.js
-//= require app/models/card.js
-//= require app/collections/cards.js
-//= require app/models/list.js
-//= require app/collections/lists.js
 //
-//= require app/views/lists/lists.js
-//= require app/views/lists/list.js
-//= require app/views/lists/cards.js
-//= require app/views/lists/card.js
-//= require app/views/lists/list-overflow-menu.js
-//= require app/views/card-editor/card-editor.js
-//= require app/views/card-editor/checklist.js
-//= require app/views/card-editor/checklists.js
-//= require app/views/card-editor/comments.js
-//
-//= require app/views/board.js
+//= require_tree ./app/routers
+//= require_tree ./app/models
+//= require_tree ./app/collections
+//= require_tree ./app/views
+

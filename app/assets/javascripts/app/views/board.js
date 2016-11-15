@@ -31,11 +31,11 @@ MrelloApp.view.Board = Backbone.View.extend({
     this.bindEvents();
   },
   bindEvents: function() {
-    _.extend(this, Backbone.Events);
     this.listenTo(MrelloApp.data, 'add remove change', this.render);
-    this.on("refreshSearch", this.searchCards);
+    MrelloApp.events.on("refreshSearch", this.searchCards);
   },
   render: function() {
+    debugger;
     this.renderLists();
     this.renderAddListButton();
     this.searchCards();
@@ -56,7 +56,7 @@ MrelloApp.view.Board = Backbone.View.extend({
     e.preventDefault();
     var title = $(this.addListContainer + " .title-input").val();
     if (title != "") {
-      MrelloApp.trigger("addList", {title: title});
+      MrelloApp.data.create({title: title}, {wait: true});
     }
   },
   searchCards: function() {

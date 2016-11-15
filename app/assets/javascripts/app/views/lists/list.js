@@ -81,7 +81,7 @@ MrelloApp.view.List = Backbone.View.extend({
       el: cardsContainer,
       collection: this.model.get("cards"),
     });
-    MrelloApp.board.trigger("refreshSearch");
+    MrelloApp.events.trigger("refreshSearch");
   },
   renderAddCardMenu: function(e) {
     e.preventDefault();
