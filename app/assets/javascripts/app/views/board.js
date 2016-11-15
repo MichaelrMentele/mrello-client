@@ -15,7 +15,7 @@
 // Click add on ListTitleEntryView -> Create new list view and Swap for AddList view
 // Click cancel on ListTitleEntryView -> Swap for Addlist view
 
-MrelloApp.view.Board = Backbone.View.extend({
+MrelloApp.views.Board = Backbone.View.extend({
   el: "body", // Existing container on tag
   addListContainer: "#new-list-creator",
   addListMenu: MrelloApp.templates["board/add-list-menu"],
@@ -35,13 +35,12 @@ MrelloApp.view.Board = Backbone.View.extend({
     MrelloApp.events.on("refreshSearch", this.searchCards);
   },
   render: function() {
-    debugger;
     this.renderLists();
     this.renderAddListButton();
     this.searchCards();
   },
   renderLists: function() {
-    new MrelloApp.view.Lists()
+    new MrelloApp.views.Lists()
   },
   renderAddListButton: function(e) {
     if (e) { e.preventDefault(); }

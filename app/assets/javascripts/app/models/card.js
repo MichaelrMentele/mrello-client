@@ -1,17 +1,17 @@
 var MrelloApp = MrelloApp || {};
 
-MrelloApp.model.Card = Backbone.Model.extend({
+MrelloApp.models.Card = Backbone.Model.extend({
   defaults: {
     title: "Card",
     description: "",
   },
   initialize: function(attributes) {
     console.log("New Card Created");
-    this.set("comments", attributes.comments || new MrelloApp.collection.Comments());
+    this.set("comments", attributes.comments || new MrelloApp.collections.Comments());
     this.get("comments").parent = this;
 
-    this.set("checklists", attributes.checklists || new MrelloApp.collection.Checklists());
-    this.get("checklists").parent = this;
+    this.set("checklists", attributes.checklists || new MrelloApp.collections.Checklists());
+    this.get("checklists").parent = this; // store a reference
 
     // Look for the parent Lists' title and cache it for easy rendering
     if (this.collection) {

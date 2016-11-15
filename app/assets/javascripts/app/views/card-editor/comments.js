@@ -1,6 +1,6 @@
 var MrelloApp = MrelloApp || {};
 
-MrelloApp.view.Comments = Backbone.View.extend({
+MrelloApp.views.Comments = Backbone.View.extend({
   events: {
   },
   initialize: function() {

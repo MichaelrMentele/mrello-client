@@ -16,7 +16,7 @@
 
 var MrelloApp = MrelloApp || {};
 
-MrelloApp.view.List = Backbone.View.extend({
+MrelloApp.views.List = Backbone.View.extend({
   template: MrelloApp.templates["board/lists/list"],
   addCardMenu: MrelloApp.templates["board/lists/add-card-menu"],
   addCardButton: MrelloApp.templates["board/lists/add-card-button"],
@@ -26,8 +26,8 @@ MrelloApp.view.List = Backbone.View.extend({
   className: "list-wrapper",
   events: {
     "click .add-card-button" : "renderAddCardMenu",
-    "click .button" : "addCard",
     "click .cancel" : "renderAddCardButton",
+    "click .button" : "addCard",
     "click .list-title-heading" : "renderTitleEditor",
     "focusout .list-title .title-input" : "updateTitle",
     "click .list-overflow-menu" : "toggleOptions",
@@ -36,7 +36,7 @@ MrelloApp.view.List = Backbone.View.extend({
   initialize: function() {
     console.log("Rendering new list view")
     this.render();
-    this.bindEvents(); // Is this necessary?
+    this.bindEvents();
   },
   getCardsContainer: function() {
     return $(this.el).find(".card-list")
@@ -77,7 +77,7 @@ MrelloApp.view.List = Backbone.View.extend({
   },
   renderCards: function() {
     var cardsContainer = this.getCardsContainer();
-    new MrelloApp.view.Cards({
+    new MrelloApp.views.Cards({
       el: cardsContainer,
       collection: this.model.get("cards"),
     });
@@ -111,6 +111,7 @@ MrelloApp.view.List = Backbone.View.extend({
     var $input = this.$el.find(".title-input");
     var title = $input.val();
     this.model.set("title", title);
+    this.model.save();
     this.render();
   },
   toggleOptions: function(e) {
@@ -129,7 +130,7 @@ MrelloApp.view.List = Backbone.View.extend({
     e.preventDefault();
     var $input = this.$el.find(".title-input")
     var title = $input.val();
-    $input.val("");
+    $input.val(""); // clear input
     if (title != "") {
       this.model.get("cards").add({title: title});
     }

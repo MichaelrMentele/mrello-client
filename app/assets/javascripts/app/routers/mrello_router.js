@@ -1,6 +1,6 @@
 var MrelloApp = MrelloApp || {}
 
-MrelloApp.router.MrelloRouter = Backbone.Router.extend({
+MrelloApp.routers.MrelloRouter = Backbone.Router.extend({
   routes: {
     '': 'showBoard',
     '/login': 'showLogin'

@@ -20,24 +20,24 @@
 
 var MrelloApp = {
   // constructor namespaces
-  model: {},      
-  collection: {}, 
-  view: {},     
-  router: {}, 
+  models: {},      
+  collections: {}, 
+  views: {},     
+  routers: {}, 
   templates: HandlebarsTemplates,
   // application objects -- called out here for readability
   data: {},
   routes: {},
   events: {},
-  boardView: {},
+  appView: {},
   init: function() {
     // Setup
-    this.data = new this.collection.Lists();  
+    this.data = new this.collections.Lists();  
     this.events = _.extend({}, Backbone.Events);
     this.bindEvents();
 
     // Run
-    this.routes = new this.router.MrelloRouter(); // first create instance of router
+    this.routes = new this.routers.MrelloRouter(); // first create instance of router
     Backbone.history.start({pushState: true});         // pushState uses the full URL
     // TODO: Session data?
     // TODO: User data?
@@ -48,7 +48,7 @@ var MrelloApp = {
   },
   renderBoard: function() {
     console.log("Rendering board")
-    MrelloApp.boardView = new MrelloApp.view.Board();
+    MrelloApp.appView = new MrelloApp.views.Board();
   },
   renderLogin: function() {
     alert("Rendering Login")

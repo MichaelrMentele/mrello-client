@@ -3,7 +3,7 @@
 
 var MrelloApp = MrelloApp || {}
 
-MrelloApp.model.Session = Backbone.Model.extend({
+MrelloApp.models.Session = Backbone.Model.extend({
   defaults: {
     logged_in: false,
     session_token: null

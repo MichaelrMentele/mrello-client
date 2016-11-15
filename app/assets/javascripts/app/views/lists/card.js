@@ -8,7 +8,7 @@
 
 var MrelloApp = MrelloApp || {};
 
-MrelloApp.view.Card = Backbone.View.extend({
+MrelloApp.views.Card = Backbone.View.extend({
   template: MrelloApp.templates["board/lists/card"],
   tagName: "div",
   className: "list-card",
@@ -40,7 +40,7 @@ MrelloApp.view.Card = Backbone.View.extend({
     return this;
   },
   renderEditor: function() {
-    new MrelloApp.view.CardEditor({model: this.model});
+    new MrelloApp.views.CardEditor({model: this.model});
   },
 });
 

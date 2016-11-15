@@ -8,6 +8,6 @@
 
 var MrelloApp = MrelloApp || {};
 
-MrelloApp.view.ListOverflowMenu = Backbone.View.extend({
+MrelloApp.views.ListOverflowMenu = Backbone.View.extend({
 
 });

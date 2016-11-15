@@ -14,6 +14,6 @@
 
 var MrelloApp = MrelloApp || {};
 
-MrelloApp.view.Checklist = Backbone.View.extend({
+MrelloApp.views.Checklist = Backbone.View.extend({
 
 });

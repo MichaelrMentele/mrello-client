@@ -1,6 +1,6 @@
 var MrelloApp = MrelloApp || {};
 
-MrelloApp.view.Cards = Backbone.View.extend({
+MrelloApp.views.Cards = Backbone.View.extend({
   initialize: function() {
     this.$el = $(this.el);
     this.render();
@@ -10,7 +10,7 @@ MrelloApp.view.Cards = Backbone.View.extend({
     this.collection.each(this.renderCardView, this);
   },
   renderCardView: function(card, index) {
-    var cardView = new MrelloApp.view.Card({
+    var cardView = new MrelloApp.views.Card({
                      model: card,
                    });
 

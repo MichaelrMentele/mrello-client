@@ -1,5 +1,5 @@
 var MrelloApp = MrelloApp || {};
 
-MrelloApp.model.Checklist = Backbone.Model.extend({
+MrelloApp.models.Checklist = Backbone.Model.extend({
   
 });
