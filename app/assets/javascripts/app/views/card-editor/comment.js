@@ -4,11 +4,11 @@
 // Subviews: 
 // CommentView <-> EditCommentView
 
-// Events CommentView:
+// Events for CommentView:
 // Click on Edit -> Swap for EditCommentView
 // Click on Delete -> Remove this view
 
-// Events EditCommentView:
+// Events for EditCommentView:
 // Click on Save -> Update comment and swap for CommentView
 // Click on Cancel -> Swap for CommentView
 

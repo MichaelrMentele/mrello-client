@@ -47,7 +47,7 @@ MrelloApp.views.Card = Backbone.View.extend({
     console.log("Card: " + this.model.get("title") + " destroyed");
     this.model.destroy({
       success: function(model, response, options) {
-        console.log("Card successfully desytroyed")
+        console.log("Card successfully destroyed.")
       },
       error: function(model, response, options) {
         console.log("Error destroying card.")
