@@ -32,7 +32,7 @@ MrelloApp.views.Card = Backbone.View.extend({
     });
 
     this.$el.on("dragover", function(ev) {
-      console.log("")
+      console.log("Insert at" + self.index)
       MrelloApp.insertAt = self.index;
     });
   },

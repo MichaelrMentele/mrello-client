@@ -39,10 +39,12 @@ MrelloApp.views.Board = Backbone.View.extend({
   searchCards: function() {
     console.log("searching...")
     var query = $("#search-bar input").val();
+    
     $(".card").css({
       "background": "white",
       "box-shadow" : "none"
     });
+
     if (query) {
       $(".card:contains(" + query + ")").css({
         "background": "aqua",
