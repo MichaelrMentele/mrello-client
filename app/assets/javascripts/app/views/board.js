@@ -17,13 +17,7 @@
 
 MrelloApp.views.Board = Backbone.View.extend({
   el: "body", // Existing container on tag
-  addListContainer: "#new-list-creator",
-  addListMenu: MrelloApp.templates["board/add-list-menu"],
-  addListButton: MrelloApp.templates["board/add-list-button"],
   events: {
-    "click #new-list-creator .add-list" : "renderAddListMenu",
-    "click #new-list-creator .button" : "addList",
-    "click #new-list-creator .cancel" : "renderAddListButton",
     "keyup #search-bar input" : "searchCards",
   },
   initialize: function() {
@@ -31,32 +25,14 @@ MrelloApp.views.Board = Backbone.View.extend({
     this.bindEvents();
   },
   bindEvents: function() {
-    this.listenTo(MrelloApp.data, 'add remove change', this.render);
     MrelloApp.events.on("refreshSearch", this.searchCards);
   },
   render: function() {
     this.renderLists();
-    this.renderAddListButton();
     this.searchCards();
   },
   renderLists: function() {
     new MrelloApp.views.Lists()
-  },
-  renderAddListButton: function(e) {
-    if (e) { e.preventDefault(); }
-    $(this.addListContainer).html(this.addListButton());
-  },
-  renderAddListMenu: function(e) {
-    e.preventDefault();
-    $(this.addListContainer).html(this.addListMenu());
-    $(this.el).find("input").focus();
-  },
-  addList: function(e) {
-    e.preventDefault();
-    var title = $(this.addListContainer + " .title-input").val();
-    if (title != "") {
-      MrelloApp.data.create({title: title}, {wait: true});
-    }
   },
   searchCards: function() {
     console.log("searching...")

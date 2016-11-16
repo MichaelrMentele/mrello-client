@@ -9,7 +9,7 @@
 var MrelloApp = MrelloApp || {};
 
 MrelloApp.views.Card = Backbone.View.extend({
-  template: MrelloApp.templates["board/lists/cards/card"],
+  template: MrelloApp.templates["board/lists/list/cards/card"],
   tagName: "div",
   className: "list-card",
   attributes: {
@@ -41,12 +41,10 @@ MrelloApp.views.Card = Backbone.View.extend({
     return this;
   },
   renderEditor: function() {
-    debugger;
     new MrelloApp.views.CardEditor({ model: this.model });
   },
   delete: function() {
     console.log("Card: " + this.model.get("title") + " destroyed");
-    this.events["click .card"] = undefined;
     this.model.destroy({
       success: function(model, response, options) {
         console.log("Card successfully destroyed.")

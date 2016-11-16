@@ -1,9 +1,9 @@
 var MrelloApp = MrelloApp || {};
 
 MrelloApp.views.Cards = Backbone.View.extend({
-  template: MrelloApp.templates["board/lists/cards/cards"],
-  addCardMenu: MrelloApp.templates["board/lists/cards/add-card-menu"],
-  addCardButton: MrelloApp.templates["board/lists/cards/add-card-button"],
+  template: MrelloApp.templates["board/lists/list/cards/cards"],
+  addCardMenu: MrelloApp.templates["board/lists/list/cards/add-card-menu"],
+  addCardButton: MrelloApp.templates["board/lists/list/cards/add-card-button"],
   tagName: "div",
   className: "cards",
   events: {
