@@ -6,7 +6,12 @@ MrelloApp.models.List = Backbone.Model.extend({
   },
   initialize: function() {
     console.log("New List Created")
-    this.set("cards", new MrelloApp.collections.Cards());
+    this.set("cards", 
+      new MrelloApp.collections.Cards()
+    );
     this.get("cards").parent = this;
+    this.get("cards").fetch({
+      data: $.param({ list_id: this.id })
+    });
   }
 });

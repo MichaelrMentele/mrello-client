@@ -132,7 +132,7 @@ MrelloApp.views.List = Backbone.View.extend({
     var title = $input.val();
     $input.val(""); // clear input
     if (title != "") {
-      this.model.get("cards").add({title: title});
+      this.model.get("cards").create( { title: title });
     }
   },
   delete: function(e) {
