@@ -21,6 +21,7 @@ MrelloApp.views.Board = Backbone.View.extend({
     "keyup #search-bar input" : "searchCards",
   },
   initialize: function() {
+    this.$el = $(this.el);
     this.render();
     this.bindEvents();
   },
@@ -32,7 +33,8 @@ MrelloApp.views.Board = Backbone.View.extend({
     this.searchCards();
   },
   renderLists: function() {
-    new MrelloApp.views.Lists()
+    var listsView = new MrelloApp.views.Lists()
+    this.$el.find("#lists-container").html(listsView.el)
   },
   searchCards: function() {
     console.log("searching...")

@@ -1,3 +1,32 @@
+/*FOR LISTS COLLECTION*/
+
+.lists-wrapper {
+  display: flex;
+  flex-direction: row;
+}
+
+.add-list {
+  display: block;
+  font-size: 14px;
+  height: 40px;
+  color: #4C94BF;
+  background-color: rgba(0,0,0,.15);
+  padding: 11px 8px 8px 8px;
+}
+
+.add-list:hover {
+  height: 40px;
+  background-color: rgba(0,0,0,0.3);
+}
+
+.list.mod-add {
+  height: auto;
+  min-height: 30px;
+  padding: 4px;
+}
+
+/*FOR A SINGLE LIST*/
+
 .list-wrapper * { 
   border-radius: 3px;
 }
