@@ -37,15 +37,18 @@ MrelloApp.views.Cards = Backbone.View.extend({
     this.$el.on("drop", function(ev) {
       ev.preventDefault();
       console.log("drop event fired")
-      self.cards.create(MrelloApp.draggedObject.attributes, {at: MrelloApp.insertAt});
+
+      newCardAttributes = self.copyDroppedCardAttrs();
+      self.cards.create(newCardAttributes, {at: MrelloApp.insertAt});
+
       MrelloApp.draggedObject.destroy({
-      success: function(model, response, options) {
-        console.log("Card successfully destroyed.")
-      },
-      error: function(model, response, options) {
-        console.log("Error destroying card.")
-      }
-    });;
+        success: function(model, response, options) {
+          console.log("Card successfully destroyed.")
+        },
+        error: function(model, response, options) {
+          console.log("Error destroying card.")
+        }
+      });;
       
     });
   },
@@ -74,6 +77,15 @@ MrelloApp.views.Cards = Backbone.View.extend({
                      model: card,
                    });
     this.$el.find(".card-list").append(cardView.el);
+  },
+  copyDroppedCardAttrs: function() {
+    attrs = MrelloApp.draggedObject.attributes
+
+    copy = {};
+    copy.title = attrs.title;
+    copy.description = attrs.description;
+
+    return copy
   },
   addCard: function(e) {
     e.preventDefault();

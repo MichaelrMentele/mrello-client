@@ -5,6 +5,13 @@ MrelloApp.models.Card = Backbone.Model.extend({
     title: "Card",
     description: "",
   },
+  parse: function(response, options) {
+    if(response.card) {
+      return response.card;
+    } else {
+      return response;
+    }
+  },
   initialize: function(attributes) {
     console.log("New Card Created");
 
