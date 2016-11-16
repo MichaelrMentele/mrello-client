@@ -62,7 +62,7 @@ MrelloApp.views.List = Backbone.View.extend({
     cardsContainer.on("drop", function(ev) {
       ev.preventDefault();
       console.log("drop event fired")
-      self.model.get("cards").add(MrelloApp.draggedObject.clone(), {at: MrelloApp.insertAt});
+      self.model.get("cards").create(MrelloApp.draggedObject.clone(), {at: MrelloApp.insertAt});
       MrelloApp.draggedObject.destroy();
       
     });

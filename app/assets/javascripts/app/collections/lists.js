@@ -5,5 +5,6 @@ MrelloApp.collections.Lists = Backbone.Collection.extend({
   model: MrelloApp.models.List,
   parse: function(response) {
     return response.lists;
-  }
+  },
+
 });

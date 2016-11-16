@@ -17,6 +17,7 @@ MrelloApp.views.Card = Backbone.View.extend({
   },
   events: {
     "click .card" : "renderEditor",
+    "click .card-delete" : "delete"
   },
   initialize: function() {
     this.index = this.model.collection.indexOf(this.model)
@@ -42,5 +43,16 @@ MrelloApp.views.Card = Backbone.View.extend({
   renderEditor: function() {
     new MrelloApp.views.CardEditor({model: this.model});
   },
+  delete: function() {
+    console.log("Card: " + this.model.get("title") + " destroyed");
+    this.model.destroy({
+      success: function(model, response, options) {
+        console.log("Card successfully desytroyed")
+      },
+      error: function(model, response, options) {
+        console.log("Error destroying card.")
+      }
+    });
+  }
 });
 

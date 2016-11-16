@@ -1,6 +1,6 @@
-var MrelloApp = MrelloApp || {};
+// var MrelloApp = MrelloApp || {};
 
-MrelloApp.collections.Comments = Backbone.Collection.extend({
-  model: MrelloApp.models.Comment,
+// MrelloApp.collections.Comments = Backbone.Collection.extend({
+//   model: MrelloApp.models.Comment,
 
-});
+// });
