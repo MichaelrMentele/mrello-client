@@ -37,7 +37,7 @@ MrelloApp.views.Cards = Backbone.View.extend({
     this.$el.on("drop", function(ev) {
       ev.preventDefault();
       console.log("drop event fired")
-      self.model.get("cards").create(MrelloApp.draggedObject.clone(), {at: MrelloApp.insertAt});
+      self.cards.create(MrelloApp.draggedObject.clone(), {at: MrelloApp.insertAt});
       MrelloApp.draggedObject.destroy();
       
     });
@@ -74,7 +74,7 @@ MrelloApp.views.Cards = Backbone.View.extend({
     var title = $input.val();
     $input.val(""); // clear input
     if (title != "") {
-      this.model.get("cards").create( { title: title });
+      this.cards.create( { title: title });
     }
   },
 });

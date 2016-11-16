@@ -26,11 +26,13 @@ MrelloApp.views.CardEditor = Backbone.View.extend({
     this.render();
   },
   render: function() {
+    // Build card view and then append it
     this.$el.html(this.template(this.model.toJSON()));
     var container = $("#modal-container").append(this.el);
-    this.renderComments();
+
+    // this.renderComments();
     // this.renderChecklists(); // Stretch: Not yet implemented
-    container.removeClass("off");
+    container.removeClass("off"); // Unhide modal
     return this;
   },
   renderComments: function() {

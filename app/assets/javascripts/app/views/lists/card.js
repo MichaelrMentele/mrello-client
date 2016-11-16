@@ -16,7 +16,7 @@ MrelloApp.views.Card = Backbone.View.extend({
     "draggable" : "true",
   },
   events: {
-    "click .card" : "renderEditor",
+    "click .card-title" : "renderEditor",
     "click .card-delete" : "delete"
   },
   initialize: function() {
@@ -41,10 +41,12 @@ MrelloApp.views.Card = Backbone.View.extend({
     return this;
   },
   renderEditor: function() {
-    new MrelloApp.views.CardEditor({model: this.model});
+    debugger;
+    new MrelloApp.views.CardEditor({ model: this.model });
   },
   delete: function() {
     console.log("Card: " + this.model.get("title") + " destroyed");
+    this.events["click .card"] = undefined;
     this.model.destroy({
       success: function(model, response, options) {
         console.log("Card successfully destroyed.")
