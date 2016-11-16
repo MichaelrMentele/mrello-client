@@ -9,7 +9,7 @@ MrelloApp.views.Comments = Backbone.View.extend({
   },
   render: function() {
     this.$el.empty();
-    this.collection.each(this.renderCommentView, this);
+    this.comments.each(this.renderCommentView, this);
   },
   renderCommentView: function(comment, index) {
     var id = index + 1;

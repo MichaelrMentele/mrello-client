@@ -1,19 +1,80 @@
 var MrelloApp = MrelloApp || {};
 
 MrelloApp.views.Cards = Backbone.View.extend({
-  initialize: function() {
-    this.$el = $(this.el);
+  template: MrelloApp.templates["board/lists/cards/cards"],
+  addCardMenu: MrelloApp.templates["board/lists/cards/add-card-menu"],
+  addCardButton: MrelloApp.templates["board/lists/cards/add-card-button"],
+  tagName: "div",
+  className: "cards",
+  events: {
+    "click .add-card-button" : "renderAddCardMenu",
+    "click .cancel" : "renderAddCardButton",
+    "click .button" : "addCard"
+  },
+  initialize: function(options) {
+    console.log("Rendering cards view.")
+    this.cards = options.cards
     this.render();
+    this.bindEvents();
+  },
+  bindEvents: function() {
+    _.extend(this, Backbone.Events);
+    this.listenTo(this.cards, 'add remove change', this.render.bind(this));
+    this.bindDropEvents();
+  },
+  bindDropEvents: function() {
+    var self = this;
+
+    this.$el.on("dragenter", function(ev) {
+      ev.preventDefault();
+    });
+
+    this.$el.on("dragover", function(ev) {
+      ev.preventDefault();
+      console.log("dragover zone");
+    });
+
+    this.$el.on("drop", function(ev) {
+      ev.preventDefault();
+      console.log("drop event fired")
+      self.model.get("cards").create(MrelloApp.draggedObject.clone(), {at: MrelloApp.insertAt});
+      MrelloApp.draggedObject.destroy();
+      
+    });
   },
   render: function() {
     this.$el.empty();
-    this.collection.each(this.renderCardView, this);
+    this.$el.html(this.template()); 
+    this.renderCards();
+    this.renderAddCardButton();
   },
-  renderCardView: function(card, index) {
+  renderCards: function() {
+    console.log("Rendering cards");
+    this.cards.each(this.renderCardView, this);
+  },
+  renderAddCardMenu: function(e) {
+    e.preventDefault();
+    console.log("Enter Card Title");
+    this.$el.find(".add-card").html(this.addCardMenu());
+    this.$el.find("input").focus();
+  },
+  renderAddCardButton: function(e) {
+    if (e) { e.preventDefault(); }
+    this.$el.find(".add-card").html(this.addCardButton());
+  },
+  renderCardView: function(card) {
     var cardView = new MrelloApp.views.Card({
                      model: card,
                    });
-
-    this.$el.append(cardView.el);
+    this.$el.find(".card-list").append(cardView.el);
+  },
+  addCard: function(e) {
+    e.preventDefault();
+    var $input = this.$el.find(".title-input")
+    var title = $input.val();
+    $input.val(""); // clear input
+    if (title != "") {
+      this.model.get("cards").create( { title: title });
+    }
   },
 });

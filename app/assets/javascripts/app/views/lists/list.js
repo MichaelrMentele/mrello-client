@@ -18,16 +18,11 @@ var MrelloApp = MrelloApp || {};
 
 MrelloApp.views.List = Backbone.View.extend({
   template: MrelloApp.templates["board/lists/list"],
-  addCardMenu: MrelloApp.templates["board/lists/add-card-menu"],
-  addCardButton: MrelloApp.templates["board/lists/add-card-button"],
   titleTemplate: MrelloApp.templates["board/lists/list-title"],
   titleEditorTemplate: MrelloApp.templates["board/lists/title-editor"],
   tagName: "div",
   className: "list-wrapper",
   events: {
-    "click .add-card-button" : "renderAddCardMenu",
-    "click .cancel" : "renderAddCardButton",
-    "click .button" : "addCard",
     "click .list-title-heading" : "renderTitleEditor",
     "focusout .list-title .title-input" : "updateTitle",
     "click .list-overflow-menu" : "toggleOptions",
@@ -36,67 +31,31 @@ MrelloApp.views.List = Backbone.View.extend({
   initialize: function() {
     console.log("Rendering new list view")
     this.render();
-    this.bindEvents();
   },
   getCardsContainer: function() {
-    return $(this.el).find(".card-list")
-  },
-  bindEvents: function() {
-    _.extend(this, Backbone.Events);
-    this.listenTo(this.model.get("cards"), 'add remove change', this.renderCards.bind(this));
-    this.bindDropEvents();
-  },
-  bindDropEvents: function() {
-    var cardsContainer = this.$el.find(".card-list");
-    var self = this;
-
-    cardsContainer.on("dragenter", function(ev) {
-      ev.preventDefault();
-    });
-
-    cardsContainer.on("dragover", function(ev) {
-      ev.preventDefault();
-      console.log("dragover zone");
-    });
-
-    cardsContainer.on("drop", function(ev) {
-      ev.preventDefault();
-      console.log("drop event fired")
-      self.model.get("cards").create(MrelloApp.draggedObject.clone(), {at: MrelloApp.insertAt});
-      MrelloApp.draggedObject.destroy();
-      
-    });
+    return $(this.el).find(".cards-wrapper")
   },
   render: function() {
     console.log("Rendering " + this.model.get("title") + " list");
     this.$el.html(this.template()); // Generate list view
     this.renderTitle();
     this.renderCards(); // Populate subviews
-    this.renderAddCardButton();
     return this;
-  },
-  renderCards: function() {
-    var cardsContainer = this.getCardsContainer();
-    new MrelloApp.views.Cards({
-      el: cardsContainer,
-      collection: this.model.get("cards"),
-    });
-    MrelloApp.events.trigger("refreshSearch");
-  },
-  renderAddCardMenu: function(e) {
-    e.preventDefault();
-    console.log("Enter Card Title");
-    this.$el.find(".add-card").html(this.addCardMenu());
-    this.$el.find("input").focus();
-  },
-  renderAddCardButton: function(e) {
-    if (e) { e.preventDefault(); }
-    this.$el.find(".add-card").html(this.addCardButton());
   },
   renderTitle: function() {
     this.$el.find(".list-title").html(
       this.titleTemplate(this.model.toJSON())
     );
+  },
+  renderCards: function() {
+    var cardsContainer = this.getCardsContainer();
+    var cardsView = new MrelloApp.views.Cards({
+      cards: this.model.get("cards"),
+    });
+
+    cardsContainer.append(cardsView.el)
+    
+    MrelloApp.events.trigger("refreshSearch");
   },
   renderTitleEditor: function(e) {
     e.preventDefault();
@@ -125,15 +84,6 @@ MrelloApp.views.List = Backbone.View.extend({
     this.$(".overflow-menu-container").css({
       "display" : "none",
     });
-  },
-  addCard: function(e) {
-    e.preventDefault();
-    var $input = this.$el.find(".title-input")
-    var title = $input.val();
-    $input.val(""); // clear input
-    if (title != "") {
-      this.model.get("cards").create( { title: title });
-    }
   },
   delete: function(e) {
     console.log("list destroyed");

@@ -38,7 +38,7 @@ MrelloApp.views.CardEditor = Backbone.View.extend({
   
     new MrelloApp.views.Comments({
       el: commentsContainer,
-      collection: this.model.get("comments")
+      comments: this.model.get("comments")
     });
   },
   clearModal: function() {
