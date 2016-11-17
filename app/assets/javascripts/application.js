@@ -14,6 +14,7 @@
 //= require lib/handlebars.js
 //= require lib/underscore.js
 //= require lib/backbone.js
+//= require lib/backbone-forms.js
 //
 //= require_tree ./app/templates
 //
