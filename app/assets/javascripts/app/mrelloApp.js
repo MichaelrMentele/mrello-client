@@ -52,7 +52,8 @@ var MrelloApp = {
   renderBoard: function() {
     console.log("Rendering board");
     this.clearAppView();
-    new MrelloApp.views.Board();
+    var boardView = new MrelloApp.views.Board()
+    $(MrelloApp.containerID).html(boardView.el);
   },
   renderLogin: function() {
     alert("Rendering Login")
@@ -60,7 +61,8 @@ var MrelloApp = {
   renderRegistration: function() {
     console.log("Rendering registration form");
     this.clearAppView();
-    new MrelloApp.views.Registration();
+    var registerView = new MrelloApp.views.Registration();
+    $(MrelloApp.containerID).html(registerView.el);
   },
   clearAppView: function() {
     $(this.containerID).empty();

@@ -9,7 +9,6 @@ MrelloApp.views.Registration = Backbone.View.extend({
   template: MrelloApp.templates['users/new'],
   registerForm: MrelloApp.templates['users/form'],
   initialize: function() {
-    this.$el = $(MrelloApp.containerID);
     this.render();
   },
   render: function() {

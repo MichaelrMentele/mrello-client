@@ -15,7 +15,6 @@ MrelloApp.views.Board = Backbone.View.extend({
     "keyup #search-bar input" : "searchCards",
   },
   initialize: function() {
-    this.$el = $(MrelloApp.containerID);
     this.render();
     this.bindEvents();
   },
