@@ -37,19 +37,12 @@ GEM
       thread_safe (~> 0.3, >= 0.3.4)
       tzinfo (~> 1.1)
     arel (6.0.3)
-    autoprefixer-rails (6.5.1)
-      execjs
-    bootstrap (4.0.0.alpha4)
-      autoprefixer-rails (>= 6.0.3)
-      sass (>= 3.4.19)
     builder (3.2.2)
     concurrent-ruby (1.0.2)
     erubis (2.7.0)
     execjs (2.7.0)
     globalid (0.3.7)
       activesupport (>= 4.1.0)
-    haml (4.0.7)
-      tilt
     handlebars_assets (0.23.1)
       execjs (~> 2.0)
       multi_json (~> 1.0)
@@ -144,8 +137,6 @@ PLATFORMS
   ruby
 
 DEPENDENCIES
-  bootstrap
-  haml
   handlebars_assets
   jasmine
   jbuilder (~> 2.0)
