@@ -1,0 +1,42 @@
+/*Global Styles*/
+input:focus,
+select:focus,
+textarea:focus,
+button:focus {
+  outline: none;
+}
+
+a:hover {
+  cursor: pointer;
+}
+
+html, body, main {
+  background-color: $bg-color;
+}
+
+body * {
+  font-family: arial, Helvetica;
+}
+
+body {
+  color: $text-primary-color;
+  font: $font-size "Helvetica Neue",Arial,Helvetica,sans-serif;
+  line-height: 18px;
+}
+
+header {
+  position: fixed;
+  width: 100%;
+  height: 40px;
+
+  text-align: center;
+  background-color: #0067A3;
+}
+
+main {
+  display: flex;
+  flex-direction: row;
+  padding: 88px 5px 44px 5px;
+}
+
+.off{ display: none; }

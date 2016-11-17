@@ -11,10 +11,5 @@
  * file per style scope.
  *
  *= require_tree ./lib
- *= require global
- *= require inputs
- *= require board
- *= require list
- *= require card
- *= require modal
+ *= require main
  */

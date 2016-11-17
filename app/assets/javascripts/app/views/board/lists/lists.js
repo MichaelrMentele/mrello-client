@@ -1,3 +1,16 @@
+// ListsView -> Manages list views
+
+// Subviews
+// ListsView -> ListView
+
+// Views Directly Managed by ListsView
+// None
+
+// Events:
+// Click on Add List -> Swap for ListTitleEntryView
+// Click add on ListTitleEntryView -> Create new list view and Swap for AddList view
+// Click cancel on ListTitleEntryView -> Swap for Addlist view
+
 var MrelloApp = MrelloApp || {};
 
 MrelloApp.views.Lists = Backbone.View.extend({

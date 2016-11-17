@@ -1,7 +1,7 @@
- .card {
+.card {
   display: block;
   margin: 8px 0;
-  background-color: #ffffff;
+  background-color: $card-bg-color;
   overflow: hidden;
   padding: 7px 6px 4px 8px;
   box-shadow: grey;

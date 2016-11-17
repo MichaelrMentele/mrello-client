@@ -1,29 +1,21 @@
-// BoardView: The main view that manages all other views and
-// binds event to static DOM elements
+// BoardView === User Board Page
 
 // Subviews:
 // Board -> Lists      
 
-// Statically Included Views Managed by 'this' View:
+// Subviews Directly Managed by BoardView:
 // Searchbar
-// AddList
-// ListTitleEntry
 
 // Events:
 // On keyup Searchbar -> Filter lists views
-// Click on Add List -> Swap for ListTitleEntryView
-// Click add on ListTitleEntryView -> Create new list view and Swap for AddList view
-// Click cancel on ListTitleEntryView -> Swap for Addlist view
 
 MrelloApp.views.Board = Backbone.View.extend({
   template: MrelloApp.templates['board/board'],
-  el: "div",
-  id: "board",
   events: {
     "keyup #search-bar input" : "searchCards",
   },
   initialize: function() {
-    this.$el = $(this.el);
+    this.$el = $(MrelloApp.containerID);
     this.render();
     this.bindEvents();
   },

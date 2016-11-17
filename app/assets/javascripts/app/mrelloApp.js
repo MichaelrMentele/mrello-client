@@ -29,8 +29,10 @@ var MrelloApp = {
   data: {},
   routes: {},
   events: {},
-  appView: {},
+  containerID: "#app-container",
   init: function() {
+    console.log("Mrello starting up...")
+
     // Setup
     this.data = new this.collections.Lists();  
     this.events = _.extend({}, Backbone.Events);
@@ -58,12 +60,10 @@ var MrelloApp = {
   renderRegistration: function() {
     console.log("Rendering registration form");
     this.clearAppView();
-    new Backbone.Form({
-      model: user
-    }).render();
+    new MrelloApp.views.Registration();
   },
   clearAppView: function() {
-    $("#app-container").empty();
+    $(this.containerID).empty();
   }
 }
 

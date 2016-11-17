@@ -1,5 +1,4 @@
-
-/*Modal Styling*/
+/*General Modal Styling*/
 #modal-container:before {
   content: "";
   position: fixed;
@@ -9,19 +8,6 @@
   left: 0;
   background: rgba(0, 0, 0, .4);
   z-index: 1; }
-
-#card-editor {
-  display: block;
-  position: absolute;
-  top: 40px;
-  left: 50%;
-  width: 450px;
-  padding-bottom: 24px;
-  margin-left: -225px; 
-  z-index: 2;
-  border-radius: 3px;
-  background: #E2E4E6;
-}
 
 .window-header {
   margin: 4px 40px 4px 38px;
@@ -47,23 +33,6 @@
   height: 22px;
 }
 
-#card-editor i {
-  position: absolute;
-  left: -33px;
-}
-
-.card-details {
-  margin: 4px 40px 4px 38px;
-  padding: 9px 9px 0;
-}
-
-.card-details textarea {
-  border-radius: 3px;
-  resize: none;
-  padding: 8px;
-  width: 100%;
-}
-
 .open-in-header {
   text-decoration: underline;
 }
@@ -87,6 +56,37 @@
   width: 100%;
   padding: 8px;
   border-radius: 3px;
+}
+
+/*Card Editor Modal Styles*/
+#card-editor {
+  display: block;
+  position: absolute;
+  top: 40px;
+  left: 50%;
+  width: 450px;
+  padding-bottom: 24px;
+  margin-left: -225px; 
+  z-index: 2;
+  border-radius: 3px;
+  background: #E2E4E6;
+}
+
+#card-editor i {
+  position: absolute;
+  left: -33px;
+}
+
+.card-details {
+  margin: 4px 40px 4px 38px;
+  padding: 9px 9px 0;
+}
+
+.card-details textarea {
+  border-radius: 3px;
+  resize: none;
+  padding: 8px;
+  width: 100%;
 }
 
 .checklist-input-box {

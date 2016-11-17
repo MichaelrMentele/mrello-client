@@ -5,10 +5,5 @@ MrelloApp.models.User = Backbone.Model.extend({
     fullname: "",
     email: "",
     password: "",
-  },
-  schema: {
-    fullname: 'Text',
-    email: { validators: ['required', 'email'] }
-    password: 'Password',
   }
-})
+});

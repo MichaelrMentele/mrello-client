@@ -1,5 +1,4 @@
 /*FOR LISTS COLLECTION*/
-
 .lists-wrapper {
   display: flex;
   flex-direction: row;
@@ -32,7 +31,7 @@
 }
 
 .list, .list * {
-  background-color: #E2E4E6;
+  background-color: $object-bg-color;
 }
 
 .list-wrapper { 
@@ -87,12 +86,12 @@
   background-color: rgba(0,0,0,.15);
 }
 
-.overflow-menu-container * { background-color: white; }
+.overflow-menu-container * { background-color: $action-object-color; }
 .overflow-menu-container {
   display: none;
   width: 120px;
   position: absolute;
-  background: white;
+  background: $action-object-color;
   top: 38px;
   right: -84px;
   padding: 8px;
@@ -100,6 +99,8 @@
   border: 1px solid lightgrey;
   box-shadow: 1px 1px 1px grey;
 }
+
+// Cards container
 
 .card-list {
   box-sizing: border-box;
@@ -114,7 +115,7 @@
   display: block;
   font-size: 14px;
   color: #6F7071;
-  background-color: #E2E4E6;
+  background-color: $object-bg-color;
   padding: 8px;
 }
 
