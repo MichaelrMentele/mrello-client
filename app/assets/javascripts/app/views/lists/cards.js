@@ -57,6 +57,7 @@ MrelloApp.views.Cards = Backbone.View.extend({
     this.$el.html(this.template()); 
     this.renderCards();
     this.renderAddCardButton();
+    return this;
   },
   renderCards: function() {
     console.log("Rendering cards");
@@ -93,7 +94,8 @@ MrelloApp.views.Cards = Backbone.View.extend({
     var title = $input.val();
     $input.val(""); // clear input
     if (title != "") {
-      this.cards.create( { title: title });
+      var list_id = this.cards.parent.attributes.id
+      this.cards.create( { title: title, list_id: list_id });
     }
   },
 });

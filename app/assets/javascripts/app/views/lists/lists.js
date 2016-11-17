@@ -23,6 +23,7 @@ MrelloApp.views.Lists = Backbone.View.extend({
     this.renderLists();
     this.renderAddListContainer();
     this.renderAddListButton();
+    return this;
   },
   bindEvents: function() {
     this.listenTo(this.lists, 'add remove change', this.render);

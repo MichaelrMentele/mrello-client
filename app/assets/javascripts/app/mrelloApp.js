@@ -43,15 +43,19 @@ var MrelloApp = {
     // TODO: User data?
   },
   bindEvents: function() {
-    MrelloApp.events.on("renderBoard", MrelloApp.renderBoard);
-    MrelloApp.events.on("renderLogin", MrelloApp.renderLogin);
+    MrelloApp.events.on("renderBoard", MrelloApp.renderBoard, this);
+    MrelloApp.events.on("renderLogin", MrelloApp.renderLogin, this);
   },
   renderBoard: function() {
     console.log("Rendering board")
-    MrelloApp.appView = new MrelloApp.views.Board();
+    this.clearAppView();
+    new MrelloApp.views.Board();
   },
   renderLogin: function() {
     alert("Rendering Login")
+  },
+  clearAppView: function() {
+    $("#app-container").empty();
   }
 }
 

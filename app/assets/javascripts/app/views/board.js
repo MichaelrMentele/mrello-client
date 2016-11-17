@@ -16,7 +16,9 @@
 // Click cancel on ListTitleEntryView -> Swap for Addlist view
 
 MrelloApp.views.Board = Backbone.View.extend({
-  el: "body", // Existing container on tag
+  template: MrelloApp.templates['board/board'],
+  el: "div",
+  id: "board",
   events: {
     "keyup #search-bar input" : "searchCards",
   },
@@ -29,8 +31,10 @@ MrelloApp.views.Board = Backbone.View.extend({
     MrelloApp.events.on("refreshSearch", this.searchCards);
   },
   render: function() {
+    this.$el.html(this.template());
     this.renderLists();
     this.searchCards();
+    return this;
   },
   renderLists: function() {
     var listsView = new MrelloApp.views.Lists()

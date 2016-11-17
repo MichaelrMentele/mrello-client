@@ -14,7 +14,7 @@
          * the jQuery ajax options, which includes the `url` property
          */
          
-         var HOST_URL = 'http://e5fc48d8.ngrok.io'
+         var HOST_URL = 'http://684d4647.ngrok.io'
         options = _.extend(options, {
             url: HOST_URL + (_.isFunction(model.url) ? model.url() : model.url)
         });

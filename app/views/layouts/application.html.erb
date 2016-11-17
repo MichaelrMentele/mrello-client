@@ -7,11 +7,10 @@
   <%= csrf_meta_tags %>
 </head>
 <body>
+  <%= yield %>
 
-<%= yield %>
-
-<script type="text/javascript">
-  MrelloApp.init()
-</script>
+  <script type="text/javascript">
+    MrelloApp.init()
+  </script>
 </body>
 </html>
