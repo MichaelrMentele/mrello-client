@@ -25,10 +25,26 @@ MrelloApp.views.Registration = Backbone.View.extend({
   },
   submit: function(e) {
     e.preventDefault();
-    alert("form submit")
+    console.log("Attempting to create user...");
+    var user = new MrelloApp.models.User(this.userInputs());
+    user.save({}, {
+      success: function(model, response, options){
+        console.log(response.message);
+      }, 
+      error: function(model, response, options) {
+        console.log(response.message);
+      }
+    })
   },
   navigateToLogin: function(e) {
     e.preventDefault();
-    MrelloApp.routes.navigate("login", { trigger: true })
+    MrelloApp.routes.navigate("login", { trigger: true });
+  },
+  userInputs: function() {
+    var inputs = {};
+    inputs.fullname = $("#inputFullname").val();
+    inputs.email = $("#inputEmail").val();
+    inputs.password = $("#inputPassword").val();
+    return inputs
   }
 });
