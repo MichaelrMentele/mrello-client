@@ -1,5 +1,3 @@
-
-
 // overwrite backbone sync to use a root url -> Modify this for production
 (function () {
     // Store the original version of Backbone.sync
@@ -14,10 +12,14 @@
          * the jQuery ajax options, which includes the `url` property
          */
          
-         var HOST_URL = 'http://684d4647.ngrok.io'
-        options = _.extend(options, {
-            url: HOST_URL + (_.isFunction(model.url) ? model.url() : model.url)
-        });
+        var HOST_URL = 'http://684d4647.ngrok.io'
+        if (options.url) {
+            options.url = HOST_URL + options.url
+        } else {
+            options = _.extend(options, {
+                url: HOST_URL + (_.isFunction(model.url) ? model.url() : model.url)
+            });
+        }
 
         /*
          *  Call the stored original Backbone.sync

@@ -25,10 +25,25 @@ MrelloApp.views.Login = Backbone.View.extend({
   },
   submit: function(e) {
     e.preventDefault();
-    alert("Requesting JWT and Logging in...")
+    console.log("Attempting login...");
+    var session = new MrelloApp.models.Session(this.userInputs());
+    session.sync("create", session, {
+      success: function(response, status, options){
+        console.log(response.message);
+      }, 
+      error: function(response, status, options) {
+        console.log(response.message);
+      }
+    })
   },
   navigateToRegistration: function(e) {
     e.preventDefault();
     MrelloApp.routes.navigate("register", { trigger: true })
+  },
+  userInputs: function() {
+    var inputs = {};
+    inputs.email = $("#inputEmail").val();
+    inputs.password = $("#inputPassword").val();
+    return inputs
   }
 });

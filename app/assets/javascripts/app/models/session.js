@@ -5,12 +5,21 @@ var MrelloApp = MrelloApp || {}
 
 MrelloApp.models.Session = Backbone.Model.extend({
   defaults: {
+    email: "",
+    password: "",
     logged_in: false,
     session_token: null
   },
-  url: '/api/v1/login',
-  initialize: function(token) {
-    // singleton user object
-    this.session_token = token
+
+  methodToURL: {
+    'create': '/api/v1/login',
+    'delete': '/api/v1/logout'
+  },
+
+  sync: function(method, model, options) {
+    options = options || {};
+    options.url = model.methodToURL[method.toLowerCase()];
+
+    return Backbone.sync.apply(this, arguments);
   }
 })
