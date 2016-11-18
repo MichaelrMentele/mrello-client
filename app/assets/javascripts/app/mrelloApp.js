@@ -52,20 +52,29 @@ var MrelloApp = {
   renderBoard: function() {
     console.log("Rendering board");
     this.clearAppView();
+
     var boardView = new MrelloApp.views.Board()
-    $(MrelloApp.containerID).html(boardView.el);
+    this.render(boardView)
   },
   renderLogin: function() {
-    alert("Rendering Login")
+    console.log("Rendering login page");
+    this.clearAppView();
+
+    var loginView = new MrelloApp.views.Login();
+    this.render(loginView);
   },
   renderRegistration: function() {
     console.log("Rendering registration form");
     this.clearAppView();
+
     var registerView = new MrelloApp.views.Registration();
-    $(MrelloApp.containerID).html(registerView.el);
+    this.render(registerView)
   },
   clearAppView: function() {
     $(this.containerID).empty();
+  },
+  render: function(view) {
+    $(MrelloApp.containerID).html(view.el);
   }
 }
 
