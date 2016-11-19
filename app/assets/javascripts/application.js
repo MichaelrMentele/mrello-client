@@ -17,8 +17,8 @@
 //
 //= require_tree ./app/templates
 //
-//= require app/config.js
 //= require app/mrelloApp.js
+//= require app/config.js
 //
 //= require_tree ./app/routers
 //= require_tree ./app/models

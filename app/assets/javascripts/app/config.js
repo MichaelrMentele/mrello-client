@@ -1,30 +1,31 @@
 // overwrite backbone sync to use a root url -> Modify this for production
 (function () {
-    // Store the original version of Backbone.sync
-    var backboneSync = Backbone.sync;
-    
+  // Store the original version of Backbone.sync
+  var backboneSync = Backbone.sync;
 
-    Backbone.sync = function (method, model, options) {
-        /*
-         * Change the `url` property of options to begin
-         * with the URL from settings
-         * This works because the options object gets sent as
-         * the jQuery ajax options, which includes the `url` property
-         */
-         
-        var HOST_URL = 'http://684d4647.ngrok.io'
-        if (options.url) {
-            options.url = HOST_URL + options.url
-        } else {
-            options = _.extend(options, {
-                url: HOST_URL + (_.isFunction(model.url) ? model.url() : model.url)
-            });
-        }
+  Backbone.sync = function (method, model, options) {
+    // Every sync call is sent to this root
+    var HOST_URL = 'http://684d4647.ngrok.io'
 
-        /*
-         *  Call the stored original Backbone.sync
-         * method with the new url property
-         */
-        backboneSync(method, model, options);
-    };
+    // prepend root url
+    if (options.url) {
+      options.url = HOST_URL + options.url
+    } else {
+      options = _.extend(options, {
+        url: HOST_URL + (_.isFunction(model.url) ? model.url() : model.url)
+      });
+    }
+
+    // Attach session token to all calls
+    options.beforeSend = function(xhr) {
+      var token = ""; // no session token by default
+      if (MrelloApp.session.hasToken) {
+        token = MrelloApp.session.get("session_token");
+      }
+      xhr.setRequestHeader('Authorization', token)
+    } 
+
+    // Call sync with root path
+    backboneSync(method, model, options);
+  };
 })();

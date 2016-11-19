@@ -4,22 +4,23 @@
 var MrelloApp = MrelloApp || {}
 
 MrelloApp.models.Session = Backbone.Model.extend({
+  url: '/api/v1/sessions',
   defaults: {
-    email: "",
-    password: "",
-    logged_in: false,
+    email: "",    // temp
+    password: "", // temp
     session_token: null
   },
-
-  methodToURL: {
-    'create': '/api/v1/login',
-    'delete': '/api/v1/logout'
-  },
-
+  
   sync: function(method, model, options) {
     options = options || {};
-    options.url = model.methodToURL[method.toLowerCase()];
+    
+    // Use this if you need to map custom url endpoints
+    // options.url = model.methodToURL[method.toLowerCase()];
 
     return Backbone.sync.apply(this, arguments);
+  },
+
+  hasToken: function() {
+    return !!this.session_token
   }
 })

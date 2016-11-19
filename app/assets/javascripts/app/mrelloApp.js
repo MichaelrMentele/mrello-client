@@ -28,6 +28,7 @@ var MrelloApp = {
   // application objects -- called out here for readability
   data: {},
   routes: {},
+  session: {}, // singleton session model
   events: {},
   containerID: "#app-container",
   init: function() {
@@ -35,14 +36,13 @@ var MrelloApp = {
 
     // Setup
     this.data = new this.collections.Lists();  
+    this.session = new this.models.Session();
     this.events = _.extend({}, Backbone.Events);
     this.bindEvents();
 
     // Run
     this.routes = new this.routers.MrelloRouter(); // first create instance of router
     Backbone.history.start({pushState: true});         // pushState uses the full URL
-    // TODO: Session data?
-    // TODO: User data?
   },
   bindEvents: function() {
     MrelloApp.events.on("renderBoard", MrelloApp.renderBoard, this);
