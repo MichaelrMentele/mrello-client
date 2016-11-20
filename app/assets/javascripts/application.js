@@ -14,14 +14,18 @@
 //= require lib/handlebars.js
 //= require lib/underscore.js
 //= require lib/backbone.js
+//= require lib/backbone_controller.js
 //
 //= require_tree ./app/templates
 //
 //= require app/mrelloApp.js
 //= require app/config.js
 //
+//= require_tree ./app/controllers
 //= require_tree ./app/routers
 //= require_tree ./app/models
 //= require_tree ./app/collections
 //= require_tree ./app/views
+//
+
 

@@ -26,17 +26,16 @@ MrelloApp.views.Login = Backbone.View.extend({
   submit: function(e) {
     e.preventDefault();
     console.log("Attempting login...");
+
     session = MrelloApp.session.set(this.userInputs());
     session.sync("create", session, {
       success: function(response, status, options){
         console.log(response.message);
 
-        // Clear user information!
-        session.set("email", "");
-        session.set("password", "");
-
-        // Set auth token for current users session
+        session.clearUserInfo();
         session.set("session_token", response.session_token);
+
+        // redirect to home page
         MrelloApp.routes.navigate("", { trigger: true} );
       }, 
       error: function(response, status, options) {

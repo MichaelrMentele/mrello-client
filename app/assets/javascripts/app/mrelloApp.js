@@ -19,26 +19,34 @@
 // - models
 
 var MrelloApp = {
+
   // constructor namespaces
   models: {},      
   collections: {}, 
   views: {},     
   routers: {}, 
+  controllers: {},
   templates: HandlebarsTemplates,
+
   // application objects -- called out here for readability
-  data: {},
-  routes: {},
-  session: {}, // singleton session model
-  events: {},
-  containerID: "#app-container",
+  data: {},               // Contains board data
+  routes: {},             // Router
+  session: {},            // Singleton model containing session state
+  sessionsController: {},
+  usersController: {},
+  boardController: {},
+  
   init: function() {
     console.log("Mrello starting up...")
 
-    // Setup
+    // State Containing Objects
     this.data = new this.collections.Lists();  
     this.session = new this.models.Session();
-    this.events = _.extend({}, Backbone.Events);
-    this.bindEvents();
+
+    // Controllers
+    this.sessionsController = new this.controllers.Sessions(MrelloApp.containerID);
+    // this.usersController = new this.controllers.Users();
+    // this.boardController = new this.controllers.Board();
 
     // Run
     this.routes = new this.routers.MrelloRouter(); // first create instance of router
@@ -46,7 +54,6 @@ var MrelloApp = {
   },
   bindEvents: function() {
     MrelloApp.events.on("renderBoard", MrelloApp.renderBoard, this);
-    MrelloApp.events.on("renderLogin", MrelloApp.renderLogin, this);
     MrelloApp.events.on("renderRegistration", MrelloApp.renderRegistration, this);
   },
   renderBoard: function() {
@@ -56,26 +63,13 @@ var MrelloApp = {
     var boardView = new MrelloApp.views.Board()
     this.render(boardView)
   },
-  renderLogin: function() {
-    console.log("Rendering login page");
-    this.clearAppView();
-
-    var loginView = new MrelloApp.views.Login();
-    this.render(loginView);
-  },
   renderRegistration: function() {
     console.log("Rendering registration form");
-    this.clearAppView();
-
+    
     var registerView = new MrelloApp.views.Registration();
     this.render(registerView)
   },
-  clearAppView: function() {
-    $(this.containerID).empty();
-  },
-  render: function(view) {
-    $(MrelloApp.containerID).html(view.el);
-  }
+  
 }
 
                                  
