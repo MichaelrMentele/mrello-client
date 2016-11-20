@@ -22,7 +22,7 @@ MrelloApp.views.Board = Backbone.View.extend({
     MrelloApp.boardsController.on("refreshSearch", this.searchCards);
   },
   render: function() {
-    this.$el.html(this.template());
+    this.$el.html(this.template({session:true}));
     this.renderLists();
     this.searchCards();
     return this;

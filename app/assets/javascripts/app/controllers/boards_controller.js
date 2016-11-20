@@ -9,8 +9,16 @@ MrelloApp.controllers.Boards = Backbone.Controller.extend({
   },
   show: function() {
     console.log("Rendering board page");
-
-    var boardView = new MrelloApp.views.Board();
-    this.render(boardView);
+    var self = this
+    MrelloApp.data.fetch({
+      success: function(model, response, options){
+        var boardView = new MrelloApp.views.Board();
+        self.render(boardView);
+      },
+      error: function(model, response, options) {
+        // MrelloApp.events.trigger("error", "You must be logged in for that.")
+        MrelloApp.routes.navigate("login", { trigger: true });
+      }
+    });
   }
 });

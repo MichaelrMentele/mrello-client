@@ -25,7 +25,11 @@ MrelloApp.models.Session = Backbone.Model.extend({
   },
 
   clearUserInfo: function() {
-    this.set("email", "");
-    this.set("password", "");
+    this.set("email", null);
+    this.set("password", null);
+  },
+
+  clearSession: function() {
+    this.set("session_token", null)
   }
 })
