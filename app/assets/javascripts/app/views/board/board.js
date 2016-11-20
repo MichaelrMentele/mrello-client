@@ -19,7 +19,7 @@ MrelloApp.views.Board = Backbone.View.extend({
     this.bindEvents();
   },
   bindEvents: function() {
-    MrelloApp.events.on("refreshSearch", this.searchCards);
+    MrelloApp.boardsController.on("refreshSearch", this.searchCards);
   },
   render: function() {
     this.$el.html(this.template());

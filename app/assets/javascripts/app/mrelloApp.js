@@ -44,32 +44,14 @@ var MrelloApp = {
     this.session = new this.models.Session();
 
     // Controllers
-    this.sessionsController = new this.controllers.Sessions(MrelloApp.containerID);
-    // this.usersController = new this.controllers.Users();
-    // this.boardController = new this.controllers.Board();
+    this.sessionsController = new this.controllers.Sessions();
+    this.usersController = new this.controllers.Users();
+    this.boardsController = new this.controllers.Boards();
 
     // Run
     this.routes = new this.routers.MrelloRouter(); // first create instance of router
     Backbone.history.start({pushState: true});         // pushState uses the full URL
-  },
-  bindEvents: function() {
-    MrelloApp.events.on("renderBoard", MrelloApp.renderBoard, this);
-    MrelloApp.events.on("renderRegistration", MrelloApp.renderRegistration, this);
-  },
-  renderBoard: function() {
-    console.log("Rendering board");
-    this.clearAppView();
-
-    var boardView = new MrelloApp.views.Board()
-    this.render(boardView)
-  },
-  renderRegistration: function() {
-    console.log("Rendering registration form");
-    
-    var registerView = new MrelloApp.views.Registration();
-    this.render(registerView)
-  },
-  
+  }, 
 }
 
                                  

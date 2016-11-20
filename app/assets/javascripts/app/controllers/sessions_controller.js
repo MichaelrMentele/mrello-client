@@ -3,11 +3,10 @@ var MrelloApp = MrelloApp || {};
 MrelloApp.controllers.Sessions = Backbone.Controller.extend({
   containerID: "#app-container",
   initialize: function() {
-    this.on("renderLogin", this.renderLogin);
+    this.on("new", this.new);
   },
-  renderLogin: function() {
+  new: function() {
     console.log("Rendering login page");
-    this.clearAppView();
 
     var loginView = new MrelloApp.views.Login();
     this.render(loginView);

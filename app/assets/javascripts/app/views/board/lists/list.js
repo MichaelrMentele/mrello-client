@@ -55,7 +55,7 @@ MrelloApp.views.List = Backbone.View.extend({
 
     cardsContainer.append(cardsView.el)
     
-    MrelloApp.events.trigger("refreshSearch");
+    MrelloApp.boardsController.trigger("refreshSearch");
   },
   renderTitleEditor: function(e) {
     e.preventDefault();
