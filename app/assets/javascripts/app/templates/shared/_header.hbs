@@ -11,20 +11,24 @@
           <i class="glyphicon glyphicon-search"></i>
         </label>
       </div>
+    {{/if}}
+  </nav>
 
-      <div id="logout" class="pull-right">
-        <a href="#">Logout</a>
-      </div>
-
+  {{#if session}}
+  <nav id="nav-aside">
       {{!-- TODO: Should only be available if Admin --}}
-      <div class="pull-right">
-        <a id="create-org" href="#">Create Organization</a>
+      <div id="create-org" class="btn">
+        <a href="#">Create Organization</a>
       </div>
 
       {{!-- TODO: Should only be availiabe if not Admin --}}
-      <div class="pull-right">
-        <a id="join-org" href="#">Join Organization</a>
+      <div id="join-org" class="btn">
+        <a href="#">Join Organization</a>
       </div>
-    {{/if}}
+
+      <div id="logout" class="btn">
+        <a href="#">Logout</a>
+      </div>
   </nav>
+  {{/if}}
 </header>
