@@ -3,7 +3,7 @@
 // Subviews:
 // Registration -> Form
 
-var MrelloApp = MrelloApp || {};
+var MrelloApp = MrelloApp || {}
 
 MrelloApp.views.Registration = Backbone.View.extend({
   template: MrelloApp.templates['users/new'],
@@ -16,45 +16,49 @@ MrelloApp.views.Registration = Backbone.View.extend({
   },  
 
   initialize: function() {
-    this.render();
+    this.render()
   },
 
   render: function() {
-    this.$el.html(this.template());
-    this.renderForm();
+    this.$el.html(this.template())
+    this.renderForm()
   },
 
   renderForm: function() {
-    this.$el.find("#registration").html(this.registerForm());
-    return this;
+    this.$el.find("#registration").html(this.registerForm())
+    return this
   },
 
   submit: function(e) {
-    e.preventDefault();
-    console.log("Attempting to create user...");
-    var user = new MrelloApp.models.User(this.userInputs());
+    e.preventDefault()
+    console.log("Attempting to create user...")
+
+    var user = new MrelloApp.models.User(this.userInputs())
     user.save({}, {
       success: function(model, response, options){
-        console.log(response.message);
+        console.log(response.message)
+        // TODO: Refactor so only safe information is returned and stored client side
+        MrelloApp.currentUser = new MrelloApp.models.User(response.user)
         MrelloApp.routes.navigate("login", { trigger: true } )
       }, 
+
       error: function(model, response, options) {
-        console.log(response.message);
+        console.log(response.message)
       }
     })
   },
 
   navigateToLogin: function(e) {
-    e.preventDefault();
-    MrelloApp.routes.navigate("login", { trigger: true });
+    e.preventDefault()
+    MrelloApp.routes.navigate("login", { trigger: true })
   },
 
   userInputs: function() {
-    var inputs = {};
-    inputs.fullname = $("#inputFullname").val();
-    inputs.email = $("#inputEmail").val();
-    inputs.password = $("#inputPassword").val();
+    var inputs = {}
+    inputs.fullname = $("#inputFullname").val()
+    inputs.email = $("#inputEmail").val()
+    inputs.password = $("#inputPassword").val()
     inputs.admin = $("#inputAdmin").is(':checked')
     return inputs
   }
-});
+})
