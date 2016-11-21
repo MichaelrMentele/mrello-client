@@ -13,6 +13,8 @@ MrelloApp.views.Board = Backbone.View.extend({
   template: MrelloApp.templates['board/board'],
   events: {
     "keyup #search-bar input" : "searchCards",
+    "click #create-org" : "createOrg",
+    "click #logout" : "logout"
   },
   initialize: function() {
     this.render();
@@ -22,7 +24,7 @@ MrelloApp.views.Board = Backbone.View.extend({
     MrelloApp.boardsController.on("refreshSearch", this.searchCards);
   },
   render: function() {
-    this.$el.html(this.template({session:true}));
+    this.$el.html(this.template({session:true} ));
     this.renderLists();
     this.searchCards();
     return this;
@@ -46,5 +48,13 @@ MrelloApp.views.Board = Backbone.View.extend({
         "box-shadow" : "4px 4px 4px #888888",
       })
     }
+  },
+  createOrg: function() {
+    console.log("Creating organization")
+    MrelloApp.routes.navigate("organization/new", { trigger: true })
+  },
+  logout: function() {
+    console.log("Logging out")
+    MrelloApp.routes.navigate("logout", { trigger: true })
   }
 });
