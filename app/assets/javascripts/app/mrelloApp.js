@@ -30,35 +30,39 @@ var MrelloApp = {
 
   // application objects -- called out here for readability
   data: {},               // Contains board data
+  organizations: {},      // TODO: should be namespaced under data
   routes: {},             // Router
   session: {},            // Singleton model containing session state
   sessionsController: {},
   usersController: {},
   boardController: {},
+  organizationsController: {},
   
   init: function() {
     console.log("Mrello starting up...")
 
     // State Container
     this.resetSession()
+    this.organizations = new this.collections.Organizations() //TODO: Refactor-> namespace under data
 
     // Controllers
-    this.sessionsController = new this.controllers.Sessions();
-    this.usersController = new this.controllers.Users();
-    this.boardsController = new this.controllers.Boards();
-    this.organizationsController = new this.controllers.Organizations();
+    this.sessionsController = new this.controllers.Sessions()
+    this.usersController = new this.controllers.Users()
+    this.boardsController = new this.controllers.Boards()
+    this.organizationsController = new this.controllers.Organizations()
 
     // Run
-    this.routes = new this.routers.MrelloRouter(); 
-    Backbone.history.start( { pushState: true } ); // pushState uses the full URL
+    this.routes = new this.routers.MrelloRouter() 
+    Backbone.history.start( { pushState: true } ) // pushState uses the full URL
   },
 
   resetSession: function() {
-    this.session = new this.models.Session();
+    this.session = new this.models.Session()
   },
   
   resetData: function() {
-    this.data = new this.collections.Lists();
+    // TODO: Should be refactored so that lists are under a board Model
+    this.data = new this.collections.Lists()
   }
 }
 

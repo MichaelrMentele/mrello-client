@@ -36,7 +36,7 @@ MrelloApp.views.Registration = Backbone.View.extend({
     user.save({}, {
       success: function(model, response, options){
         console.log(response.message);
-        MrelloApp.router.navigate("login", { trigger: true } )
+        MrelloApp.routes.navigate("login", { trigger: true } )
       }, 
       error: function(model, response, options) {
         console.log(response.message);
@@ -54,6 +54,7 @@ MrelloApp.views.Registration = Backbone.View.extend({
     inputs.fullname = $("#inputFullname").val();
     inputs.email = $("#inputEmail").val();
     inputs.password = $("#inputPassword").val();
+    inputs.admin = $("#inputAdmin").is(':checked')
     return inputs
   }
 });

@@ -1,4 +1,4 @@
-// OrganizationView === Org Registration Page
+// OrganizationNew === Org Registration Page
 
 // Subviews:
 // Registration -> Form
@@ -39,7 +39,7 @@ MrelloApp.views.OrganizationsNew = Backbone.View.extend({
     organization.save({}, {
       success: function(model, response, options){
         console.log(response.message);
-        MrelloApp.router.navigate("", { trigger: true } )
+        MrelloApp.routes.navigate("", { trigger: true } )
       }, 
       error: function(model, response, options) {
         console.log(response.message);

@@ -1,3 +1,4 @@
+{{!-- TODO: This should be its own view so we can bind events in one place--}}
 <header class="page-head board-head">
   <nav>
     <div id="logo">
@@ -10,11 +11,19 @@
           <i class="glyphicon glyphicon-search"></i>
         </label>
       </div>
+
+      <div id="logout" class="pull-right">
+        <a href="#">Logout</a>
+      </div>
+
+      {{!-- TODO: Should only be available if Admin --}}
       <div class="pull-right">
         <a id="create-org" href="#">Create Organization</a>
       </div>
-      <div id="logout" class="pull-right">
-        <a href="#">Logout</a>
+
+      {{!-- TODO: Should only be availiabe if not Admin --}}
+      <div class="pull-right">
+        <a id="join-org" href="#">Join Organization</a>
       </div>
     {{/if}}
   </nav>

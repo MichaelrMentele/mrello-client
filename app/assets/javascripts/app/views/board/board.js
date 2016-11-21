@@ -14,8 +14,9 @@ MrelloApp.views.Board = Backbone.View.extend({
   template: MrelloApp.templates['board/board'],
   events: {
     "keyup #search-bar input" : "searchCards",
-    "click #create-org" : "createOrg",
-    "click #logout" : "logout"
+    "click #create-org" : "createOrg", // TODO: Move to header sub view
+    "click #logout" : "logout", // TODO: move to header subview
+    "click #join-org" : "joinOrg", // TODO: move to header subview
   },
 
   initialize: function() {
@@ -59,7 +60,13 @@ MrelloApp.views.Board = Backbone.View.extend({
   createOrg: function(e) {
     e.preventDefault()
     console.log("Creating organization")
-    MrelloApp.routes.navigate("organization/new", { trigger: true })
+    MrelloApp.routes.navigate("organizations/new", { trigger: true })
+  },
+
+  joinOrg: function(e) {
+    e.preventDefault()
+    console.log("Showing organizations to join")
+    MrelloApp.routes.navigate("organizations", { trigger: true } )
   },
   
   logout: function(e) {

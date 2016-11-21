@@ -7,7 +7,8 @@ MrelloApp.routers.MrelloRouter = Backbone.Router.extend({
     'register'  :   'usersControllerNew',
     'login'     :   'sessionsControllerNew',
     'logout'    :   'sessionsControllerDestroy',
-    'organization/new' : 'organizationControllerNew'
+    'organizations'    : 'organizationsControllerIndex',
+    'organizations/new' : 'organizationsControllerNew',
   },
 
   boardsControllerShow: function() {   
@@ -30,7 +31,12 @@ MrelloApp.routers.MrelloRouter = Backbone.Router.extend({
     MrelloApp.sessionsController.trigger("destroy")
   },
 
-  organizationControllerNew: function() {
+  organizationsControllerIndex: function() {
+    console.log("Router: @index, organizations#index")
+    MrelloApp.organizationsController.trigger("index")
+  },
+
+  organizationsControllerNew: function() {
     console.log("Router: @new, organizations#new")
     MrelloApp.organizationsController.trigger("new")
   }

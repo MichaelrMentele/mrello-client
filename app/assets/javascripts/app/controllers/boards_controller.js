@@ -4,7 +4,7 @@ var MrelloApp = MrelloApp || {};
 // Serves as board related pub/sub event aggregator
 MrelloApp.controllers.Boards = Backbone.Controller.extend({
 
-  containerID: "#app-container",
+  containerID: "#app-container", // TODO: Refactor (this is contained in all controllers)
 
   initialize: function() {
     this.on("show", this.show);

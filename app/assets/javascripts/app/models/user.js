@@ -6,5 +6,6 @@ MrelloApp.models.User = Backbone.Model.extend({
     fullname: "",
     email: "",
     password: "",
+    admin: false,
   }
 });
