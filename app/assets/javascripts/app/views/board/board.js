@@ -10,29 +10,35 @@
 // On keyup Searchbar -> Filter lists views
 
 MrelloApp.views.Board = Backbone.View.extend({
+
   template: MrelloApp.templates['board/board'],
   events: {
     "keyup #search-bar input" : "searchCards",
     "click #create-org" : "createOrg",
     "click #logout" : "logout"
   },
+
   initialize: function() {
     this.render();
     this.bindEvents();
   },
+
   bindEvents: function() {
     MrelloApp.boardsController.on("refreshSearch", this.searchCards);
   },
+
   render: function() {
     this.$el.html(this.template({session:true} ));
     this.renderLists();
     this.searchCards();
     return this;
   },
+
   renderLists: function() {
     var listsView = new MrelloApp.views.Lists()
     this.$el.find("#lists-container").html(listsView.el)
   },
+
   searchCards: function() {
     console.log("searching...")
     var query = $("#search-bar input").val();
@@ -49,11 +55,15 @@ MrelloApp.views.Board = Backbone.View.extend({
       })
     }
   },
-  createOrg: function() {
+
+  createOrg: function(e) {
+    e.preventDefault()
     console.log("Creating organization")
     MrelloApp.routes.navigate("organization/new", { trigger: true })
   },
-  logout: function() {
+  
+  logout: function(e) {
+    e.preventDefault()
     console.log("Logging out")
     MrelloApp.routes.navigate("logout", { trigger: true })
   }

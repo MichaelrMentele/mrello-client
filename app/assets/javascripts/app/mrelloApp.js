@@ -39,19 +39,27 @@ var MrelloApp = {
   init: function() {
     console.log("Mrello starting up...")
 
-    // State Containing Objects
-    this.data = new this.collections.Lists();  
-    this.session = new this.models.Session();
+    // State Container
+    this.resetSession()
 
     // Controllers
     this.sessionsController = new this.controllers.Sessions();
     this.usersController = new this.controllers.Users();
     this.boardsController = new this.controllers.Boards();
+    this.organizationsController = new this.controllers.Organizations();
 
     // Run
-    this.routes = new this.routers.MrelloRouter(); // first create instance of router
-    Backbone.history.start({pushState: true});         // pushState uses the full URL
-  }, 
+    this.routes = new this.routers.MrelloRouter(); 
+    Backbone.history.start( { pushState: true } ); // pushState uses the full URL
+  },
+
+  resetSession: function() {
+    this.session = new this.models.Session();
+  },
+  
+  resetData: function() {
+    this.data = new this.collections.Lists();
+  }
 }
 
                                  
