@@ -3,7 +3,7 @@
 // Subviews:
 // Registration -> Form
 
-var MrelloApp = MrelloApp || {};
+var MrelloApp = MrelloApp || {}
 
 MrelloApp.views.OrganizationsNew = Backbone.View.extend({
 
@@ -17,44 +17,50 @@ MrelloApp.views.OrganizationsNew = Backbone.View.extend({
   },  
 
   initialize: function() {
-    this.render();
+    this.render()
   },
 
   render: function() {
-    this.$el.html(this.template());
-    this.renderForm();
+    this.renderHeader()
+    this.$el.append(this.template())
+    this.renderForm()
+  },
+
+  renderHeader: function() {
+    var headerView = new MrelloApp.views.Header( { session: true } )
+    this.$el.append(headerView.el)
   },
 
   renderForm: function() {
-    this.$el.find("#organization-registration").html(this.registerForm());
-    return this;
+    this.$el.find("#organization-registration").html(this.registerForm())
+    return this
   },
 
   submit: function(e) {
-    e.preventDefault();
+    e.preventDefault()
 
-    console.log("Attempting to create organization");
+    console.log("Attempting to create organization")
 
-    var organization = new MrelloApp.models.Organization(this.formInputs());
+    var organization = new MrelloApp.models.Organization(this.formInputs())
     organization.save({}, {
       success: function(model, response, options){
-        console.log(response.message);
+        console.log(response.message)
         MrelloApp.routes.navigate("", { trigger: true } )
       }, 
       error: function(model, response, options) {
-        console.log(response.message);
+        console.log(response.message)
       }
     })
   },
 
   navigateToBoard: function(e) {
-    e.preventDefault();
-    MrelloApp.routes.navigate("", { trigger: true });
+    e.preventDefault()
+    MrelloApp.routes.navigate("", { trigger: true })
   },
 
   formInputs: function() {
-    var inputs = {};
-    inputs.title = $("#inputTitle").val();
+    var inputs = {}
+    inputs.title = $("#inputTitle").val()
     return inputs
   }
-});
+})

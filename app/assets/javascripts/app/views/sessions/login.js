@@ -12,13 +12,22 @@ MrelloApp.views.Login = Backbone.View.extend({
     "click #submit-login" : "submit",
     "click #navigate-to-registration" : "navigateToRegistration"
   },  
+
   initialize: function() {
     this.render()
   },
+
   render: function() {
-    this.$el.html(this.template())
+    this.renderHeader()
+    this.$el.append(this.template())
     this.renderForm()
   },
+
+  renderHeader: function() {
+    var headerView = new MrelloApp.views.Header()
+    this.$el.append(headerView.el)
+  },
+
   renderForm: function() {
     this.$el.find("#login").html(this.loginForm())
     return this

@@ -1,14 +1,15 @@
-var MrelloApp = MrelloApp || {};
+var MrelloApp = MrelloApp || {}
 
-MrelloApp.controllers.Users = Backbone.Controller.extend({
-  containerID: "#app-container",
+MrelloApp.controllers.Users = MrelloApp.controllers.Application.extend({
+
   initialize: function() {
-    this.on("new", this.new);
+    this.on("new", this.new)
   },
+  
   new: function() {
-    console.log("Rendering registration form");
+    console.log("Rendering registration form")
     
-    var registerView = new MrelloApp.views.Registration();
+    var registerView = new MrelloApp.views.Registration()
     this.render(registerView)
   },
-});
+})

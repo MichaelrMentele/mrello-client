@@ -20,8 +20,14 @@ MrelloApp.views.Registration = Backbone.View.extend({
   },
 
   render: function() {
-    this.$el.html(this.template())
+    this.renderHeader()
+    this.$el.append(this.template())
     this.renderForm()
+  },
+
+  renderHeader: function() {
+    var headerView = new MrelloApp.views.Header()
+    this.$el.append(headerView.el)
   },
 
   renderForm: function() {

@@ -1,8 +1,6 @@
 var MrelloApp = MrelloApp || {}
 
-MrelloApp.controllers.Organizations = Backbone.Controller.extend({
-
-  containerID: "#app-container",
+MrelloApp.controllers.Organizations = MrelloApp.controllers.Application.extend({
 
   initialize: function() {
     this.on("new", this.new)

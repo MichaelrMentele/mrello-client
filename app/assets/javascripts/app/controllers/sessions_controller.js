@@ -1,7 +1,6 @@
 var MrelloApp = MrelloApp || {};
 
-MrelloApp.controllers.Sessions = Backbone.Controller.extend({
-  containerID: "#app-container",
+MrelloApp.controllers.Sessions = MrelloApp.controllers.Application.extend({
   
   initialize: function() {
     this.on("new", this.new);

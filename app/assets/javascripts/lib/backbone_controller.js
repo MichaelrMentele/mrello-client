@@ -6,13 +6,6 @@ Backbone.Controller = function Controller() {
 
 _.extend(Backbone.Controller.prototype, Backbone.Events, {
   initialize: function() {},
-  render: function(view) {
-    this.clearAppView.apply(this, arguments);
-    $(this.containerID).html(view.el);
-  },
-  clearAppView: function() {
-    $(this.containerID).empty();
-  },
 });
 
 // extend Helper added to controller (taken from Backbone source)
