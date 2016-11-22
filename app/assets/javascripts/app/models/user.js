@@ -6,14 +6,19 @@ MrelloApp.models.User = Backbone.Model.extend({
   urlRoot: "/api/v1/users",
   defaults: {
     fullname: "",
-    email: "",
-    password: "",
     admin: false,
+    organization_id: null,
   },
 
-  initialize: function() {
-    if (this.getStored()) {
-      this.set(this.getStored())
+  initialize: function(attributes) {
+    if (attributes) {
+      this.set("fullname", attributes.fullname)
+      this.set("admin", attributes.admin)
+      this.set("organization_id", attributes.organization_id)
+    } else if (this.getStored()) {
+      userJson = this.getStored()
+      userAttr = JSON.parse(userJson)
+      this.set(userAttr)
     }
 
     this.bindSave()
@@ -25,6 +30,11 @@ MrelloApp.models.User = Backbone.Model.extend({
       self.saveUser()
       console.log("current user saved")
     })
+  },
+
+  clear: function() {
+    // User defaults are reset on page reload
+    localStorage.currentUser = null
   },
 
   saveUser: function() {

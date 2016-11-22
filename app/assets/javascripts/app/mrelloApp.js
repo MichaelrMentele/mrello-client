@@ -61,6 +61,11 @@ var MrelloApp = {
   resetData: function() {
     // TODO: Should be refactored so that lists are under a board Model
     this.data = new this.collections.Lists()
+  },
+
+  clearCache: function() {
+    this.session.clear()
+    this.currentUser.clear()
   }
 }
 

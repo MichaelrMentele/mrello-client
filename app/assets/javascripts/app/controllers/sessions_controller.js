@@ -16,7 +16,7 @@ MrelloApp.controllers.Sessions = MrelloApp.controllers.Application.extend({
 
   destroy: function() {
     console.log("Clearing session and redirecting")
-    MrelloApp.session.clear()
+    MrelloApp.clearCache()
     MrelloApp.resetData()
     MrelloApp.routes.navigate("login", { trigger: true } )
   }
