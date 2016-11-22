@@ -6,8 +6,9 @@ MrelloApp.views.Header = Backbone.View.extend({
   className: "page-head",
   events: {
     "click #create-org" : "createOrg",
-    "click #logout" : "logout", 
-    "click #join-org" : "joinOrg", 
+    "click #logout"     : "logout", 
+    "click #join-org"   : "joinOrg",
+    "click #view-board" : "viewBoard" 
   },
 
   initialize: function(context) {
@@ -59,5 +60,11 @@ MrelloApp.views.Header = Backbone.View.extend({
     e.preventDefault()
     console.log("Logging out")
     MrelloApp.routes.navigate("logout", { trigger: true })
+  },
+
+  viewBoard: function(e) {
+    e.preventDefault()
+    console.log("Viewing board")
+    MrelloApp.routes.navigate("", { trigger: true })
   }
 })

@@ -48,5 +48,9 @@ MrelloApp.models.User = Backbone.Model.extend({
 
   stringify: function() {
     return JSON.stringify(this)
+  },
+
+  isAdmin: function() {
+    return this.get('admin')
   }
 });

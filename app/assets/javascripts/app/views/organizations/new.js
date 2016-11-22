@@ -27,7 +27,12 @@ MrelloApp.views.OrganizationsNew = Backbone.View.extend({
   },
 
   renderHeader: function() {
-    var headerView = new MrelloApp.views.Header( { session: true } )
+    adminStatus = MrelloApp.currentUser.isAdmin()
+    var headerView = new MrelloApp.views.Header({ 
+      session: true, 
+      admin: adminStatus,
+      createOrg: true,
+    })
     this.$el.append(headerView.el)
   },
 

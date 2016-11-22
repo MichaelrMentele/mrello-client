@@ -14,15 +14,23 @@
 
 {{#if session }}
   <nav id="nav-aside">
-    {{!-- TODO: Should only be available if Admin --}}
+    {{#unless board}}
+    <div id="view-board" class="btn">
+      <a href="#">Board</a>
+    </div>
+    {{/unless}}
+
+    {{#if admin}}
     <div id="create-org" class="btn">
       <a href="#">Create Organization</a>
     </div>
+    {{/if}}
 
-    {{!-- TODO: Should only be availiabe if not Admin --}}
+    {{#unless admin}}
     <div id="join-org" class="btn">
       <a href="#">Join Organization</a>
     </div>
+    {{/unless}}
 
     <div id="logout" class="btn">
       <a href="#">Logout</a>
