@@ -21,6 +21,10 @@ MrelloApp.models.Session = Backbone.Model.extend({
       this.set("token", this.getStoredToken())
     }
 
+    this.bindSave()
+  },
+
+  bindSave: function() {
     var self = this
     $(window).unload(function() {
       self.saveToken()

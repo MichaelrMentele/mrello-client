@@ -37,6 +37,7 @@ MrelloApp.views.Login = Backbone.View.extend({
     console.log("Attempting login...")
 
     session = MrelloApp.session.set(this.userInputs())
+    // TODO: refactor this callback to be implicit on the session object?
     session.sync("create", session, {
       success: function(response, status, options){
         console.log(response.message)

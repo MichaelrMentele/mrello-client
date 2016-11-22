@@ -41,9 +41,11 @@ var MrelloApp = {
   init: function() {
     console.log("Mrello starting up...")
 
-    // State Container
+    // State Containers
+    //TODO: Refactor-> namespace under data
     this.session = new this.models.Session()
-    this.organizations = new this.collections.Organizations() //TODO: Refactor-> namespace under data
+    this.organizations = new this.collections.Organizations() 
+    this.currentUser = new this.models.User()
 
     // Controllers
     this.sessionsController = new this.controllers.Sessions()
