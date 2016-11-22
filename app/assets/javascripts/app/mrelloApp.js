@@ -42,7 +42,7 @@ var MrelloApp = {
     console.log("Mrello starting up...")
 
     // State Container
-    this.resetSession()
+    this.session = new this.models.Session()
     this.organizations = new this.collections.Organizations() //TODO: Refactor-> namespace under data
 
     // Controllers
@@ -54,10 +54,6 @@ var MrelloApp = {
     // Run
     this.routes = new this.routers.MrelloRouter() 
     Backbone.history.start( { pushState: true } ) // pushState uses the full URL
-  },
-
-  resetSession: function() {
-    this.session = new this.models.Session()
   },
   
   resetData: function() {

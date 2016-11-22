@@ -41,8 +41,8 @@ MrelloApp.views.Login = Backbone.View.extend({
       success: function(response, status, options){
         console.log(response.message)
 
-        session.clearUserInfo()
-        session.set("session_token", response.session_token)
+        session.clearUserInfo() // clear sensitive user info
+        session.set("token", response.session_token)
         MrelloApp.currentUser = new MrelloApp.models.User(response.user)
 
         // redirect to home page

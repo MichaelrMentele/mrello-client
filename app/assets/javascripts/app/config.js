@@ -19,8 +19,8 @@
     // Attach session token to all calls
     options.beforeSend = function(xhr) {
       var token = ""; // no session token by default
-      if (MrelloApp.session.hasToken) {
-        token = MrelloApp.session.get("session_token");
+      if (MrelloApp.session.hasToken()) {
+        token = MrelloApp.session.get("token")
       }
       xhr.setRequestHeader('Authorization', token)
     } 
