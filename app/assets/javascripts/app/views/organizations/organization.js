@@ -24,12 +24,15 @@ MrelloApp.views.Organization = Backbone.View.extend({
 
   handleJoin: function(e) {
     e.preventDefault()
-    console.log("User attempting to join org")
-    MrelloApp.currentUser.save({ organization_id: this.model.id }, { 
-      patch: true, 
+    console.log("User creating join request")
+
+    var joinRequest = new MrelloApp.models.JoinRequest({ 
+      organization_id: this.model.id
+    })
+
+    joinRequest.save({}, {  
       success: function(model, response, options) {
-        console.log("User joined org.")
-        MrelloApp.currentUser = new MrelloApp.models.User(response.user)
+        console.log("Join request created.")
         MrelloApp.routes.navigate("", { trigger: true })
       },
       error: function(model, response, options) {
