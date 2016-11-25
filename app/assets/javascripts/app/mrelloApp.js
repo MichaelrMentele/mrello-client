@@ -51,6 +51,7 @@ var MrelloApp = {
     this.sessionsController = new this.controllers.Sessions()
     this.usersController = new this.controllers.Users()
     this.boardsController = new this.controllers.Boards()
+    this.listsController = new this.controllers.Lists()
     this.organizationsController = new this.controllers.Organizations()
 
     // Run

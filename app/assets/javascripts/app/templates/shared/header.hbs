@@ -21,15 +21,27 @@
     {{/unless}}
 
     {{#if admin}}
-    <div id="create-org" class="btn">
-      <a href="#">Create Organization</a>
-    </div>
+      {{#if hasOrganization }}
+      <div id="manage-org" class="btn">
+        <a href="#">Your Organization</a>
+      </div>
+      {{else}}
+      <div id="create-org" class="btn">
+        <a href="#">Create Organization</a>
+      </div>
+      {{/if}}
     {{/if}}
 
     {{#unless admin}}
-    <div id="join-org" class="btn">
-      <a href="#">Join Organization</a>
-    </div>
+      {{#if hasOrganization }}
+      <div id="view-org" class="btn">
+        <a href="#">Your Organization</a>
+      </div>
+      {{else}}
+      <div id="join-org" class="btn">
+        <a href="#">Join Organization</a>
+      </div>
+      {{/if}}
     {{/unless}}
 
     <div id="logout" class="btn">

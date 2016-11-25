@@ -4,11 +4,14 @@ MrelloApp.views.Header = Backbone.View.extend({
   template: MrelloApp.templates['shared/header'],
   tagName: "header",
   className: "page-head",
+  // TODO: Consider creating a header for admin and for normal user
   events: {
-    "click #create-org" : "createOrg",
+    "click #create-org" : "createOrg", // Admin only
     "click #logout"     : "logout", 
     "click #join-org"   : "joinOrg",
-    "click #view-board" : "viewBoard" 
+    "click #view-board" : "viewBoard", 
+    "click #manage-org" : "manageOrganization", // Admin only
+    "click #view-org"   : "viewOrg"
   },
 
   initialize: function(context) {
@@ -66,5 +69,17 @@ MrelloApp.views.Header = Backbone.View.extend({
     e.preventDefault()
     console.log("Viewing board")
     MrelloApp.routes.navigate("", { trigger: true })
+  },
+
+  manageOrganization: function(e) {
+    e.preventDefault()
+    console.log("Managing requests")
+    MrelloApp.routes.navigate("organizations/show", { trigger: true })
+  },
+
+  viewOrganization: function(e) {
+    e.preventDefault()
+    console.log("Viewing organizations (shared) board.")
+    MrelloApp.routes.navigate("organizations/show", { trigger: true })
   }
 })

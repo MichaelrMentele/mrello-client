@@ -12,4 +12,5 @@ MrelloApp.controllers.Users = MrelloApp.controllers.Application.extend({
     var registerView = new MrelloApp.views.Registration()
     this.render(registerView)
   },
+
 })

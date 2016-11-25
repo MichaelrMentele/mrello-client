@@ -4,7 +4,9 @@ MrelloApp.controllers.Organizations = MrelloApp.controllers.Application.extend({
 
   initialize: function() {
     this.on("new", this.new)
+    this.on("create", this.create)
     this.on("index", this.index)
+    this.on("show", this.show)
   },
   
   new: function() {
@@ -12,6 +14,20 @@ MrelloApp.controllers.Organizations = MrelloApp.controllers.Application.extend({
 
     var orgView = new MrelloApp.views.OrganizationsNew()
     this.render(orgView)
+  },
+
+  create: function(args) {
+    var organization = new MrelloApp.models.Organization(args)
+    organization.save({}, {
+      success: function(model, response, options){
+        console.log(response.message)
+        
+        MrelloApp.routes.navigate("", { trigger: true } )
+      }, 
+      error: function(model, response, options) {
+        console.log(response.message)
+      }
+    })
   },
 
   index: function() {
@@ -29,5 +45,24 @@ MrelloApp.controllers.Organizations = MrelloApp.controllers.Application.extend({
         MrelloApp.routes.navigate("", { trigger: true })
       }
     })
+  },
+
+  show: function() {
+    console.log("Rendering join requests")
+
+    var org_id = MrelloApp.currentUser.get("organization_id")
+    var organization = new MrelloApp.models.Organization({id: org_id})
+    
+    var self = this
+    organization.fetch({
+      success: function(model, response, options) {
+        var requestsView = new MrelloApp.views.OrganizationRequests({ model: organization})
+        self.render(requestsView)
+      },
+
+      error: function(model, response, options) {
+        console.log("Fetch failed for join requests.")
+      }
+    })   
   }
 })

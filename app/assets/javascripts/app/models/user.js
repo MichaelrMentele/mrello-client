@@ -52,5 +52,9 @@ MrelloApp.models.User = Backbone.Model.extend({
 
   isAdmin: function() {
     return this.get('admin')
+  },
+
+  hasOrganization: function() {
+    return !!this.get("organization_id")
   }
 });

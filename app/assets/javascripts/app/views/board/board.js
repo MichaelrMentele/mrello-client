@@ -30,10 +30,12 @@ MrelloApp.views.Board = Backbone.View.extend({
 
   renderHeader: function() {
     adminStatus = MrelloApp.currentUser.isAdmin()
+    hasOrgStatus = MrelloApp.currentUser.hasOrganization()
     var headerView = new MrelloApp.views.Header({ 
       session: true, 
       board: true,
       admin: adminStatus,
+      hasOrganization: hasOrgStatus,
     })
     this.$el.append(headerView.el)
   },

@@ -43,17 +43,16 @@ MrelloApp.views.OrganizationsNew = Backbone.View.extend({
 
   submit: function(e) {
     e.preventDefault()
-
     console.log("Attempting to create organization")
 
-    var organization = new MrelloApp.models.Organization(this.formInputs())
-    organization.save({}, {
-      success: function(model, response, options){
-        console.log(response.message)
-        MrelloApp.routes.navigate("", { trigger: true } )
-      }, 
+    MrelloApp.organizationsController.trigger("create", this.formInputs())
+
+    MrelloApp.currentUser.fetch({
+      success: function(model, response, options) {
+        debugger;
+      },
       error: function(model, response, options) {
-        console.log(response.message)
+        debugger;
       }
     })
   },
