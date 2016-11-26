@@ -11,7 +11,7 @@ MrelloApp.views.Header = Backbone.View.extend({
     "click #join-org"   : "joinOrg",
     "click #view-board" : "viewBoard", 
     "click #manage-org" : "manageOrganization", // Admin only
-    "click #view-org"   : "viewOrg"
+    "click #view-org"   : "viewOrganization"
   },
 
   initialize: function(context) {
@@ -80,6 +80,8 @@ MrelloApp.views.Header = Backbone.View.extend({
   viewOrganization: function(e) {
     e.preventDefault()
     console.log("Viewing organizations (shared) board.")
-    MrelloApp.routes.navigate("organizations/show", { trigger: true })
+    var id = MrelloApp.currentUser.get("organization_id")
+    var url = "organizations/show/" + id
+    MrelloApp.routes.navigate(url, { trigger: true })
   }
 })

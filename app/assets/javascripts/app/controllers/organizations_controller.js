@@ -62,6 +62,7 @@ MrelloApp.controllers.Organizations = MrelloApp.controllers.Application.extend({
 
       error: function(model, response, options) {
         console.log("Fetch failed for join requests.")
+        MrelloApp.routes.navigate("", { trigger: true })
       }
     })   
   }

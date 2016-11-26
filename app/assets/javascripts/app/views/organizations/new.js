@@ -49,10 +49,10 @@ MrelloApp.views.OrganizationsNew = Backbone.View.extend({
 
     MrelloApp.currentUser.fetch({
       success: function(model, response, options) {
-        debugger;
+        console.log("Current user info refreshed.")
       },
       error: function(model, response, options) {
-        debugger;
+        console.log("Problem fetching new user info.")
       }
     })
   },

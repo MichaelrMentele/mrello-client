@@ -36,7 +36,8 @@ MrelloApp.views.OrganizationRequests = Backbone.View.extend({
 
   renderRequests: function() {
     console.log("Rendering orgs")
-    this.model.get("join_requests").each(this.renderJoinRequestView, this)
+    debugger
+    this.model.get("joinRequests").each(this.renderJoinRequestView, this)
   },
 
   renderJoinRequestView: function(joinRequest) {

@@ -7,7 +7,7 @@ MrelloApp.views.JoinRequest = Backbone.View.extend({
   template: MrelloApp.templates['organizations/joinRequest'],
 
   tagName: "li",
-  className: "join-request",
+  className: "join-request clearfix",
 
   events: {
     "click .approve" : "handleApproval"
@@ -25,7 +25,7 @@ MrelloApp.views.JoinRequest = Backbone.View.extend({
   handleApproval: function(e) {
     e.preventDefault()
     console.log("Admin approving request and sharing board")
-
+    debugger;
     this.model.save({approved: true}, {  
       success: function(model, response, options) {
         console.log("Join request approved.")
