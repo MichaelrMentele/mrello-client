@@ -6,14 +6,12 @@ MrelloApp.models.User = Backbone.Model.extend({
   urlRoot: "/api/v1/users",
   defaults: {
     fullname: "",
-    admin: false,
     organization_id: null,
   },
 
   initialize: function(attributes) {
     if (attributes) {
       this.set("fullname", attributes.fullname)
-      this.set("admin", attributes.admin)
       this.set("organization_id", attributes.organization_id)
     } else if (this.getStored()) {
       userJson = this.getStored()
@@ -48,10 +46,6 @@ MrelloApp.models.User = Backbone.Model.extend({
 
   stringify: function() {
     return JSON.stringify(this)
-  },
-
-  isAdmin: function() {
-    return this.get('admin')
   },
 
   hasOrganization: function() {
