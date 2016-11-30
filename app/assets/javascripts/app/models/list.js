@@ -15,6 +15,12 @@ MrelloApp.models.List = Backbone.Model.extend({
   
   initialize: function() {
     console.log("New List Created")
+    
+    this.initializeCards()
+  },
+
+  // Initializers
+  initializeCards: function() {
     this.set("cards", 
       new MrelloApp.collections.Cards()
     );
