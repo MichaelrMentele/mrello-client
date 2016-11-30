@@ -1,23 +1,3 @@
-// App -> lists -> list-1 -> cards -> card-1 -> ...
-//                 list-n -> cards -> card-n -> comments    -> comment-n
-//                                              checklists  -> checklist-n
-
-// App Data:
-// - A collection of lists
-
-// Lists Data:
-// - list constructor
-// - models
-
-// List Data:
-// - An id
-// - A title (string)
-// - A collection of cards
-
-// Cards data:
-// - card constructor
-// - models
-
 var MrelloApp = {
 
   // constructor namespaces
@@ -28,45 +8,50 @@ var MrelloApp = {
   controllers: {},
   templates: HandlebarsTemplates,
 
-  // application objects -- called out here for readability
+  // application objects (called out for readability)
   data: {},               // Contains board data
   organizations: {},      // TODO: should be namespaced under data
   routes: {},             // Router
   session: {},            // Singleton model containing session state
-  sessionsController: {},
-  usersController: {},
-  boardController: {},
-  organizationsController: {},
   
   init: function() {
     console.log("Mrello starting up...")
 
-    // State Containers
-    //TODO: Refactor-> namespace under data
-    this.session = new this.models.Session()
-    this.organizations = new this.collections.Organizations() 
-    this.currentUser = new this.models.User()
-
-    // Controllers
-    this.sessionsController = new this.controllers.Sessions()
-    this.usersController = new this.controllers.Users()
-    this.boardsController = new this.controllers.Boards()
-    this.listsController = new this.controllers.Lists()
-    this.organizationsController = new this.controllers.Organizations()
-
-    // Run
-    this.routes = new this.routers.MrelloRouter() 
-    Backbone.history.start( { pushState: true } ) // pushState uses the full URL
+    this.initializeState()
+    this.initializeControllers()
+    this.initializeRouting()
   },
   
   resetData: function() {
     // TODO: Should be refactored so that lists are under a board Model
-    this.data = new this.collections.Lists()
+    this.data = new this.collections.Boards()
   },
 
   clearCache: function() {
     this.session.clear()
     this.currentUser.clear()
+  },
+
+  // Initializers
+  initializeState: function() {
+    // State Containers
+    //TODO: Refactor-> namespace under data
+    this.session = new this.models.Session()
+    this.organizations = new this.collections.Organizations() 
+    this.currentUser = new this.models.User()
+  },
+
+  initializeControllers: function() {
+    this.sessionsController = new this.controllers.Sessions()
+    this.usersController = new this.controllers.Users()
+    this.boardsController = new this.controllers.Boards()
+    this.listsController = new this.controllers.Lists()
+    this.organizationsController = new this.controllers.Organizations()
+  },
+
+  initializeRouting: function() {
+    this.routes = new this.routers.MrelloRouter() 
+    Backbone.history.start( { pushState: true } ) // pushState uses the full URL
   }
 }
 
