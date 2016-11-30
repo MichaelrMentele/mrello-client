@@ -11,7 +11,7 @@
 
 MrelloApp.views.Board = Backbone.View.extend({
 
-  template: MrelloApp.templates['board/board'],
+  template: MrelloApp.templates['boards/board'],
 
   events: {
     "keyup #search-bar input" : "searchCards",

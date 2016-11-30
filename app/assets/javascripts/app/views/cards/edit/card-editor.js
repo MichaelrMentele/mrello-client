@@ -17,14 +17,17 @@ MrelloApp.views.CardEditor = Backbone.View.extend({
   template: MrelloApp.templates["board/card-editor/card-edit"],
   id: "card-editor",
   class: "window",
+
   events: {
     "click .cancel" : "clearModal",
     "click .submit-checklist-item" : "addChecklistItem",
     "click .submit-comment" : "addComment",
   },
+
   initialize: function() {
     this.render();
   },
+
   render: function() {
     // Build card view and then append it
     this.$el.html(this.template(this.model.toJSON()));
@@ -35,6 +38,7 @@ MrelloApp.views.CardEditor = Backbone.View.extend({
     container.removeClass("off"); // Unhide modal
     return this;
   },
+
   renderComments: function() {
     var commentsContainer = this.$(".comments")
   
@@ -43,18 +47,21 @@ MrelloApp.views.CardEditor = Backbone.View.extend({
       comments: this.model.get("comments")
     });
   },
+
   clearModal: function() {
     $("#modal-container").addClass("off").empty();
   },
+
   addChecklistItem: function(e) {
     console.log("Adding checklist item");
     alert("Oops! Sorry, this feature is not implemented just yet!")
   },
+
   addComment: function(e) {
     console.log("Adding comment")
     var $comment = this.$(".comment-input-box")
+    // Convert to trigger create action on controller
     this.model.get("comments").add({payload: $comment.val()})
     $comment.val("");
-    this.renderComments();
   }
 });
