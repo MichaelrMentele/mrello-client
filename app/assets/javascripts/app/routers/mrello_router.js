@@ -10,7 +10,6 @@ MrelloApp.routers.MrelloRouter = Backbone.Router.extend({
     'organizations'    : 'organizationsControllerIndex',
     'organizations/new' : 'organizationsControllerNew',
     'organizations/show' : 'organizationsControllerShow',
-    'organizations/show/:id' : 'organizationsControllerShow'
   },
 
   boardsControllerShow: function() {   
@@ -43,14 +42,10 @@ MrelloApp.routers.MrelloRouter = Backbone.Router.extend({
     MrelloApp.organizationsController.trigger("new")
   },
 
-  organizationsControllerShow: function(id) {
+  organizationsControllerShow: function() {
     console.log("Router: @show, organizations#show")
-    if(id) {
-      alert("the id is " + id)
-    } else {
-      // Must be an admin, show their board.
-      MrelloApp.organizationsController.trigger("show")      
-    }
+    // Must be an admin, show their board.
+    MrelloApp.organizationsController.trigger("show")      
   }
 })
 

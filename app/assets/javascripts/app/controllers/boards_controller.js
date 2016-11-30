@@ -8,9 +8,16 @@ MrelloApp.controllers.Boards = MrelloApp.controllers.Application.extend({
     this.on("show", this.show);
   },
 
-  show: function() {
+  show: function(id) {
     console.log("Rendering board page");
-
+    if(id) {
+      this.showSharedBoard()
+    } else {
+      this.showCurrentUsersBoard()
+    }
+  },
+  // Helpers
+  showCurrentUsersBoard: function() {
     MrelloApp.resetData()
     
     var self = this

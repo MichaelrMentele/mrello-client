@@ -56,5 +56,25 @@ MrelloApp.models.User = Backbone.Model.extend({
 
   hasOrganization: function() {
     return !!this.get("organization_id")
+  },
+
+  getSharedBoardId: function(callback) {
+    var org_id = this.get("organization_id")
+    var org = new MrelloApp.models.Organization({ id: org_id })
+
+    var self = this
+    // TODO: refactor, this should not be necessary and is a design issue
+    // we want this information available in context
+    org.fetch({
+      success: function(model, response, options) {
+        console.log("Org fetch succeeded. Firing callback.")
+        $.ajax('/api/v1/shared', {
+          
+        })
+      },
+      error: function(model, response, options) {
+        console.log("Org fetch failed.")
+      }
+    })
   }
 });
