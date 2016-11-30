@@ -14,6 +14,9 @@
 //= require lib/handlebars.js
 //= require lib/underscore.js
 //= require lib/backbone.js
+//= require lib/sinon.js
+//= require lib/jasmine-sinon.js
+//
 //= require lib/backbone_controller.js
 //
 //= require_tree ./app/templates
