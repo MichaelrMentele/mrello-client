@@ -7,7 +7,7 @@
     // Every sync call is sent to this root
     var HOST_URL = "http://4ab174eb.ngrok.io" //'http://mrello-api.herokuapp.com/'
 
-    // prepend root url
+    // Prepend root url for every sync call
     if (options.url) {
       options.url = HOST_URL + options.url
     } else {

@@ -16,6 +16,7 @@ MrelloApp.controllers.Boards = MrelloApp.controllers.Application.extend({
       this.showCurrentUsersBoard()
     }
   },
+  
   // Helpers
   showCurrentUsersBoard: function() {
     MrelloApp.resetData()
