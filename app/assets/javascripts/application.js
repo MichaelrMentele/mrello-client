@@ -9,16 +9,19 @@
 //
 // Read Sprockets README (https://github.com/rails/sprockets#sprockets-directives) for details
 // about supported directives.
-//
+
+// Vendor
 //= require jquery
-//= require lib/handlebars.js
-//= require lib/underscore.js
-//= require lib/backbone.js
-//= require lib/sinon.js
-//= require lib/jasmine-sinon.js
+//= require handlebars.js
+//= require underscore.js
+//= require backbone.js
+//= require sinon.js
+//= require jasmine-sinon.js
 //
+// Custom Extension
 //= require lib/backbone_controller.js
 //
+// Application
 //= require_tree ./app/templates
 //
 //= require app/mrelloApp.js
