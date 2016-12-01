@@ -1,5 +1,5 @@
 describe("Card model", function () {
-  describe("creation", function() {
+  xdescribe("creation", function() {
     it("has default values", function () {
       var model = new MrelloApp.models.Card()
 
