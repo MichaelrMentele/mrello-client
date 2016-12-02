@@ -2,9 +2,10 @@ var MrelloApp = MrelloApp || {}
 
 MrelloApp.Views.Header = Backbone.View.extend({
   template: MrelloApp.templates['shared/header'],
+  
   tagName: "header",
   className: "page-head",
-  // TODO: Consider creating a header for admin and for normal user
+
   events: {
     "click #create-org" : "createOrg", // Admin only
     "click #logout"     : "logout", 

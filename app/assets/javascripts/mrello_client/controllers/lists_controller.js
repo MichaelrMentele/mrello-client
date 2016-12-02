@@ -10,6 +10,7 @@ MrelloApp.Controllers.Lists = MrelloApp.Controllers.Application.extend({
 
   create: function(args) {
     console.log("@listsConroller: creating new list")
+
     MrelloApp.data.create(args, {
       wait: true,
       success: function(model, response, options) {
@@ -18,7 +19,6 @@ MrelloApp.Controllers.Lists = MrelloApp.Controllers.Application.extend({
       error: function(model, response, options) {
         console.log("Failed on virgin list create.")
       }
-    })
-    
+    }) 
   }
 })

@@ -18,13 +18,7 @@ MrelloApp.Views.Sessions.New = Backbone.View.extend({
   },
 
   render: function() {
-    this.renderHeader()
-    this.$el.append(this.template())
-  },
-
-  renderHeader: function() {
-    var headerView = new MrelloApp.Views.Header()
-    this.$el.append(headerView.el)
+    this.$el.html(this.template())
   },
 
   submit: function(e) {
@@ -48,10 +42,12 @@ MrelloApp.Views.Sessions.New = Backbone.View.extend({
       }
     })
   },
+
   navigateToRegistration: function(e) {
     e.preventDefault()
     MrelloApp.routes.navigate("register", { trigger: true })
   },
+  
   userInputs: function() {
     var inputs = {}
     inputs.email = $("#inputEmail").val()

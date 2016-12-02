@@ -3,13 +3,13 @@ var MrelloApp = MrelloApp || {}
 MrelloApp.Routers.Router = Backbone.Router.extend({
   
   routes: {
-    ''          :   'boardsControllerShow',
-    'register'  :   'usersControllerNew',
-    'login'     :   'sessionsControllerNew',
-    'logout'    :   'sessionsControllerDestroy',
-    'organizations'    : 'organizationsControllerIndex',
-    'organizations/new' : 'organizationsControllerNew',
-    'organizations/show' : 'organizationsControllerShow',
+    ''                    :   'boardsControllerShow',
+    'register'            :   'usersControllerNew',
+    'login'               :   'sessionsControllerNew',
+    'logout'              :   'sessionsControllerDestroy',
+    'organizations'       :   'organizationsControllerIndex',
+    'organizations/new'   :   'organizationsControllerNew',
+    'organizations/show'  :   'organizationsControllerShow',
   },
 
   boardsControllerShow: function() {   
