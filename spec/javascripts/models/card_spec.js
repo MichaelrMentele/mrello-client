@@ -1,5 +1,6 @@
 describe("Card model", function () {
-  xdescribe("creation", function() {
+
+  xdescribe("instantiation", function() {
     it("has default values", function () {
       var model = new MrelloApp.models.Card()
 
@@ -25,7 +26,6 @@ describe("Card model", function () {
       })
 
       it("stores a reference to its parent list", function() {
-        debugger;
         expect()
       })
 

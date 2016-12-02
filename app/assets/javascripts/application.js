@@ -15,23 +15,22 @@
 //= require handlebars.js
 //= require underscore.js
 //= require backbone.js
-//= require sinon.js
-//= require jasmine-sinon.js
 //
 // Custom Extension
-//= require lib/backbone_controller.js
+//= require ./lib/backbone_controller.js
 //
 // Application
-//= require_tree ./app/templates
+//= require_tree ./mrello_client/templates
 //
-//= require app/mrelloApp.js
-//= require app/config.js
+//= require ./mrello_client/mrelloApp
+//= require ./mrello_client/config
 //
-//= require_tree ./app/controllers
-//= require_tree ./app/routers
-//= require_tree ./app/models
-//= require_tree ./app/collections
-//= require_tree ./app/views
+//= require ./mrello_client/controllers/application_controller
+//= require_tree ./mrello_client/controllers
+//= require_tree ./mrello_client/routers
+//= require_tree ./mrello_client/models
+//= require_tree ./mrello_client/collections
+//= require_tree ./mrello_client/views
 //
 
 
