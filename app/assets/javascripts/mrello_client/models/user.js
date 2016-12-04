@@ -44,6 +44,10 @@ MrelloApp.Models.User = Backbone.Model.extend({
     return localStorage.currentUser
   },
 
+  isCached: function() {
+    return !!this.getStored
+  },
+
   stringify: function() {
     return JSON.stringify(this)
   },
