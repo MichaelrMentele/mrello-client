@@ -3,15 +3,16 @@ var MrelloApp = MrelloApp || {};
 MrelloApp.Controllers.Sessions = MrelloApp.Controllers.Application.extend({
   
   initialize: function() {
-    this.on("new", this.new);
-    this.on("destroy", this.destroy);
+    this.listenTo(MrelloApp.eventBus, "sessions:new", this.new);
+    this.listenTo(MrelloApp.eventBus, "sessions:create", this.create)
+    this.listenTo(MrelloApp.eventBus, "sessions:destroy", this.destroy);
   },
 
   new: function() {
     console.log("Rendering login page");
 
-    var headerView = new MrelloApp.Views.Header()
-    var loginView = new MrelloApp.Views.Sessions.New();
+    var headerView = new MrelloApp.Views.HeaderRegions.Page()
+    var loginView = new MrelloApp.Views.BodyRegions.SessionsNew();
 
     this.renderPage({
       header: headerView, 
@@ -19,12 +20,32 @@ MrelloApp.Controllers.Sessions = MrelloApp.Controllers.Application.extend({
     });
   },
 
+  create: function(credentials) {
+    var session = new MrelloApp.Models.Session(credentials)
+
+    session.save({}, session, {
+      success: function(response, status, options){
+        MrelloApp.session = new MrelloApp.Models.Session({
+          token: response.session_token
+        })
+
+        MrelloApp.eventBus.trigger('users:cache', response.user)
+
+        MrelloApp.flashMessage = response.message
+        this.redirectTo("home")
+      }, 
+      error: function(response, status, options) {
+        this.renderFlashMessage(response.message)
+      }
+    })
+  },
+
   destroy: function() {
     console.log("Clearing session and redirecting to login.")
 
-    MrelloApp.clearCache()
+    MrelloApp.clearSessionCache()
     MrelloApp.resetData()
 
-    MrelloApp.routes.navigate("login", { trigger: true } )
+    this.redirectTo("login")
   }
 });
