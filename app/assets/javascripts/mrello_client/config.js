@@ -5,7 +5,7 @@
 
   Backbone.sync = function (method, model, options) {
     // Every sync call is sent to this root
-    var HOST_URL = "http://bb5bfe8d.ngrok.io" //'http://mrello-api.herokuapp.com/'
+    var HOST_URL = MrelloApp.HOST_URL
 
     // Prepend root url for every sync call
     if (options.url) {
