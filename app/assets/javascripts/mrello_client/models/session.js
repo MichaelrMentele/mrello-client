@@ -9,8 +9,8 @@ var MrelloApp = MrelloApp || {}
 MrelloApp.Models.Session = Backbone.Model.extend({
   url: '/api/v1/sessions',
   defaults: {
-    email: "",    // temp 
-    password: "", // temp
+    email: null,    // temp 
+    password: null, // temp
     token: ""
   },
 
@@ -47,6 +47,22 @@ MrelloApp.Models.Session = Backbone.Model.extend({
 
   hasToken: function() {
     return !!this.get("token")
+  },
+
+  isAuthorized: function() {
+    return this.hasToken()
+  },
+
+  isNotAuthorized: function() {
+    return !this.isNotAuthorized()
+  },
+
+  isSafe: function() {
+    if(this.has("email", "password")) {
+      return false
+    } else {
+      return true
+    }
   },
 
   clearUserInfo: function() {
