@@ -9,7 +9,7 @@
 // Events:
 // On keyup Searchbar -> Filter lists views
 
-MrelloApp.Views.Boards.Show = Backbone.View.extend({
+MrelloApp.Views.BodyRegions.BoardsShow = Backbone.View.extend({
 
   template: MrelloApp.templates['boards/board'],
 
