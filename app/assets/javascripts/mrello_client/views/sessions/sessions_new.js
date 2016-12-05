@@ -5,8 +5,10 @@
 
 var MrelloApp = MrelloApp || {}
 
-MrelloApp.Views.Sessions.New = Backbone.View.extend({
+MrelloApp.Views.BodyRegions.SessionsNew = Backbone.View.extend({
   template: MrelloApp.templates['sessions/form'],
+
+  className: "window",
   
   events: {
     "click #submit-login" : "submit",
@@ -19,33 +21,19 @@ MrelloApp.Views.Sessions.New = Backbone.View.extend({
 
   render: function() {
     this.$el.html(this.template())
+    return this
   },
 
   submit: function(e) {
     e.preventDefault()
     console.log("Attempting login...")
 
-    session = MrelloApp.session.set(this.userInputs())
-    // TODO: refactor this callback to be implicit on the session object?
-    session.sync("create", session, {
-      success: function(response, status, options){
-        console.log(response.message)
-
-        session.clearUserInfo() // clear sensitive user info
-        session.set("token", response.session_token)
-        MrelloApp.currentUser = new MrelloApp.models.User(response.user)
-        // redirect to home page
-        MrelloApp.routes.navigate("", { trigger: true} )
-      }, 
-      error: function(response, status, options) {
-        console.log(response.message)
-      }
-    })
+    MrelloApp.eventBus.trigger("sessions:create", this.userInputs())
   },
 
   navigateToRegistration: function(e) {
     e.preventDefault()
-    MrelloApp.routes.navigate("register", { trigger: true })
+    MrelloApp.eventBus.trigger("routes:go", "register")
   },
   
   userInputs: function() {
