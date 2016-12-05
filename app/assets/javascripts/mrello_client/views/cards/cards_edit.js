@@ -13,8 +13,9 @@
 
 var MrelloApp = MrelloApp || {};
 
-MrelloApp.Views.Cards.Edit = Backbone.View.extend({
+MrelloApp.Views.Composites.CardsEdit = Backbone.View.extend({
   template: MrelloApp.templates["board/card-editor/card-edit"],
+
   id: "card-editor",
   class: "window",
 

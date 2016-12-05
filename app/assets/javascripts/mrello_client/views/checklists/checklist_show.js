@@ -14,6 +14,6 @@
 
 var MrelloApp = MrelloApp || {};
 
-MrelloApp.Views.Checklists.Show = Backbone.View.extend({
+MrelloApp.Views.Atomics.ChecklistsShow = Backbone.View.extend({
 
 });
