@@ -48,7 +48,7 @@ MrelloApp.Controllers.Application = Backbone.Controller.extend({
 
   renderBody: function(bodyView) {
     $(this.appBodyID).html(bodyView.el)
-  }
+  },
 
   redirectTo: function(route) {
     MrelloApp.eventBus.trigger("routes:go", route)
