@@ -7,7 +7,7 @@ MrelloApp.Routers.Router = Backbone.Router.extend({
   },
 
   listenForNavigation: function() {
-    this.listenTo(MrelloApp.dispatcher, "routes:go", this.go)
+    this.listenTo(MrelloApp.eventBus, "routes:go", this.go)
   },
 
   go: function(route) {
@@ -23,8 +23,9 @@ MrelloApp.Routers.Router = Backbone.Router.extend({
     'login'               :   'sessionsControllerNew',
 
     'organizations'       :   'organizationsControllerIndex',
-    'organizations/new'   :   'organizationsControllerNew',
-    'organizations/show'  :   'organizationsControllerShow',
+    'user/organizations'  :   'organizationsControllerIndex',
+
+    'organizations/:id'  :   'organizationsControllerShow',
 
     "*path"               :   'applicationControllerError'
   },
@@ -44,25 +45,14 @@ MrelloApp.Routers.Router = Backbone.Router.extend({
     MrelloApp.eventBus.trigger("sessions:new");
   },
 
-  sessionsControllerDestroy: function() {
-    console.log("Router: @logout, sessions#destroy")
-    MrelloApp.eventBus.trigger("sessions:destroy")
-  },
-
-  organizationsControllerIndex: function() {
+  organizationsControllerIndex: function(scoped=false) {
     console.log("Router: @index, organizations#index")
-    MrelloApp.eventBus.trigger("organizations:index")
+    MrelloApp.eventBus.trigger("organizations:index", scoped)
   },
 
-  organizationsControllerNew: function() {
-    console.log("Router: @new, organizations#new")
-    MrelloApp.eventBus.trigger("organizations:new")
-  },
-
-  organizationsControllerShow: function() {
+  organizationsControllerShow: function(id) {
     console.log("Router: @show, organizations#show")
-    // Must be an admin, show their board.
-    MrelloApp.eventBus.trigger("organizations:show")      
+    MrelloApp.eventBus.trigger("organizations:show", id)      
   },
 
   applicationControllerError: function() {
