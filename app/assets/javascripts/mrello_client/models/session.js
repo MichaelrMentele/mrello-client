@@ -14,10 +14,8 @@ MrelloApp.Models.Session = Backbone.Model.extend({
     token: ""
   },
 
-  initialize: function(token) {
-    if (token) {
-      this.set("token", token)
-    } else if (this.getStoredToken()) {
+  initialize: function() {
+    if (this.hasCachedToken()) {
       this.set("token", this.getStoredToken())
     }
 
@@ -39,6 +37,10 @@ MrelloApp.Models.Session = Backbone.Model.extend({
     } else {
       return false
     }
+  },
+
+  hasCachedToken: function() {
+    return !!localStorage.session_token
   },
 
   getStoredToken: function() {
