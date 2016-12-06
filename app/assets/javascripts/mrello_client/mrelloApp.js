@@ -31,7 +31,7 @@ var MrelloApp = {
     this.initializeControllers()
     this.initializeRouting()
 
-    this.loadSession()
+    this.initializeSession()
   },
 
   initializeEventBus: function() {
@@ -42,7 +42,7 @@ var MrelloApp = {
     return this.eventBus
   },
 
-  loadSession: function() {
+  initializeSession: function() {
     this.session = new this.Models.Session()
     this.currentUser = new this.Models.User()
   },
