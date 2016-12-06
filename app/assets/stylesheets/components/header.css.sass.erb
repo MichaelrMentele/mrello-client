@@ -1,4 +1,6 @@
-@import 'https://fonts.googleapis.com/css?family=Modak'
+<% unless Rails.env.production? %>
+@import 'https://fonts.googleapis.com/css?family=Modak' 
+<% end %>
 
 header.page-head
   position: fixed
