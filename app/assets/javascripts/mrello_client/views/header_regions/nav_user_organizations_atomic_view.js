@@ -2,7 +2,7 @@ var MrelloApp = MrelloApp || {}
 
 MrelloApp.Views.Atomics.NavUserOrganizations = Backbone.View.extend({
 
-  template: MrelloApp.templates['shared/nav_user_organizations'],
+  template: MrelloApp.templates['header_regions/nav_user_organizations'],
 
   id: "user-orgs",
   className: "btn",

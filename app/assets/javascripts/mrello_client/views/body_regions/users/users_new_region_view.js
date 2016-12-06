@@ -6,7 +6,7 @@
 var MrelloApp = MrelloApp || {}
 
 MrelloApp.Views.BodyRegions.UsersNew = Backbone.View.extend({
-  template: MrelloApp.templates['users/form'],
+  template: MrelloApp.templates['body_regions/users/form'],
 
   className: "window",
 
