@@ -40,7 +40,7 @@ MrelloApp.Controllers.Application = Backbone.Controller.extend({
   },
 
   renderFlashMessage: function(options) {
-    var flashView = new MrelloApp.Views.MessagesRegions.Flash(options.message, options.type)
+    var flashView = new MrelloApp.Views.MessageRegions.Flash(options.message, options.type)
 
     $(this.appMessagesID).html(flashView.el)
   },

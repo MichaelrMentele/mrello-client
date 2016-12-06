@@ -1,13 +1,12 @@
-
 describe('Sessions Controller', function() {
   describe('new', function() {
     beforeEach(function() {
       loadFixtures('appContainer.html')
-      this.events = MrelloApp.initializeEventBus()
+      createEventBus.apply(this)
     })
 
     it("renders a page", function() {
-      var controller = new MrelloApp.Controllers.Sessions()
+      var controller = createSessionsController()
       this.events.trigger("sessions:new")
 
       expect($("#logo")[0]).toBeInDOM()
@@ -17,7 +16,7 @@ describe('Sessions Controller', function() {
     it("fires new callback on event", function() {
       sinon.stub(MrelloApp.Controllers.Sessions.prototype, 'new')
 
-      var controller = new MrelloApp.Controllers.Sessions()
+      var controller = createSessionsController()
       this.events.trigger("sessions:new")
       
       expect(controller.new.called).toEqual(true)
@@ -27,47 +26,28 @@ describe('Sessions Controller', function() {
   });
 
   describe("create", function() {
-    beforeEach(function() {
-      this.events = MrelloApp.initializeEventBus()
-
-      this.server = sinon.fakeServer.create();
-      this.responseBody = JSON.stringify({
-        "message" : "Session created!",
-        "session_token":"somestring",
-        "user": {
-          "fullname": "name"
-        }
-      })
-
-      this.server.respondWith("POST", "/api/v1/sessions", [200, {"Content-Type": "application/json"}, this.responseBody]
-      );
-      this.eventSpy = sinon.spy();
-    });
-
-    afterEach(function() {
-      this.server.restore();
-    });
-
-    it("fires create callback on event", function() {
-      sinon.stub(MrelloApp.Controllers.Sessions.prototype, 'create')
-
-      var controller = new MrelloApp.Controllers.Sessions()
-      this.events.trigger("sessions:create")
-      
-      expect(controller.create.called).toEqual(true)
-      
-      MrelloApp.Controllers.Sessions.prototype.create.restore()
-    }) 
-
-    describe('valid user inputs', function() {
+    describe('success callback', function() {
       beforeEach(function() {
-        var controller = new MrelloApp.Controllers.Sessions()
+        createFakeServer.apply(this)
 
+        prepareSession()
+        createEventBus.apply(this)
+        createSessionsController.apply(this)
+        
+        spyOn.apply(this, ["users:cache"])
+
+        // trigger create event on controller
         this.events.trigger("sessions:create", {
           email: "john@ex.com", 
           password: "pass"
         })
+
+        this.server.respond()
       })
+
+      afterEach(function() {
+        cleanupFakeServer.apply(this)
+      });
 
       it("calls the server", function() {
         expect(this.server.requests[0].method).toEqual("POST")
@@ -78,8 +58,8 @@ describe('Sessions Controller', function() {
         expect(MrelloApp.session.isAuthorized()).toEqual(true)
       })
 
-      it("caches current user information", function() {
-        expect(MrelloApp.currentUser.isCached()).toEqual(true)
+      it("emits users cache event", function() {
+        expect(this.spy.called).toEqual(true)
       })
 
       it("clears sensitive user login information from session object", function() {
@@ -87,19 +67,55 @@ describe('Sessions Controller', function() {
       })
 
       it("sets a flash message", function() {
-        
+        expect(MrelloApp.hasFlash()).toEqual(true)
       })
 
-      it("redirects to the home page", function() {
-
+      xit("redirects to the home page", function() {
+        expect()
       })
     });
 
-    describe('invalid user inputs', function() {
-      it("gets an error message from the server")
-      it("does NOT create a session")
-      it("does NOT get user information")
-      it("sets a flash message")
+    describe('error callback', function() {
+      beforeEach(function() {
+        loadFixtures('appContainer.html')
+        createFakeServer.apply(this, [false])
+
+        prepareSession()
+        createEventBus.apply(this)
+        createSessionsController.apply(this)
+        this.controller.new()
+
+        spyOn.apply(this, ["users:cache"])
+
+        this.events.trigger("sessions:create", {
+          email: "john@ex.com", 
+          password: "pass"
+        })
+
+        this.server.respond()
+      })
+
+      afterEach(function() {
+        cleanupFakeServer.apply(this)
+      });
+
+      it("calls the server", function() {
+        expect(this.server.requests[0].method).toEqual("POST")
+        expect(this.server.requests[0].url).toEqual(MrelloApp.HOST_URL + "/api/v1/sessions")
+      })
+      
+      it("does NOT create a session", function() {
+        expect(MrelloApp.session.isAuthorized()).toEqual(false)
+      })
+
+      it("does NOT emit cache event", function() {
+        expect(this.spy.called).toEqual(false)
+      })
+
+      it("renders a flash message", function() {
+        debugger
+        expect($(".alert-danger")).toBeInDOM()
+      })
     });
   })
 
@@ -109,3 +125,53 @@ describe('Sessions Controller', function() {
     it("renders a flash message")
   });
 });
+
+function spyOn(event) {
+  this.spy = sinon.spy()
+  this.events.listenTo(this.events, event, this.spy)
+  return this.spy
+}
+
+function prepareSession() {
+  MrelloApp.initializeSession()
+  MrelloApp.clearSessionCache()
+}
+
+function createEventBus() {
+  this.events = MrelloApp.initializeEventBus()
+  return this.events
+}
+
+function createSessionsController() {
+  this.controller = new MrelloApp.Controllers.Sessions()
+  return this.controller
+}
+
+function createFakeServer(valid=true) {
+  this.server = sinon.fakeServer.create();
+
+  var createUrl = MrelloApp.HOST_URL + "/api/v1/sessions"
+  var JSONheader = {"Content-Type": "application/json"}
+
+  var successResponseBody = JSON.stringify({
+    "message" : "Session created!",
+    "session_token":"somestring",
+    "user": {
+      "fullname": "name"
+    }
+  })
+
+  var errorResponseBody = JSON.stringify({
+    "message" : "There was a problem with your credentials."
+  })
+
+  if(valid) {
+    this.server.respondWith("POST", createUrl, [200, JSONheader, successResponseBody]);
+  } else {
+    this.server.respondWith("POST", createUrl, [406, JSONheader, errorResponseBody])
+  }
+}
+
+function cleanupFakeServer() {
+  this.server.restore();
+}
