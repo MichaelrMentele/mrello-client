@@ -28,7 +28,7 @@ describe('Sessions Controller', function() {
   describe("create", function() {
     describe('success callback', function() {
       beforeEach(function() {
-        createFakeServer.apply(this)
+        createFakeSessionsServer.apply(this)
 
         prepareSession()
         createEventBus.apply(this)
@@ -79,7 +79,7 @@ describe('Sessions Controller', function() {
     describe('error callback', function() {
       beforeEach(function() {
         loadFixtures('appContainer.html')
-        createFakeServer.apply(this, [false])
+        createFakeSessionsServer.apply(this, [false])
 
         prepareSession()
         createEventBus.apply(this)
@@ -149,20 +149,9 @@ describe('Sessions Controller', function() {
   });
 });
 
-function listenerSpy(object, event) {
-  var spy = sinon.spy()
-  object.listenTo(object, event, spy)
-  return spy
-}
-
 function prepareSession() {
   MrelloApp.initializeSession()
   MrelloApp.session.clear()
-}
-
-function createEventBus() {
-  this.events = MrelloApp.initializeEventBus()
-  return this.events
 }
 
 function createSessionsController() {
@@ -170,7 +159,7 @@ function createSessionsController() {
   return this.controller
 }
 
-function createFakeServer(valid=true) {
+function createFakeSessionsServer(valid=true) {
   this.server = sinon.fakeServer.create();
 
   var createUrl = MrelloApp.HOST_URL + "/api/v1/sessions"
@@ -193,8 +182,4 @@ function createFakeServer(valid=true) {
   } else {
     this.server.respondWith("POST", createUrl, [406, JSONheader, errorResponseBody])
   }
-}
-
-function cleanupFakeServer() {
-  this.server.restore();
 }
