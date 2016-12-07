@@ -19,7 +19,7 @@ MrelloApp.Controllers.Application = Backbone.Controller.extend({
   // Controller Helpers
   checkValidSession: function() {
     if ( MrelloApp.session.isNotAuthorized() ) {
-      this.renderFlashMessage("You are not authorized for that. Are you logged in?")
+      this.setFlash("You are not authorized for that. Are you logged in?")
       this.redirectTo("login")
     }
   },

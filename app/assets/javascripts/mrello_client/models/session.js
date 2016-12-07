@@ -65,7 +65,7 @@ MrelloApp.Models.Session = Backbone.Model.extend({
   },
 
   isNotAuthorized: function() {
-    return !this.isNotAuthorized()
+    return !this.isAuthorized()
   },
 
   isSafe: function() {

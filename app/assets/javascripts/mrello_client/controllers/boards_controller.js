@@ -19,14 +19,17 @@ MrelloApp.Controllers.Boards = MrelloApp.Controllers.Application.extend({
   
   // Helpers
   showCurrentUsersBoard: function() {
-    MrelloApp.resetData()
     
     var self = this
-    MrelloApp.data.fetch({
+    MrelloApp.session.data.fetch({
 
       success: function(model, response, options){
-        var boardView = new MrelloApp.views.Board();
-        self.render(boardView);
+        var headerView = new MrelloApp.Views.HeaderRegions.Page()
+        var boardView = new MrelloApp.Views.BodyRegions.Board()
+        self.renderPage({
+          header: headerView,
+          body: boardView
+        });
       },
 
       error: function(model, response, options) {
