@@ -149,11 +149,6 @@ describe('Sessions Controller', function() {
   });
 });
 
-function prepareSession() {
-  MrelloApp.initializeSession()
-  MrelloApp.session.clear()
-}
-
 function createSessionsController() {
   this.controller = new MrelloApp.Controllers.Sessions()
   return this.controller

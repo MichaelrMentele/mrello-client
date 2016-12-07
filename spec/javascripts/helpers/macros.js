@@ -12,3 +12,8 @@ function listenerSpy(object, event) {
   object.listenTo(object, event, spy)
   return spy
 }
+
+function prepareSession() {
+  MrelloApp.initializeSession()
+  MrelloApp.session.clear()
+}
