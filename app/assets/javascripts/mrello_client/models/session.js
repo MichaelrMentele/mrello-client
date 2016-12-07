@@ -8,6 +8,7 @@ var MrelloApp = MrelloApp || {}
 
 MrelloApp.Models.Session = Backbone.Model.extend({
   url: '/api/v1/sessions',
+
   defaults: {
     email: null,    // temp 
     password: null, // temp
@@ -15,12 +16,14 @@ MrelloApp.Models.Session = Backbone.Model.extend({
   },
 
   initialize: function() {
+    // These are not attributes but nested objects related to the session
+    this.currentUser = new MrelloApp.Models.User()
+    this.data = new MrelloApp.Collections.Boards()
+
     if (this.hasCachedToken()) {
       this.set("token", this.getStoredToken())
     }
-
-    this.currentUser = new MrelloApp.Models.User()
-    this.data = new MrelloApp.Collections.Boards()
+    
     this.bindSaveTokenOnUnload()
   },
 
