@@ -73,7 +73,7 @@ describe('Mrello router', function() {
 
   describe('other routes', function() {
     it("emits an appropriate event", function() {
-      this.events.listenTo(this.events, "application:error", this.routerSpy)
+      this.events.listenTo(this.events, "application:notFound", this.routerSpy)
       
       this.events.trigger("routes:go", 'blaalsdjf')
       expect(this.routerSpy.called).toEqual(true)

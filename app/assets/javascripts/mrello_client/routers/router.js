@@ -27,7 +27,7 @@ MrelloApp.Routers.Router = Backbone.Router.extend({
 
     'organizations/:id'  :   'organizationsControllerShow',
 
-    "*path"               :   'applicationControllerError'
+    "*path"               :   'applicationControllerNotFound'
   },
 
   boardsControllerShow: function() {   
@@ -55,9 +55,9 @@ MrelloApp.Routers.Router = Backbone.Router.extend({
     MrelloApp.eventBus.trigger("organizations:show", id)      
   },
 
-  applicationControllerError: function() {
-    console.log("Router: @error, application#error")
-    MrelloApp.eventBus.trigger("application:error")
+  applicationControllerNotFound: function() {
+    console.log("Router: @error, application#notFound")
+    MrelloApp.eventBus.trigger("application:notFound")
   }
 })
 

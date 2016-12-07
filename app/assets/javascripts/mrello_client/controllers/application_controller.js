@@ -8,11 +8,11 @@ MrelloApp.Controllers.Application = Backbone.Controller.extend({
 
   // Catch non-existent routes
   initialize: function() {
-    this.listenTo(MrelloApp.eventBus, "application:nonexistentRoute", this.nonexistentRoute)
+    this.listenTo(MrelloApp.eventBus, "application:notFound", this.notFound)
   },
 
-  nonexistentRoute: function() {
-    this.renderFlashMessage("That URL does not exist.")
+  notFound: function() {
+    MrelloApp.setFlash("That URL does not exist.", "warning")
     this.redirectTo("home")
   },
 
