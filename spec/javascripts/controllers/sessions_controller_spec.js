@@ -34,7 +34,8 @@ describe('Sessions Controller', function() {
         createEventBus.apply(this)
         createSessionsController.apply(this)
         
-        spyOn.apply(this, ["users:cache"])
+        this.userCacheSpy = listenerSpy(this.events, "users:cache")
+        this.redirectSpy = listenerSpy(this.events, "routes:go")
 
         // trigger create event on controller
         this.events.trigger("sessions:create", {
@@ -59,7 +60,7 @@ describe('Sessions Controller', function() {
       })
 
       it("emits users cache event", function() {
-        expect(this.spy.called).toEqual(true)
+        expect(this.userCacheSpy.called).toEqual(true)
       })
 
       it("clears sensitive user login information from session object", function() {
@@ -70,8 +71,8 @@ describe('Sessions Controller', function() {
         expect(MrelloApp.hasFlash()).toEqual(true)
       })
 
-      xit("redirects to the home page", function() {
-        expect()
+      it("redirects to the home page", function() {
+        expect(this.redirectSpy.called).toEqual(true)
       })
     });
 
@@ -85,7 +86,7 @@ describe('Sessions Controller', function() {
         createSessionsController.apply(this)
         this.controller.new()
 
-        spyOn.apply(this, ["users:cache"])
+        this.spy = listenerSpy(this.events, "users:cache")
 
         this.events.trigger("sessions:create", {
           email: "john@ex.com", 
@@ -113,23 +114,48 @@ describe('Sessions Controller', function() {
       })
 
       it("renders a flash message", function() {
-        debugger
         expect($(".alert-danger")).toBeInDOM()
       })
     });
   })
 
   describe('destroy', function() {
-    it('clears the session data')
-    it('redirects to the login page')
-    it("renders a flash message")
+    beforeEach(function() {
+      prepareSession()
+      createEventBus.apply(this)
+      createSessionsController.apply(this)
+
+      this.spy = listenerSpy(this.events, "routes:go")
+      sinon.spy(MrelloApp, "clearSessionCache")
+      sinon.spy(MrelloApp, "resetData")
+
+      this.events.trigger("sessions:destroy")
+    })
+
+    afterEach(function() {
+      MrelloApp.clearSessionCache.restore()
+      MrelloApp.resetData.restore()
+    })
+
+    it('clears the session data', function() {
+      expect(MrelloApp.clearSessionCache.called).toEqual(true)
+      expect(MrelloApp.resetData.called).toEqual(true)
+    })
+
+    it('redirects to the login page', function() {
+      expect(this.spy.called).toEqual(true)
+    })
+
+    it("sets a flash message", function() {
+      expect(MrelloApp.hasFlash()).toEqual(true)
+    })
   });
 });
 
-function spyOn(event) {
-  this.spy = sinon.spy()
-  this.events.listenTo(this.events, event, this.spy)
-  return this.spy
+function listenerSpy(object, event) {
+  var spy = sinon.spy()
+  object.listenTo(object, event, spy)
+  return spy
 }
 
 function prepareSession() {

@@ -54,6 +54,7 @@ MrelloApp.Controllers.Sessions = MrelloApp.Controllers.Application.extend({
 
     MrelloApp.clearSessionCache()
     MrelloApp.resetData()
+    MrelloApp.setFlash("The session has been ended.", "success")
 
     this.redirectTo("login")
   }
