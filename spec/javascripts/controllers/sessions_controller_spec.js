@@ -119,27 +119,24 @@ describe('Sessions Controller', function() {
     });
   })
 
-  describe('destroy', function() {
+  describe('destroy ends the sessions', function() {
     beforeEach(function() {
       prepareSession()
       createEventBus.apply(this)
       createSessionsController.apply(this)
 
       this.spy = listenerSpy(this.events, "routes:go")
-      sinon.spy(MrelloApp, "clearSessionCache")
-      sinon.spy(MrelloApp, "resetData")
+      sinon.spy(MrelloApp.session, "clear")
 
       this.events.trigger("sessions:destroy")
     })
 
     afterEach(function() {
-      MrelloApp.clearSessionCache.restore()
-      MrelloApp.resetData.restore()
+      MrelloApp.session.clear.restore()
     })
 
     it('clears the session data', function() {
-      expect(MrelloApp.clearSessionCache.called).toEqual(true)
-      expect(MrelloApp.resetData.called).toEqual(true)
+      expect(MrelloApp.session.clear.called).toEqual(true)
     })
 
     it('redirects to the login page', function() {
@@ -160,7 +157,7 @@ function listenerSpy(object, event) {
 
 function prepareSession() {
   MrelloApp.initializeSession()
-  MrelloApp.clearSessionCache()
+  MrelloApp.session.clear()
 }
 
 function createEventBus() {

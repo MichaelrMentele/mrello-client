@@ -52,8 +52,7 @@ MrelloApp.Controllers.Sessions = MrelloApp.Controllers.Application.extend({
   destroy: function() {
     console.log("Clearing session and redirecting to login.")
 
-    MrelloApp.clearSessionCache()
-    MrelloApp.resetData()
+    MrelloApp.session.clear()
     MrelloApp.setFlash("The session has been ended.", "success")
 
     this.redirectTo("login")

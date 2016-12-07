@@ -1,41 +1,87 @@
 describe('The MrelloApp object', function() {
-  xit("is defined", function() {
+  it("is defined", function() {
     expect(MrelloApp).toBeDefined();
   });
 
   describe('and namespaces constructors', function() {
-    xit("the views", function() {
-      expect(MrelloApp.views).toBeDefined();
+    it("the views", function() {
+      expect(MrelloApp.Views).toBeDefined();
+    })
+
+    it("the models", function() {
+      expect(MrelloApp.Models).toBeDefined();
     });
-    xit("the models", function() {
-      expect(MrelloApp.models).toBeDefined();
+
+    it("the collections", function() {
+      expect(MrelloApp.Collections).toBeDefined();
     });
-    xit("the collections", function() {x
-      expect(MrelloApp.collections).toBeDefined();
+
+    it("the routers", function() {
+      expect(MrelloApp.Routers).toBeDefined();
     });
-    xit("the routers", function() {
-      expect(MrelloApp.routers).toBeDefined();
-    });
+
+    it('controllers', function() {
+      expect(MrelloApp.Controllers).toBeDefined()
+    })
   });
 
   describe('and namespaces runtime attributes', function() {
-    xit('the data', function() {
-      expect(MrelloApp.data).toBeDefined();
+    it("like templates", function() {
+      expect(MrelloApp.templates).toBeDefined()
+    })
+
+    it('the data', function() {
+      expect(MrelloApp.data).toBeDefined()
     });
-    xit('the app view', function() {
-      expect(MrelloApp.appView).toBeDefined();
+
+    it('the app router', function() {
+      expect(MrelloApp.routes).toBeDefined()
     });
-    xit('the app router', function() {
-      expect(MrelloApp.routes).toBeDefined();
+
+    it('the event aggregator', function() {
+      expect(MrelloApp.eventBus).toBeDefined()
     });
-    xit('the event aggregator', function() {
-      expect(MrelloApp.eventAggregator).toBeDefined();
-    });
+
+    it("session", function () {
+      expect(MrelloApp.session).toBeDefined()
+    })
+
+    it("flash", function() {
+      expect(MrelloApp.flash).toBeDefined()
+    })
   });
 
   describe('#init', function() {
-    xit('sets the app data to a Lists collection', function() {
-      expect(MrelloApp.data).toEqual(new MrelloApp.collections.Lists());
+    it('initializes the event bus', function() {
+      sinon.spy(MrelloApp, "initializeEventBus")
+
+      MrelloApp.restart()
+
+      expect(MrelloApp.initializeEventBus.called).toEqual(true)
     });
-  });
+
+    it("initializes the controllers", function() {
+      sinon.spy(MrelloApp, "initializeControllers")
+
+      MrelloApp.restart()
+
+      expect(MrelloApp.initializeControllers.called).toEqual(true)
+    })
+
+    it("initializes routing", function() {
+      sinon.spy(MrelloApp, "initializeRouting")
+
+      MrelloApp.restart()
+
+      expect(MrelloApp.initializeControllers.called).toEqual(true)
+    })
+
+    it("initializes the session", function() {
+      sinon.spy(MrelloApp, "initializeSession")
+
+      MrelloApp.restart()
+
+      expect(MrelloApp.initializeSession.called).toEqual(true)
+    })
+  }); 
 });

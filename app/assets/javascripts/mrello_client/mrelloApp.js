@@ -16,12 +16,14 @@ var MrelloApp = {
   Controllers: {},
 
   // Application objects (called out for readability)
-  templates: HandlebarsTemplates,            
+  templates: HandlebarsTemplates,
+  data: {},               // App data for the current window
   routes: {},             // Router
   eventBus: {},           // Pub/Sub Bus
   session: {},            // Singleton managing session token
-  currentUser: {}, //TODO: merge under session?
   flash: {},
+  // Additionally Mrello has a collection of resource controllers, see initialize 
+  // controllers in init
   
   // Initializers
   init: function() {
@@ -30,7 +32,6 @@ var MrelloApp = {
     this.initializeEventBus()
     this.initializeControllers()
     this.initializeRouting()
-
     this.initializeSession()
   },
 
@@ -44,7 +45,6 @@ var MrelloApp = {
 
   initializeSession: function() {
     this.session = new this.Models.Session()
-    this.currentUser = new this.Models.User()
   },
 
   initializeControllers: function() {
@@ -63,6 +63,12 @@ var MrelloApp = {
     return this.routes
   },
 
+  // Data Helpers
+  restart: function() {
+    Backbone.history.stop()
+    this.init()
+  },
+
   // Flash Helpers
   hasFlash: function() {
     return !!this.flash.message
@@ -79,16 +85,6 @@ var MrelloApp = {
   setFlash: function(message, type) {
     this.flash.message = message
     this.flash.type = type
-  },
-
-  // Data Helpers
-  resetData: function() {
-    this.boardsData = new this.Collections.Boards()
-  },
-
-  clearSessionCache: function() {
-    this.session.clear()
-    this.currentUser.clear()
   },
 }
 
