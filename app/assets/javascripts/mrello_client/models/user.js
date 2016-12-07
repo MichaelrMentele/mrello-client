@@ -5,7 +5,7 @@ var MrelloApp = MrelloApp || {}
 MrelloApp.Models.User = Backbone.Model.extend({
   urlRoot: "/api/v1/users",
   defaults: {
-    fullname: "",
+    fullname: null,
     organization_id: null,
   },
 
@@ -30,9 +30,12 @@ MrelloApp.Models.User = Backbone.Model.extend({
     })
   },
 
-  clear: function() {
-    // User defaults are reset on page reload
-    localStorage.currentUser = null
+  isSafe: function() {
+    if (this.has("email") || this.has("password")) {
+      return false // its not safe
+    } else {
+      return true // its safe
+    }
   },
 
   saveUser: function() {
@@ -40,18 +43,28 @@ MrelloApp.Models.User = Backbone.Model.extend({
     return true
   },
 
+  clear: function() {
+    // User defaults are reset on page reload
+    localStorage.currentUser = null
+  },
+
   getStored: function() {
     return localStorage.currentUser
   },
 
   isCached: function() {
-    return !!this.getStored
+    if (this.get("fullname") || this.getStored() != "null") {
+      return true
+    } else {
+      return false
+    }
   },
 
   stringify: function() {
     return JSON.stringify(this)
   },
 
+  // TODO: Do I need these?
   hasOrganization: function() {
     return !!this.get("organization_id")
   },
