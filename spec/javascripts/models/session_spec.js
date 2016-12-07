@@ -1,13 +1,13 @@
 describe('Session model', function() {
-  describe('attributes', function() {
-    
+  xdescribe('attributes', function() {
+  
   })
 
-  describe('initialize', function() {
+  xdescribe('initialize', function() {
 
   })
 
-  describe('saves on unload', function() {
+  xdescribe('saves on unload', function() {
     
   });
 });
