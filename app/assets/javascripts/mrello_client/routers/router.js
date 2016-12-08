@@ -16,13 +16,13 @@ MrelloApp.Routers.Router = Backbone.Router.extend({
 
   // URL Route Actions
   routes: {
-    'home'                :   'boardsControllerShow',
+    'home'                :   'boardsControllerIndex',
 
     'register'            :   'usersControllerNew',
 
     'login'               :   'sessionsControllerNew',
 
-    'organizations'       :   'organizationsControllerIndex',
+    'organizations'       :   'organizationsControllerIndex', 
     'user/organizations'  :   'organizationsControllerIndex',
 
     'organizations/:id'  :   'organizationsControllerShow',
@@ -30,9 +30,9 @@ MrelloApp.Routers.Router = Backbone.Router.extend({
     "*path"               :   'applicationControllerNotFound'
   },
 
-  boardsControllerShow: function() {   
+  boardsControllerIndex: function() {   
     console.log("Router: @root, board#show...")
-    MrelloApp.eventBus.trigger("boards:show")    
+    MrelloApp.eventBus.trigger("boards:index")    
   },
 
   usersControllerNew: function() {
