@@ -19,7 +19,7 @@ describe('Mrello router', function() {
 
   describe('/home', function() {
     it("emits an appropriate event", function() {
-      this.events.listenTo(this.events, "boards:show", this.routerSpy)
+      this.events.listenTo(this.events, "boards:index", this.routerSpy)
       
       this.events.trigger("routes:go", '/home')
       expect(this.routerSpy.called).toEqual(true)
