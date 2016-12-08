@@ -21,7 +21,6 @@ MrelloApp.Views.List = Backbone.View.extend({
   titleTemplate: MrelloApp.templates["board/lists/list/list-title"],
   titleEditorTemplate: MrelloApp.templates["board/lists/list/title-editor"],
 
-  tagName: "div",
   className: "list-wrapper",
 
   events: {

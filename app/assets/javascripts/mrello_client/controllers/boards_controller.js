@@ -5,16 +5,23 @@ var MrelloApp = MrelloApp || {};
 MrelloApp.Controllers.Boards = MrelloApp.Controllers.Application.extend({
 
   initialize: function() {
+    this.on("index", this.index)
     this.on("show", this.show);
   },
 
-  show: function(id) {
+  index: function(organization_id=null) {
+    var headerView = new MrelloApp.Views.HeaderRegions.Page()
+    var boardsView = new MrelloApp.Views.BodyRegions.Boards()
+
+    this.renderPage({
+      header: headerView,
+      body: boardsView
+    })
+  },
+
+  show: function(board) {
     console.log("Rendering board page");
-    if(id) {
-      this.showSharedBoard()
-    } else {
-      this.showCurrentUsersBoard()
-    }
+    board.initializeLists()
   },
   
   // Helpers
