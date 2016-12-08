@@ -20,7 +20,7 @@ MrelloApp.Models.Session = Backbone.Model.extend({
     this.currentUser = new MrelloApp.Models.User()
     this.data = new MrelloApp.Collections.Boards()
 
-    if (this.hasCachedToken()) {
+    if (this.hasCachedJWT()) {
       this.set("token", this.getStoredToken())
     }
     
@@ -48,8 +48,8 @@ MrelloApp.Models.Session = Backbone.Model.extend({
     this.currentUser.clear()
   },
 
-  hasCachedToken: function() {
-    return !!localStorage.session_token
+  hasCachedJWT: function() {
+    return localStorage.session_token.split(".").length(3)
   },
 
   getStoredToken: function() {
@@ -84,7 +84,7 @@ MrelloApp.Models.Session = Backbone.Model.extend({
 
   clear: function() {
     this.set("token", "")
-    localStorage.session_token = null
+    localStorage.session_token = ""
     return true
   }
 })
