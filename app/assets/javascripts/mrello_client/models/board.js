@@ -11,13 +11,12 @@ MrelloApp.Models.Board = Backbone.Model.extend({
   },
   
   initialize: function() {
-    console.log("New List Created")
-    
-    this.initializeLists()
+    console.log("New Board Created")
   },
 
   // Initializers
   initializeLists: function() {
+    console.log("Fetching lists for your board.")
     this.set("lists", 
       new MrelloApp.collections.Lists()
     );
