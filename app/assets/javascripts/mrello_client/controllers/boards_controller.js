@@ -6,7 +6,8 @@ MrelloApp.Controllers.Boards = MrelloApp.Controllers.Application.extend({
 
   initialize: function() {
     this.listenTo(MrelloApp.eventBus, "boards:index", this.index)
-    this.listenTo(MrelloApp.eventBus, "boards:show", this.show);
+    this.listenTo(MrelloApp.eventBus, "boards:show", this.show)
+    this.listenTo(MrelloApp.eventBus, "boards:create", this.create)
   },
 
   index: function(organization_id=null) {

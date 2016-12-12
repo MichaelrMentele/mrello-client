@@ -1,11 +1,20 @@
 describe('Boards controller', function() {
   
-  describe("index for user", function() {
-    
-    it("renders the index page")
+  describe("index", function() {
+    describe('users boards', function() {
+      
+    });
+
+    describe('organizations boards', function() {
+      
+    });
   })
 
-  describe('index for organization', function() {
+  describe('create', function() {
     
   })
+
+  describe('show', function() {
+    
+  });
 })

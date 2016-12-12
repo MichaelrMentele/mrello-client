@@ -1,0 +1,58 @@
+/*FOR BOARDS COLLECTION*/
+.boards-wrapper 
+  display: flex
+  flex-direction: row
+
+#tiles 
+  display: flex
+  flex-direction: row
+
+.add-board 
+  display: block
+  font-size: 14px
+  height: 40px
+  color: #4C94BF
+  background-color: rgba(0,0,0,.15)
+  padding: 11px 8px 8px 8px
+
+
+.add-board:hover 
+  height: 40px
+  background-color: rgba(0,0,0,0.3)
+
+/*FOR A SINGLE BOARD*/
+.board-tile-wrapper *
+  border-radius: 3px
+
+.board-tile-wrapper
+  vertical-align: top
+  display: flex
+  flex-direction: column
+  width: 270px
+  height: 100% 
+  margin: 0 5px
+
+.board-tile, .board-tile * 
+  background-color: $object-bg-color
+
+.board-tile
+  position: relative
+  padding: 6px 4px
+
+.board-header
+  display: flex
+  flex-direction: row
+  cursor: pointer
+  padding: 2px 8px
+
+.board-title 
+  font-size: 14px
+  font-weight: bold
+  display:flex
+  flex-direction: row
+  align-items: center
+  width: 100%
+  min-height: 30px
+  padding: 0 4px
+  margin: 0
+
