@@ -49,7 +49,8 @@ MrelloApp.Models.Session = Backbone.Model.extend({
   },
 
   hasCachedJWT: function() {
-    return localStorage.session_token.split(".").length(3)
+    var token = localStorage.session_token
+    return token != "" & token.split(".").length == 3 // Three segments in a JWT
   },
 
   getStoredToken: function() {

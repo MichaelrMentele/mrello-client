@@ -5,18 +5,35 @@ var MrelloApp = MrelloApp || {};
 MrelloApp.Controllers.Boards = MrelloApp.Controllers.Application.extend({
 
   initialize: function() {
-    this.on("index", this.index)
-    this.on("show", this.show);
+    this.listenTo(MrelloApp.eventBus, "boards:index", this.index)
+    this.listenTo(MrelloApp.eventBus, "boards:show", this.show);
   },
 
   index: function(organization_id=null) {
-    var headerView = new MrelloApp.Views.HeaderRegions.Page()
-    var boardsView = new MrelloApp.Views.BodyRegions.Boards()
+    console.log("Rendering index of boards")
 
-    this.renderPage({
-      header: headerView,
-      body: boardsView
+    var boards = new MrelloApp.Collections.Boards()
+
+    var self = this
+    boards.fetch({
+      data: $.param({ organization_id: organization_id }),
+      success: function(model, response, options) {
+        var headerView = new MrelloApp.Views.HeaderRegions.Page()
+        var boardsView = new MrelloApp.Views.BodyRegions.BoardsIndex({ collection: boards })
+
+        self.renderPage({
+          header: headerView,
+          body: boardsView
+        })
+      },
+      error: function(model, response, options) {
+        MrelloApp.setFlash(response.message, "warning")
+        self.redirectTo("login")
+      }
     })
+    
+
+    
   },
 
   show: function(board) {
@@ -24,25 +41,4 @@ MrelloApp.Controllers.Boards = MrelloApp.Controllers.Application.extend({
     board.initializeLists()
   },
   
-  // Helpers
-  showCurrentUsersBoard: function() {
-    
-    var self = this
-    MrelloApp.session.data.fetch({
-
-      success: function(model, response, options){
-        var headerView = new MrelloApp.Views.HeaderRegions.Page()
-        var boardView = new MrelloApp.Views.BodyRegions.Board()
-        self.renderPage({
-          header: headerView,
-          body: boardView
-        });
-      },
-
-      error: function(model, response, options) {
-        // MrelloApp.events.trigger("error", "You must be logged in for that.")
-        MrelloApp.routes.navigate("login", { trigger: true });
-      }
-    });
-  }
 });

@@ -52,10 +52,13 @@ describe('The MrelloApp object', function() {
   });
 
   describe('#init', function() {
+    beforeEach(function() {
+      Backbone.history.stop()
+    })
     it('initializes the event bus', function() {
       sinon.spy(MrelloApp, "initializeEventBus")
 
-      MrelloApp.restart()
+      MrelloApp.init()
 
       expect(MrelloApp.initializeEventBus.called).toEqual(true)
     });
@@ -63,7 +66,7 @@ describe('The MrelloApp object', function() {
     it("initializes the controllers", function() {
       sinon.spy(MrelloApp, "initializeControllers")
 
-      MrelloApp.restart()
+      MrelloApp.init()
 
       expect(MrelloApp.initializeControllers.called).toEqual(true)
     })
@@ -71,7 +74,7 @@ describe('The MrelloApp object', function() {
     it("initializes routing", function() {
       sinon.spy(MrelloApp, "initializeRouting")
 
-      MrelloApp.restart()
+      MrelloApp.init()
 
       expect(MrelloApp.initializeControllers.called).toEqual(true)
     })
@@ -79,7 +82,7 @@ describe('The MrelloApp object', function() {
     it("initializes the session", function() {
       sinon.spy(MrelloApp, "initializeSession")
 
-      MrelloApp.restart()
+      MrelloApp.init()
 
       expect(MrelloApp.initializeSession.called).toEqual(true)
     })

@@ -1,6 +1,6 @@
 var MrelloApp = {
   // Config
-  HOST_URL: "http://73871e3a.ngrok.io", // http://mrello-api.herokuapp.com
+  HOST_URL: "http://65fe4867.ngrok.io", // http://mrello-api.herokuapp.com
 
   // constructor namespaces
   Models: {},      
@@ -31,8 +31,8 @@ var MrelloApp = {
 
     this.initializeEventBus()
     this.initializeControllers()
-    this.initializeRouting()
     this.initializeSession()
+    this.initializeRouting()
   },
 
   initializeEventBus: function() {
