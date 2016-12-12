@@ -25,6 +25,8 @@ MrelloApp.Views.BodyRegions.BoardsIndex = Backbone.View.extend({
       this.collection = new MrelloApp.Collections.Boards()
     }
 
+    this.listenTo(this.collection, 'add remove change', this.render)
+
     this.render()
   },
 

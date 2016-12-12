@@ -1,6 +1,7 @@
 var MrelloApp = MrelloApp || {};
 
 MrelloApp.Models.Board = Backbone.Model.extend({
+  url: "/api/v1/boards",
 
   parse: function(response, options) {
     if(response.board) {

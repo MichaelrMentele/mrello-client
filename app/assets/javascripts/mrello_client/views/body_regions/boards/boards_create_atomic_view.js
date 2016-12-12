@@ -22,10 +22,18 @@ MrelloApp.Views.Atomics.BoardsCreate = Backbone.View.extend({
     e.preventDefault()
     console.log("Creating a board...")
 
-    MrelloApp.eventBus.trigger("boards:create", this.getTitleInput())
+    var title = this.getTitleInput()
+    var type = MrelloApp.session.ownerType()
+    var id = MrelloApp.session.ownerId()
+    var attributes = { 
+      title: title,
+      owner_type: type,
+      owner_id: id,
+    }
+    MrelloApp.eventBus.trigger("boards:create", attributes)
   },
 
   getTitleInput: function() {
-    return this.$el.find("#title").val()
+    return this.$el.find("input").val()
   }
 })

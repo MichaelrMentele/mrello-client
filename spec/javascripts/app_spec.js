@@ -30,10 +30,6 @@ describe('The MrelloApp object', function() {
       expect(MrelloApp.templates).toBeDefined()
     })
 
-    it('the data', function() {
-      expect(MrelloApp.data).toBeDefined()
-    });
-
     it('the app router', function() {
       expect(MrelloApp.routes).toBeDefined()
     });

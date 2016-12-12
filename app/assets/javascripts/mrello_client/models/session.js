@@ -3,6 +3,8 @@
 //
 // It manages saving JWT session token to local storage to bypass 
 // reauth on page reload
+//
+// Holds session relevant data and state.
 
 var MrelloApp = MrelloApp || {}
 
@@ -16,17 +18,19 @@ MrelloApp.Models.Session = Backbone.Model.extend({
   },
 
   initialize: function() {
-    // These are not attributes but nested objects related to the session
+    // When a session is created we redirect to the users home which
+    // always views a user's boards, so set default owner to user
     this.currentUser = new MrelloApp.Models.User()
-    this.data = new MrelloApp.Collections.Boards()
+    this.currentOwner = this.currentUser
 
+    // Pick up where last session left off.
     if (this.hasCachedJWT()) {
       this.set("token", this.getStoredToken())
     }
-    
     this.bindSaveTokenOnUnload()
   },
 
+  // Related to Caching
   bindSaveTokenOnUnload: function() {
     var self = this
     $(window).unload(function() {
@@ -42,10 +46,6 @@ MrelloApp.Models.Session = Backbone.Model.extend({
     } else {
       return false
     }
-  },
-
-  clearSessionCache: function() {
-    this.currentUser.clear()
   },
 
   hasCachedJWT: function() {
@@ -69,6 +69,12 @@ MrelloApp.Models.Session = Backbone.Model.extend({
     return !this.isAuthorized()
   },
 
+  clear: function() {
+    this.clearToken()
+    this.currentUser.clear()
+  },
+
+  // Helpers
   isSafe: function() {
     if(this.has("email", "password")) {
       return false
@@ -77,15 +83,35 @@ MrelloApp.Models.Session = Backbone.Model.extend({
     }
   },
 
+  clearToken: function() {
+    this.set("token", "")
+    localStorage.session_token = ""
+    return true
+  },
+
   clearUserInfo: function() {
     this.set("email", null);
     this.set("password", null);
     return true
   },
 
-  clear: function() {
-    this.set("token", "")
-    localStorage.session_token = ""
-    return true
+  ownerType: function() {
+    if(this.currentOwner.has("fullname")){
+      return "User"
+    } else {
+      return "Organization"
+    }
+  },
+
+  ownerId: function() {
+    return this.currentOwner.id
+  },
+
+  ownerToUser: function() {
+    this.currentOwner = this.currentUser
+  },
+
+  ownerToOrganization: function(id) {
+    this.currentOwner = this.currentUser.getOrganization(id)
   }
 })

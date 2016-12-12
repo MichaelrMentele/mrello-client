@@ -17,7 +17,6 @@ var MrelloApp = {
 
   // Application objects (called out for readability)
   templates: HandlebarsTemplates,
-  data: {},               // App data for the current window
   routes: {},             // Router
   eventBus: {},           // Pub/Sub Bus
   session: {},            // Singleton managing session token

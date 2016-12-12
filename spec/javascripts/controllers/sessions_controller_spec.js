@@ -50,11 +50,6 @@ describe('Sessions Controller', function() {
         cleanupFakeServer.apply(this)
       });
 
-      it("calls the server", function() {
-        expect(this.server.requests[0].method).toEqual("POST")
-        expect(this.server.requests[0].url).toEqual(MrelloApp.HOST_URL + "/api/v1/sessions")
-      })
-
       it("creates a session", function() {
         expect(MrelloApp.session.isAuthorized()).toEqual(true)
       })

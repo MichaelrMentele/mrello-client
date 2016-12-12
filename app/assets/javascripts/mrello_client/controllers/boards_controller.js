@@ -5,15 +5,39 @@ var MrelloApp = MrelloApp || {};
 MrelloApp.Controllers.Boards = MrelloApp.Controllers.Application.extend({
 
   initialize: function() {
+    this.listenTo(MrelloApp.eventBus, "boards:create", this.create)
     this.listenTo(MrelloApp.eventBus, "boards:index", this.index)
     this.listenTo(MrelloApp.eventBus, "boards:show", this.show)
-    this.listenTo(MrelloApp.eventBus, "boards:create", this.create)
+  },
+
+  create: function(boardAttrs) {
+    console.log("Creating board.")
+
+    var board = new MrelloApp.Models.Board(boardAttrs)
+    MrelloApp.session.currentOwner.boards.add(board)
+    
+    var self = this
+    board.save([], {
+      success: function(model, response, options) {
+        self.renderFlashMessage({
+          message: response.message,
+          type: "success"
+        })
+      },
+
+      error: function(model, response, options) {
+        self.renderFlashMessage({
+          message: response.message,
+          type: "warning"
+        })
+      }
+    })
   },
 
   index: function(organization_id=null) {
     console.log("Rendering index of boards")
 
-    var boards = new MrelloApp.Collections.Boards()
+    var boards = MrelloApp.session.currentOwner.boards
 
     var self = this
     boards.fetch({

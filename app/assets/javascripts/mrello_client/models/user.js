@@ -4,20 +4,22 @@ var MrelloApp = MrelloApp || {}
 // having fullname and admin is probably okay for user experience
 MrelloApp.Models.User = Backbone.Model.extend({
   urlRoot: "/api/v1/users",
+
   defaults: {
     fullname: null,
-    organization_id: null,
   },
 
   initialize: function(attributes) {
     if (attributes) {
       this.set("fullname", attributes.fullname)
-      this.set("organization_id", attributes.organization_id)
     } else if (this.getStored()) {
       userJson = this.getStored()
       userAttr = JSON.parse(userJson)
       this.set(userAttr)
     }
+
+    this.boards = new MrelloApp.Collections.Boards()
+    this.organizations = new MrelloApp.Collections.Organizations()
 
     this.bindSave()
   },
@@ -30,6 +32,7 @@ MrelloApp.Models.User = Backbone.Model.extend({
     })
   },
 
+  // Caching related
   isSafe: function() {
     if (this.has("email") || this.has("password")) {
       return false // its not safe
@@ -45,7 +48,7 @@ MrelloApp.Models.User = Backbone.Model.extend({
 
   clear: function() {
     // User defaults are reset on page reload
-    localStorage.currentUser = null
+    localStorage.currentUser = ""
   },
 
   getStored: function() {
@@ -53,41 +56,15 @@ MrelloApp.Models.User = Backbone.Model.extend({
   },
 
   isCached: function() {
-    if (this.get("fullname") || this.getStored() != "null") {
+    if (this.getStored() != "") {
       return true
     } else {
       return false
     }
   },
 
+  // Helpers
   stringify: function() {
     return JSON.stringify(this)
   },
-
-  // TODO: Do I need these?
-  hasOrganization: function() {
-    return !!this.get("organization_id")
-  },
-
-  getSharedBoardId: function(callback) {
-    var org_id = this.get("organization_id")
-    // TODO: Move creation of models to its controller
-    // Instead create an event that the controller can have a callback for
-    var org = new MrelloApp.Models.Organization({ id: org_id })
-
-    var self = this
-    // TODO: refactor, this should not be necessary and is a design issue
-    // we want this information available in context
-    org.fetch({
-      success: function(model, response, options) {
-        console.log("Org fetch succeeded. Firing callback.")
-        $.ajax('/api/v1/shared', {
-          
-        })
-      },
-      error: function(model, response, options) {
-        console.log("Org fetch failed.")
-      }
-    })
-  }
 });

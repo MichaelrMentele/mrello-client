@@ -67,5 +67,7 @@ describe('Boards index region view', function() {
 
       expect(this.eventSpy).toHaveBeenCalled()
     })
+
+    it("rerenders on change")
   })
 });
