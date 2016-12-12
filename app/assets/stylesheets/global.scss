@@ -25,6 +25,7 @@ body * {
 }
 
 body {
+  display: flex;
   color: $text-primary-color;
   font: $font-size "Helvetica Neue",Arial,Helvetica,sans-serif;
   line-height: 18px;
@@ -40,3 +41,7 @@ h1 { font-size: 2em; }
 h2 { font-size: 1.5em; }
 
 .off{ display: none; }
+
+#app-container {
+  width: 100%
+}

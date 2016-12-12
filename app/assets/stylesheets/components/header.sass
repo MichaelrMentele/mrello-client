@@ -1,7 +1,3 @@
-<% unless Rails.env.production? %>
-@import 'https://fonts.googleapis.com/css?family=Modak' 
-<% end %>
-
 header.page-head
   width: 100%
   height: 40px
@@ -10,21 +6,37 @@ header.page-head
   text-align: center
   background-color: #0067A3
 
+header #logo
+  position: fixed
+  left: 48%
+
 header #logo h1 
   font: 22px bold
   font-family: 'Modak', cursive
   color: #4997D2
   margin: 0
 
-nav #logo, #search-bar, #nav-aside 
+nav #logo, #search-bar, #nav-aside-right, #nav-aside-left
   display: inline-block
   margin: 4px 6px
 
-nav#nav-aside
+// Navigation
+nav#nav-aside-right
   top: 0
   right: 0
   position: fixed
 
+// State Info
+nav#nav-aside-left
+  top: 0
+  left: 0
+  position: fixed
+
+header #info
+  margin: 8px
+  color: #4997D2
+
+// Search
 .glyphicon-search 
   color: white
   transform: rotate(90deg) 
@@ -34,7 +46,6 @@ nav#nav-aside
   background-color: #4C94BF
   border-radius: 3px
   padding-right: 6px
-
 
 #search-bar input
   padding: 0 6px

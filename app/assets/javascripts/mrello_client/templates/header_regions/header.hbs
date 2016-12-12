@@ -1,49 +1,16 @@
-<nav>
-  <div class="pull-left">Your Boards</div>
-  <div id="logo">
-    <h1>Mrello</h1>
-  </div>
-  {{#if board }}
-    <div id="search-bar">
-      <label for="search-bar">
-        <input class="button-outline" type="text" name="search-bar">
-        <i class="glyphicon glyphicon-search"></i>
-      </label>
-    </div>
-  {{/if}}
+<nav id="nav-aside-left"> 
+  <div id="info">{{stateInfo}}</div>
 </nav>
 
-{{#if session }}
-  <nav id="nav-aside">
-    {{#unless board}}
-    <div id="view-board" class="btn">
-      <a href="#">Board</a>
+<nav>
+  <div id="logo">
+    <h1>Mrello</h1>
+    <div id="search-container">
+      {{!-- generated --}}
     </div>
-    {{/unless}}
+  </div>
+</nav>
 
-    {{#if admin}}
-      {{#if hasOrganization }}
-      <div id="manage-org" class="btn">
-        <a href="#">Your Organization</a>
-      </div>
-      {{else}}
-      <div id="create-org" class="btn">
-        <a href="#">Create Organization</a>
-      </div>
-      {{/if}}
-    {{/if}}
-
-    {{#unless admin}}
-      {{#if hasOrganization }}
-      <div id="view-org" class="btn">
-        <a href="#">Your Organization</a>
-      </div>
-      {{else}}
-      <div id="join-org" class="btn">
-        <a href="#">Join Organization</a>
-      </div>
-      {{/if}}
-    {{/unless}}
-
-  </nav>
-{{/if}}
+<nav id="nav-aside-right">
+{{!-- generated --}}
+</nav>

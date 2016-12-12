@@ -3,19 +3,9 @@
 // Subviews:
 // Board -> Lists      
 
-// Subviews Directly Managed by BoardView:
-// Searchbar
-
-// Events:
-// On keyup Searchbar -> Filter lists views
-
 MrelloApp.Views.BodyRegions.BoardsShow = Backbone.View.extend({
 
   template: MrelloApp.templates['boards/board'],
-
-  events: {
-    "keyup #search-bar input" : "searchCards",
-  },
 
   initialize: function() {
     this.render()

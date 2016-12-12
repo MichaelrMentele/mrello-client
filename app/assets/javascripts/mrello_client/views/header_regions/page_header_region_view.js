@@ -11,52 +11,46 @@ MrelloApp.Views.HeaderRegions.Page = Backbone.View.extend({
     "click #create-org" : "createOrg", // Admin only
     "click #join-org"   : "joinOrg",
     "click #manage-org" : "manageOrganization",
-    "click #view-orgs"  : "viewOrganizationsBoards"
   },
 
-  initialize: function(searchable=false, navViews=[]) {
-    this.searchable = searchable
-    this.navViews = navViews
+  initialize: function(options) {
+    if(options) {
+      this.stateInfo  =   options.stateInfo     // Provides context message to user
+
+      // Sub views
+      this.search     =   options.searchView    // Expects search bar view    
+      this.navViews   =   options.navViews      // Expects array of navigation links
+    }
 
     this.render()
-    this.bindSearch()
   },
 
   render: function() {
     this.renderSelf()
+
+    if(this.search) {
+      this.renderSearch()
+    }
+
     this.renderNav()
     return this
   },
 
   renderSelf: function() {
-    this.$el.html(this.template(this.context))
+    this.$el.html(this.template({ stateInfo: this.stateInfo }))
+  },
+
+  renderSearch: function() {
+    this.$el.find("#search-container").html(this.search.el)
   },
 
   renderNav: function() {
-    // TODO:
+    this.$el.find("#nav-aside-right").empty()
+    _.each(this.navViews, this.appendNavView, this)
   },
 
-  bindSearch: function() {
-    if(this.searchable) {
-      this.listenTo(MrelloApp.eventBus, "board:search", this.searchCards)
-    }
-  },
-
-  searchCards: function() {
-    console.log("searching...")
-    var query = $("#search-bar input").val()
-    
-    $(".card").css({
-      "background": "white",
-      "box-shadow" : "none"
-    })
-
-    if (query) {
-      $(".card:contains(" + query + ")").css({
-        "background": "aqua",
-        "box-shadow" : "4px 4px 4px #888888",
-      })
-    }
+  appendNavView: function(view) {
+    this.$el.find("#nav-aside-right").append(view.el)
   },
 
   // TODO: Move all of this to atomic nav views.
@@ -72,26 +66,9 @@ MrelloApp.Views.HeaderRegions.Page = Backbone.View.extend({
     MrelloApp.routes.navigate("organizations", { trigger: true } )
   },
 
-  viewBoard: function(e) {
-    e.preventDefault()
-    console.log("Viewing board")
-    MrelloApp.routes.navigate("", { trigger: true })
-  },
-
   manageOrganization: function(e) {
     e.preventDefault()
     console.log("Managing requests")
     MrelloApp.routes.navigate("organizations/show", { trigger: true })
   },
-
-  viewOrganizationsBoard: function(e) {
-    e.preventDefault()
-    console.log("Attempting to view (shared) board.")
-    
-    // Get the shared org and then show it
-    MrelloApp.currentUser.getSharedBoardId(function(boardId) {
-      var url = "board/show/" + boardId
-      MrelloApp.routes.navigate(url, { trigger: true })
-    })
-  }
 })
