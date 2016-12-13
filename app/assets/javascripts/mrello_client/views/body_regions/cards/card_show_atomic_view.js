@@ -9,7 +9,7 @@
 var MrelloApp = MrelloApp || {}
 
 MrelloApp.Views.Card = Backbone.View.extend({
-  template: MrelloApp.templates["board/lists/list/cards/card"],
+  template: MrelloApp.templates["body_regions/lists/list/cards/card"],
 
   className: "list-card",
   attributes: {

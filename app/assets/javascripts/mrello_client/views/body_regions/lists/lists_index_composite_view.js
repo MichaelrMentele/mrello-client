@@ -31,6 +31,7 @@ MrelloApp.Views.Lists = Backbone.View.extend({
     this.$el = $(this.el)
 
     this.addListContainerID = "#new-list-creator" // move this to separate view
+    this.listenTo(this.collection, 'add remove change', this.render)
 
     this.render()
     this.bindEvents()
@@ -53,7 +54,7 @@ MrelloApp.Views.Lists = Backbone.View.extend({
   },
 
   renderListView: function(list) {
-    var listView = new MrelloApp.views.List({
+    var listView = new MrelloApp.Views.List({
                      model: list
                    })
     this.$el.append(listView.el)
@@ -79,7 +80,10 @@ MrelloApp.Views.Lists = Backbone.View.extend({
 
     var title = $(this.addListContainerID + " .title-input").val()
     if (title != "") {
-      MrelloApp.listsController.trigger("create", { title: title })
+      MrelloApp.listsController.trigger("create", this.collection, { 
+        board_id: this.collection.parent.id, // the parent of lists is a board
+        title: title 
+      })
     }
   },
   

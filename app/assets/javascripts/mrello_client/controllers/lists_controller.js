@@ -8,17 +8,27 @@ MrelloApp.Controllers.Lists = MrelloApp.Controllers.Application.extend({
     this.on("create", this.create)
   },
 
-  create: function(args) {
-    console.log("@listsConroller: creating new list")
+  create: function(lists, listAttrs) {
+    console.log("Creating board.")
 
-    MrelloApp.data.create(args, {
-      wait: true,
+    var list = new MrelloApp.Models.List(listAttrs)
+    lists.add(list)
+    
+    var self = this
+    list.save([], {
       success: function(model, response, options) {
-        console.log("Virgin list created.")
+        self.renderFlashMessage({
+          message: response.message,
+          type: "success"
+        })
       },
+
       error: function(model, response, options) {
-        console.log("Failed on virgin list create.")
+        self.renderFlashMessage({
+          message: response.message,
+          type: "warning"
+        })
       }
-    }) 
-  }
+    })
+  },
 })

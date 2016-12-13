@@ -1,6 +1,8 @@
 var MrelloApp = MrelloApp || {};
 
 MrelloApp.Models.List = Backbone.Model.extend({
+  urlRoot: "/api/v1/lists",
+
   defaults: {
     title: "List",
   },
@@ -22,7 +24,7 @@ MrelloApp.Models.List = Backbone.Model.extend({
   // Initializers
   initializeCards: function() {
     this.set("cards", 
-      new MrelloApp.collections.Cards()
+      new MrelloApp.Collections.Cards()
     );
     this.get("cards").parent = this;
     this.get("cards").fetch({

@@ -1,10 +1,12 @@
 var MrelloApp = MrelloApp || {}
 
-MrelloApp.Views.Cards = Backbone.View.extend({
+MrelloApp.Views.Composites.Cards = Backbone.View.extend({
 
-  template: MrelloApp.templates["board/lists/list/cards/cards"],
-  addCardMenu: MrelloApp.templates["board/lists/list/cards/add-card-menu"],
-  addCardButton: MrelloApp.templates["board/lists/list/cards/add-card-button"],
+  template: MrelloApp.templates["body_regions/lists/list/cards/cards"],
+
+  // Sub Views
+  addCardMenu: MrelloApp.templates["body_regions/lists/list/cards/add-card-menu"],
+  addCardButton: MrelloApp.templates["body_regions/lists/list/cards/add-card-button"],
 
   tagName: "div",
   className: "cards",
@@ -85,7 +87,7 @@ MrelloApp.Views.Cards = Backbone.View.extend({
   },
 
   renderCardView: function(card) {
-    var cardView = new MrelloApp.views.Card({
+    var cardView = new MrelloApp.Views.Card({
                      model: card,
                    })
     this.$el.find(".card-list").append(cardView.el)

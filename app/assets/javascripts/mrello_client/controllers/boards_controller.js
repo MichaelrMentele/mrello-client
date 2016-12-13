@@ -73,7 +73,9 @@ MrelloApp.Controllers.Boards = MrelloApp.Controllers.Application.extend({
       success: function(model, response, options) {
         var headerView = new MrelloApp.Views.HeaderRegions.Page({
           stateInfo: board.get("title"),
+          searchView: new MrelloApp.Views.Atomics.CardSearch(),
           navViews: [
+            new MrelloApp.Views.Atomics.NavUserBoards(),
             new MrelloApp.Views.Atomics.NavLogout(),
           ]
         })

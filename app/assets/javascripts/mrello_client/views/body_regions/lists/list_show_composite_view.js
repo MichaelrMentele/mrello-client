@@ -17,9 +17,11 @@
 var MrelloApp = MrelloApp || {}
 
 MrelloApp.Views.List = Backbone.View.extend({
-  template: MrelloApp.templates["board/lists/list/list"],
-  titleTemplate: MrelloApp.templates["board/lists/list/list-title"],
-  titleEditorTemplate: MrelloApp.templates["board/lists/list/title-editor"],
+  template: MrelloApp.templates["body_regions/lists/list"],
+
+  // Swappable views
+  titleTemplate: MrelloApp.templates["body_regions/lists/list/list-title"],
+  titleEditorTemplate: MrelloApp.templates["body_regions/lists/list/title-editor"],
 
   className: "list-wrapper",
 
@@ -51,7 +53,7 @@ MrelloApp.Views.List = Backbone.View.extend({
 
   renderCards: function() {
     var cardsContainer = this.getCardsContainer()
-    var cardsView = new MrelloApp.views.Cards({
+    var cardsView = new MrelloApp.Views.Composites.Cards({
       cards: this.model.get("cards"),
     })
 

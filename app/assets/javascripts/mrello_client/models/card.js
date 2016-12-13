@@ -28,19 +28,21 @@ MrelloApp.Models.Card = Backbone.Model.extend({
 
   // Initializers
   initializeComments: function() {
-    this.set("comments", new MrelloApp.collections.Comments());
+    this.set("comments", new MrelloApp.Collections.Comments());
     this.get("comments").parent = this; // store a reference to this in child
-    this.get("comments").fetch({
-      data: $.param({ card_id: this.id})
-    })
+    // TODO: Move to comments controller
+    // this.get("comments").fetch({
+    //   data: $.param({ card_id: this.id})
+    // })
   },
 
   initializeChecklists: function() {
-    this.set("checklists", new MrelloApp.collections.Checklists());
+    this.set("checklists", new MrelloApp.Collections.Checklists());
     this.get("checklists").parent = this; 
-    this.get("checklists").fetch({
-      data: $.param({ card_id: this.id})
-    })
+    //TODO :MOVE TO CHECKLISTS controller
+    // this.get("checklists").fetch({
+    //   data: $.param({ card_id: this.id})
+    // })
   },
 
   storeListReference: function() {
