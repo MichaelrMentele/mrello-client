@@ -13,8 +13,8 @@
 
 var MrelloApp = MrelloApp || {};
 
-MrelloApp.Views.Composites.CardsEdit = Backbone.View.extend({
-  template: MrelloApp.templates["board/card-editor/card-edit"],
+MrelloApp.Views.Composites.CardEdit = Backbone.View.extend({
+  template: MrelloApp.templates["body_regions/cards/card-editor/card-edit"],
 
   id: "card-editor",
   class: "window",
@@ -43,7 +43,7 @@ MrelloApp.Views.Composites.CardsEdit = Backbone.View.extend({
   renderComments: function() {
     var commentsContainer = this.$(".comments")
   
-    new MrelloApp.views.Comments({
+    new MrelloApp.Views.Composites.Comments({
       el: commentsContainer,
       comments: this.model.get("comments")
     });

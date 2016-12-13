@@ -31,7 +31,7 @@ MrelloApp.Routers.Router = Backbone.Router.extend({
   },
 
   boardsControllerIndex: function() {   
-    console.log("Router: @root, board#show...")
+    console.log("Router: @root, board#index...")
     MrelloApp.eventBus.trigger("boards:index")    
   },
 

@@ -46,7 +46,7 @@ MrelloApp.Views.Card = Backbone.View.extend({
   },
 
   renderEditor: function() {
-    new MrelloApp.views.CardEditor({ model: this.model })
+    new MrelloApp.Views.Composites.CardEdit({ model: this.model })
   },
   
   delete: function() {
