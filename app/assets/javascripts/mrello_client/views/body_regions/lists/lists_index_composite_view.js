@@ -14,9 +14,9 @@
 var MrelloApp = MrelloApp || {}
 
 MrelloApp.Views.Lists = Backbone.View.extend({
-  addListContainer: MrelloApp.templates["board/lists/add-list-container"],
-  addListMenu: MrelloApp.templates["board/lists/add-list-menu"],
-  addListButton: MrelloApp.templates["board/lists/add-list-button"],
+  addListContainer: MrelloApp.templates["body_regions/lists/add-list-container"],
+  addListMenu: MrelloApp.templates["body_regions/lists/add-list-menu"],
+  addListButton: MrelloApp.templates["body_regions/lists/add-list-button"],
 
   tagName: "div",
   className: "lists-wrapper",
@@ -31,7 +31,6 @@ MrelloApp.Views.Lists = Backbone.View.extend({
     this.$el = $(this.el)
 
     this.addListContainerID = "#new-list-creator" // move this to separate view
-    this.lists = MrelloApp.data
 
     this.render()
     this.bindEvents()
@@ -50,7 +49,7 @@ MrelloApp.Views.Lists = Backbone.View.extend({
   },
 
   renderLists: function() {
-    this.lists.each(this.renderListView, this)
+    this.collection.each(this.renderListView, this)
   },
 
   renderListView: function(list) {

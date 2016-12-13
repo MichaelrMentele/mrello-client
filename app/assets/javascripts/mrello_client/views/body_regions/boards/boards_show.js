@@ -5,33 +5,21 @@
 
 MrelloApp.Views.BodyRegions.BoardsShow = Backbone.View.extend({
 
-  template: MrelloApp.templates['boards/board'],
+  template: MrelloApp.templates['body_regions/boards/board_show'],
 
   initialize: function() {
     this.render()
   },
 
   render: function() {
-    this.renderHeader()
     this.$el.append(this.template())
     this.renderLists()
     return this
   },
 
-  renderHeader: function() {
-    adminStatus = MrelloApp.currentUser.isAdmin()
-    hasOrgStatus = MrelloApp.currentUser.hasOrganization()
-    var headerView = new MrelloApp.views.Header({ 
-      session: true, 
-      board: true,
-      admin: adminStatus,
-      hasOrganization: hasOrgStatus,
-    })
-    this.$el.append(headerView.el)
-  },
-
   renderLists: function() {
-    var listsView = new MrelloApp.views.Lists()
+    var lists = this.model.get("lists")
+    var listsView = new MrelloApp.Views.Lists({ collection: lists })
     this.$el.find("#lists-container").html(listsView.el)
   },
 

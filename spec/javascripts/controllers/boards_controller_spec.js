@@ -1,7 +1,46 @@
 describe('Boards controller', function() {
   
   xdescribe("index", function() {
-  })
+    describe('fetch success', function() {
+      describe('renders header', function() {
+        
+      });
+
+      describe('renders page', function() {
+        
+      });
+    });
+
+    describe('fetch error', function() {
+      beforeEach(function() {
+        // Setup
+        loadFixtures('appContainer.html')
+        indexFakeBoardsServer.apply(this, [false])
+        createEventBus.apply(this)
+        createBoardsController.apply(this)
+        prepareSession() 
+        
+        this.redirectSpy = listenerSpy(this.events, "routes:go")
+
+        // Actions
+        this.events.trigger("boards:index")
+
+        this.server.respond()
+      })
+
+      afterEach(function() {
+        cleanupFakeServer.apply(this)
+      })
+
+      it("renders a flash message", function() {
+        expect($(".alert-warning")).toBeInDOM()
+      })
+
+      it("redirects", function() {
+        expect(this.redirectSpy).toHaveBeenCalled()
+      })
+    });
+  });
 
   describe('create', function() {
     describe("successful", function() {
@@ -68,7 +107,18 @@ describe('Boards controller', function() {
   })
 
   xdescribe('show', function() {
-    
+    describe('fetching the lists for the board', function() {
+      describe("success", function() {
+        it("renders the page")
+        it("fetches the lists for the board")
+        it("renders the appropriate navigation")
+      })
+
+      describe('error', function() {
+        it("redirects to login page")
+        it("renders a flash message")
+      });
+    });
   });
 })
 

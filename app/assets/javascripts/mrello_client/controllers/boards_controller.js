@@ -43,7 +43,13 @@ MrelloApp.Controllers.Boards = MrelloApp.Controllers.Application.extend({
     boards.fetch({
       data: $.param({ organization_id: organization_id }),
       success: function(model, response, options) {
-        var headerView = new MrelloApp.Views.HeaderRegions.Page()
+        var headerView = new MrelloApp.Views.HeaderRegions.Page({
+          stateInfo: "Your Boards",
+          navViews: [
+            new MrelloApp.Views.Atomics.NavLogout(),
+          ]
+        })
+
         var boardsView = new MrelloApp.Views.BodyRegions.BoardsIndex({ collection: boards })
 
         self.renderPage({
@@ -56,14 +62,34 @@ MrelloApp.Controllers.Boards = MrelloApp.Controllers.Application.extend({
         self.redirectTo("login")
       }
     })
-    
-
-    
   },
 
   show: function(board) {
     console.log("Rendering board page");
-    board.initializeLists()
+
+    var self = this
+    board.get("lists").fetch({
+      data: $.param({ board_id: board.id }),
+      success: function(model, response, options) {
+        var headerView = new MrelloApp.Views.HeaderRegions.Page({
+          stateInfo: board.get("title"),
+          navViews: [
+            new MrelloApp.Views.Atomics.NavLogout(),
+          ]
+        })
+
+        var boardsView = new MrelloApp.Views.BodyRegions.BoardsShow({ model: board })
+
+        self.renderPage({
+          header: headerView,
+          body: boardsView
+        })
+      },
+      error: function(model, response, options) {
+        MrelloApp.setFlash(response.message, "warning")
+        self.redirectTo("login")
+      }
+    })
   },
   
 });
