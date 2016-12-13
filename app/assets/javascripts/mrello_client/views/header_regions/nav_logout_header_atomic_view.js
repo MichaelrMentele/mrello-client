@@ -2,7 +2,7 @@ var MrelloApp = MrelloApp || {}
 
 MrelloApp.Views.Atomics.NavLogout = Backbone.View.extend({
 
-  template: MrelloApp.templates['header_regions/nav_logout'],
+  template: MrelloApp.templates['header_regions/nav_element'],
 
   id: "logout",
   className: "btn",
@@ -16,7 +16,7 @@ MrelloApp.Views.Atomics.NavLogout = Backbone.View.extend({
   },
 
   render: function() {
-    this.$el.html(this.template())
+    this.$el.html(this.template({ text: "Logout" }))
     return this
   },
 

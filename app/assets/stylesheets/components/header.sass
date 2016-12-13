@@ -9,10 +9,6 @@ header.page-head
   text-align: center
   background-color: #0067A3
 
-header #logo
-  position: fixed
-  left: 48%
-
 header #logo h1 
   font: 22px bold
   font-family: 'Modak', cursive
@@ -21,6 +17,7 @@ header #logo h1
 
 nav #logo, #search-bar, #nav-aside-right, #nav-aside-left
   display: inline-block
+  position: static
   margin: 4px 6px
 
 // Navigation
@@ -40,6 +37,9 @@ header #info
   color: #4997D2
 
 // Search
+#search-container
+  display: inline-block
+
 .glyphicon-search 
   color: white
   transform: rotate(90deg) 
@@ -50,6 +50,9 @@ header #info
   border-radius: 3px
   padding-right: 6px
 
+  label
+    margin: 0
+
 #search-bar input
   padding: 0 6px
   margin: 4px
@@ -59,5 +62,7 @@ header #info
   color: white
   border-radius: 3px
 
+.nav-element
+  margin: 0 4px
 
 

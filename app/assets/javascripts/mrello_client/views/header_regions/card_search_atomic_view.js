@@ -9,6 +9,10 @@ MrelloApp.Views.Atomics.CardSearch = Backbone.View.extend({
     "keyup input" : "searchCards",
   },
 
+  initialize: function() {
+    this.render()
+  },
+
   render: function() {
     this.$el.html(this.template())
     return this
