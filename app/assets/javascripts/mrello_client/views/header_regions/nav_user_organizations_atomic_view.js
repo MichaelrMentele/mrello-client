@@ -2,7 +2,7 @@ var MrelloApp = MrelloApp || {}
 
 MrelloApp.Views.Atomics.NavUserOrganizations = Backbone.View.extend({
 
-  template: MrelloApp.templates['header_regions/nav_user_organizations'],
+  template: MrelloApp.templates['header_regions/nav_element'],
 
   id: "user-orgs",
   className: "btn",
@@ -16,7 +16,7 @@ MrelloApp.Views.Atomics.NavUserOrganizations = Backbone.View.extend({
   },
 
   render: function() {
-    this.$el.html(this.template())
+    this.$el.html(this.template({ text: "Your Orgs" }))
     return this
   },
 

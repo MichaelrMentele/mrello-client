@@ -5,7 +5,7 @@ MrelloApp.Controllers.Organizations = MrelloApp.Controllers.Application.extend({
   initialize: function() {
     this.on("new", this.new)
     this.on("create", this.create)
-    this.on("index", this.index)
+    this.listenTo(MrelloApp.eventBus, "organizations:index", this.index)
     this.on("show", this.show)
   },
   
@@ -30,13 +30,21 @@ MrelloApp.Controllers.Organizations = MrelloApp.Controllers.Application.extend({
     })
   },
 
-  index: function() {
+  index: function(options) {
     console.log("Rendering organizations")
-    var self = this
-    MrelloApp.organizations.fetch({
 
+    var currentUser = MrelloApp.session.currentUser
+
+    var userParam = {}
+    if(options & options.scope == "User") {
+      userParam.user_id = currentUser.id 
+    }
+
+    var self = this
+    currentUser.organizations.fetch({
+      data: $.param(userParam),
       success: function(model, response, options){
-        var indexView = new MrelloApp.views.OrganizationsIndex()
+        var indexView = new MrelloApp.Views.OrganizationsIndex()
         self.render(indexView)
       },
 

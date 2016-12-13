@@ -4,7 +4,7 @@ var MrelloApp = MrelloApp || {};
 
 MrelloApp.Views.Organization = Backbone.View.extend({
 
-  template: MrelloApp.templates['organizations/organization'],
+  template: MrelloApp.templates['body_regions/organizations/organization'],
 
   tagName: "li",
   className: "organization",
@@ -24,13 +24,13 @@ MrelloApp.Views.Organization = Backbone.View.extend({
 
   handleJoin: function(e) {
     e.preventDefault()
-    console.log("User creating join request")
+    console.log("User creating unapproved membership")
 
-    var joinRequest = new MrelloApp.models.JoinRequest({ 
+    var membership = new MrelloApp.Models.Membership({ 
       organization_id: this.model.id
     })
 
-    joinRequest.save({}, {  
+    Membership.save({}, {  
       success: function(model, response, options) {
         console.log("Join request created.")
         MrelloApp.routes.navigate("", { trigger: true })
