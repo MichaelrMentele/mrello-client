@@ -1,6 +1,6 @@
 var MrelloApp = {
   // Config
-  HOST_URL: "http://65fe4867.ngrok.io", // http://mrello-api.herokuapp.com
+  HOST_URL: "http://4fe60abc.ngrok.io", // http://mrello-api.herokuapp.com
 
   // constructor namespaces
   Models: {},      
