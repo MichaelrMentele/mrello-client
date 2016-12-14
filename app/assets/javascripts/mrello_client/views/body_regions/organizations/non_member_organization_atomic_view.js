@@ -2,7 +2,7 @@
 
 var MrelloApp = MrelloApp || {};
 
-MrelloApp.Views.Organization = Backbone.View.extend({
+MrelloApp.Views.Atomics.NonMemberOrganization = Backbone.View.extend({
 
   template: MrelloApp.templates['body_regions/organizations/organization'],
 
@@ -10,7 +10,7 @@ MrelloApp.Views.Organization = Backbone.View.extend({
   className: "organization",
 
   events: {
-    "click .join" : "handleJoin"
+    "click a" : "handleJoin"
   },
 
   initialize: function() {
@@ -18,7 +18,10 @@ MrelloApp.Views.Organization = Backbone.View.extend({
   },
 
   render: function() {
-    this.$el.html( this.template(this.model.toJSON()) )
+    this.$el.html( this.template({ 
+      title: this.model.get("title"), 
+      button_text: "Join"
+    }) )
     return this
   },
 
@@ -30,10 +33,9 @@ MrelloApp.Views.Organization = Backbone.View.extend({
       organization_id: this.model.id
     })
 
-    Membership.save({}, {  
+    membership.save({}, {  
       success: function(model, response, options) {
-        console.log("Join request created.")
-        MrelloApp.routes.navigate("", { trigger: true })
+        console.log("Membership request created.")
       },
       error: function(model, response, options) {
         console.log("User failed to join org")

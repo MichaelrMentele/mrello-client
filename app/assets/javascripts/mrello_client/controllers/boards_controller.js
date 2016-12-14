@@ -46,6 +46,7 @@ MrelloApp.Controllers.Boards = MrelloApp.Controllers.Application.extend({
         var headerView = new MrelloApp.Views.HeaderRegions.Page({
           stateInfo: "Your Boards",
           navViews: [
+            new MrelloApp.Views.Atomics.NavAllOrganizations(),
             new MrelloApp.Views.Atomics.NavUserOrganizations(),
             new MrelloApp.Views.Atomics.NavLogout(),
           ]

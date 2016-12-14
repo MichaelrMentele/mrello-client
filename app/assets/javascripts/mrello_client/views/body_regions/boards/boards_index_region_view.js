@@ -10,16 +10,6 @@ MrelloApp.Views.BodyRegions.BoardsIndex = Backbone.View.extend({
     "click #cancel-create-board" : "createCancelled"
   },
 
-  newClicked: function(e) {
-    e.preventDefault()
-    this.renderCreateSubView()
-  },
-
-  createCancelled: function(e) {
-    e.preventDefault()
-    this.renderNewSubView()
-  },
-
   initialize: function() {
     if(!this.collection) {
       this.collection = new MrelloApp.Collections.Boards()
@@ -46,6 +36,17 @@ MrelloApp.Views.BodyRegions.BoardsIndex = Backbone.View.extend({
                      model: board
                    })
     this.$el.find("#tiles").append(tileView.el)
+  },
+
+  // Swappable Subviews
+  newClicked: function(e) {
+    e.preventDefault()
+    this.renderCreateSubView()
+  },
+
+  createCancelled: function(e) {
+    e.preventDefault()
+    this.renderNewSubView()
   },
 
   renderNewSubView: function() {

@@ -22,10 +22,12 @@ MrelloApp.Routers.Router = Backbone.Router.extend({
 
     'login'               :   'sessionsControllerNew',
 
-    'organizations'       :   'organizationsControllerIndex', 
-    'user/organizations'  :   'organizationsControllerIndex',
+    'organizations'       :   'organizationsControllerIndexAll', 
+    'user/organizations'  :   'organizationsControllerIndexUser',
 
-    'organizations/:id'  :   'organizationsControllerShow',
+    'organizations/new'   :   'organizationsControllerNew',
+
+    'organizations/:id'   :   'organizationsControllerShow',
 
     "*path"               :   'applicationControllerNotFound'
   },
@@ -45,9 +47,19 @@ MrelloApp.Routers.Router = Backbone.Router.extend({
     MrelloApp.eventBus.trigger("sessions:new");
   },
 
-  organizationsControllerIndex: function(scoped=false) {
+  organizationsControllerIndexAll: function() {
     console.log("Router: @index, organizations#index")
-    MrelloApp.eventBus.trigger("organizations:index", scoped)
+    MrelloApp.eventBus.trigger("organizations:index:all")
+  },
+
+  organizationsControllerIndexUser: function() {
+    console.log("Router: @index, organizations#index")
+    MrelloApp.eventBus.trigger("organizations:index:user")
+  },
+
+  organizationsControllerNew: function() {
+    console.log("Router: @index, organizations#new")
+    MrelloApp.eventBus.trigger("organizations:new")
   },
 
   organizationsControllerShow: function(id) {

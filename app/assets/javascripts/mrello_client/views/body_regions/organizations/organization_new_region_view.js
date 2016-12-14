@@ -5,11 +5,11 @@
 
 var MrelloApp = MrelloApp || {}
 
-MrelloApp.Views.OrganizationsNew = Backbone.View.extend({
+MrelloApp.Views.BodyRegions.OrganizationsNew = Backbone.View.extend({
 
-  template: MrelloApp.templates['organizations/new'],
+  template: MrelloApp.templates['body_regions/organizations/new'],
   
-  registerForm: MrelloApp.templates['organizations/form'],
+  registerForm: MrelloApp.templates['body_regions/organizations/form'],
 
   events: {
     "click #submit-registration" : "submit",
@@ -21,19 +21,8 @@ MrelloApp.Views.OrganizationsNew = Backbone.View.extend({
   },
 
   render: function() {
-    this.renderHeader()
     this.$el.append(this.template())
     this.renderForm()
-  },
-
-  renderHeader: function() {
-    adminStatus = MrelloApp.currentUser.isAdmin()
-    var headerView = new MrelloApp.views.Header({ 
-      session: true, 
-      admin: adminStatus,
-      createOrg: true,
-    })
-    this.$el.append(headerView.el)
   },
 
   renderForm: function() {

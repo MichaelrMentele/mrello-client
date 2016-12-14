@@ -1,6 +1,6 @@
 var MrelloApp = MrelloApp || {}
 
-MrelloApp.Views.Atomics.NavLogout = Backbone.View.extend({
+MrelloApp.Views.Atomics.ButtonOrganizationsNew = Backbone.View.extend({
 
   template: MrelloApp.templates['header_regions/nav_element'],
 
@@ -15,13 +15,12 @@ MrelloApp.Views.Atomics.NavLogout = Backbone.View.extend({
   },
 
   render: function() {
-    this.$el.html(this.template({ text: "Logout" }))
+    this.$el.html(this.template({ text: "New Organization" }))
     return this
   },
 
   navEvent: function(e) {
     e.preventDefault()
-    console.log("Logging out")
-    MrelloApp.eventBus.trigger('sessions:destroy')
+    MrelloApp.routes.go("organizations/new")
   },
 })

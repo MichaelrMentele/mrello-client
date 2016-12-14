@@ -5,6 +5,7 @@ MrelloApp.Models.Organization = Backbone.Model.extend({
   defaults: {
     title: "",
   },
+
   parse: function(response, options) {
     if(response.organization) {
       return response.organization;
@@ -12,17 +13,19 @@ MrelloApp.Models.Organization = Backbone.Model.extend({
       return response;
     }
   },
+
   initialize: function() {
     console.log("New Organization Created")
 
-    this.set("joinRequests", 
-      new MrelloApp.collections.JoinRequests()
+    this.set("memberships", 
+      new MrelloApp.Collections.Memberships()
     );
 
-    this.get("joinRequests").parent = this;
+    this.get("memberships").parent = this;
 
-    this.get("joinRequests").fetch({
-      data: $.param({ organization_id: this.id })
-    });
+    // TODO: extract this to relevant controller actoin
+    // this.get("joinRequests").fetch({
+    //   data: $.param({ organization_id: this.id })
+    // });
   }
 });

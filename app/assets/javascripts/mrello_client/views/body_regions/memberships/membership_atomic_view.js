@@ -2,7 +2,7 @@
 
 var MrelloApp = MrelloApp || {};
 
-MrelloApp.Views.JoinRequest = Backbone.View.extend({
+MrelloApp.Views.Atomics.Membership = Backbone.View.extend({
 
   template: MrelloApp.templates['organizations/joinRequest'],
 
