@@ -23,9 +23,9 @@ MrelloApp.Views.BodyRegions.OrganizationsUserIndex = Backbone.View.extend({
 
   render: function() {
     var newButtonView = new MrelloApp.Views.Atomics.ButtonOrganizationsNew() 
-    this.$el.append( newButtonView.el )
-    this.$el.append( this.template({ title: "Your Memberships" }) ) 
+    this.$el.html( this.template({ title: "Your Memberships" }) ) 
     this.renderOrganizations()
+    this.$el.find("#organization-controls").append( newButtonView.el )
     return this
   },
 
