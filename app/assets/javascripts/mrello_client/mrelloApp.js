@@ -1,18 +1,20 @@
 var MrelloApp = {
   // Config
-  HOST_URL: "http://4fe60abc.ngrok.io", // http://mrello-api.herokuapp.com
+  // for testing set up a local server running mrello-api and use a tunneling
+  // service such as NGROK.
+  HOST_URL: "http://mrello-api.herokuapp.com",
 
   // constructor namespaces
-  Models: {},      
-  Collections: {}, 
+  Models: {},
+  Collections: {},
   Views: {
     HeaderRegions: {},
     BodyRegions: {},
     MessageRegions: {},
     Composites: {},
     Atomics: {},
-  },     
-  Routers: {}, 
+  },
+  Routers: {},
   Controllers: {},
 
   // Application objects (called out for readability)
@@ -21,9 +23,9 @@ var MrelloApp = {
   eventBus: {},           // Pub/Sub Bus
   session: {},            // Singleton managing session token
   flash: {},
-  // Additionally Mrello has a collection of resource controllers, see initialize 
+  // Additionally Mrello has a collection of resource controllers, see initialize
   // controllers in init
-  
+
   // Initializers
   init: function() {
     console.log("Mrello starting up...")
@@ -57,7 +59,7 @@ var MrelloApp = {
   },
 
   initializeRouting: function() {
-    this.routes = new this.Routers.Router() 
+    this.routes = new this.Routers.Router()
     Backbone.history.start( { pushState: true }) // pushState uses the full URL
     return this.routes
   },
@@ -86,5 +88,3 @@ var MrelloApp = {
     this.flash.type = type
   },
 }
-
-                                 

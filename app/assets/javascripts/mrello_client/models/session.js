@@ -1,7 +1,7 @@
 // A singleton that is a single source of truth for login/logout
-// status and management. 
+// status and management.
 //
-// It manages saving JWT session token to local storage to bypass 
+// It manages saving JWT session token to local storage to bypass
 // reauth on page reload
 //
 // Holds session relevant data and state.
@@ -12,7 +12,7 @@ MrelloApp.Models.Session = Backbone.Model.extend({
   url: '/api/v1/sessions',
 
   defaults: {
-    email: null,    // temp 
+    email: null,    // temp
     password: null, // temp
     token: ""
   },
@@ -50,7 +50,11 @@ MrelloApp.Models.Session = Backbone.Model.extend({
 
   hasCachedJWT: function() {
     var token = localStorage.session_token
-    return token != "" & token.split(".").length == 3 // Three segments in a JWT
+    if (token) {
+      return token.split(".").length === 3
+    } else {
+      return false
+    }
   },
 
   getStoredToken: function() {
